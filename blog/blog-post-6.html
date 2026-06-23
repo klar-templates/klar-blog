@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en" class="light"><head>
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
@@ -29,7 +31,7 @@
     <template data-for="related-articles" data-query="list('blog-post', {order: 'updated_at:desc', limit: 10})">
       {% assign matched = 0 %}
       {% for post in items %}
-      {% if matched &lt; 3
+      {% if matched < 3
           and post.filePath != page.filePath
           and post.content.category == page.content.category %}
       <article class="blog-card">
@@ -146,7 +148,7 @@
                   <span class="badge badge-secondary field-category">Technology</span>
                   <time class="blog-meta field-createdAt" datetime="2026-05-07">May 7, 2026</time>
                 </div>
-                <h1 class="page-title mb-6 field-title">En blogg för alla de som tycker det är kul att blogg 1</h1>
+                <h1 class="page-title mb-6 field-title">En blogg för alla de som tycker det är kul att blogg</h1>
                 <div class="flex items-center justify-between mb-8">
                   <div class="byline">
                     <span class="avatar field-initial">N</span>
@@ -544,5 +546,5 @@
         </div>
       </footer>
     </div>
-  
-</body></html>
+  </body>
+</html>
