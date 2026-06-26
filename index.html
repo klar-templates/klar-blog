@@ -55,26 +55,29 @@
       {% endfor %}
     </template>
     <template data-for="featured" data-query="list('blog-post', { only: page.content.featured })">
-      
-    <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
-      {% for post in items %}
-      <article class="blog-card">
-        <a class="block" href="{{ post.filePath }}" aria-label="Read article">
-          <div class="blog-card__media">
-            <img src="{{ post.image.src }}" alt="" width="387" height="291" loading="lazy">
-          </div>
-          <div class="blog-card__body">
-            <div class="flex items-center gap-2">
-              <span class="blog-meta">{{ post.category }}</span><span class="text-muted-foreground text-xs" aria-hidden="true">—</span><time class="blog-meta" datetime="2026-05-10">{{ post.content.createdAt | date: '%B %-d, %Y' | localeDate: 'en-US'  }}</time>
+      {% if index0 = 0 %}
+      <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
+      {% endif %}
+        {% for post in items %}
+        <article class="blog-card">
+          <a class="block" href="{{ post.filePath }}" aria-label="Read article">
+            <div class="blog-card__media">
+              <img src="{{ post.image.src }}" alt="" width="387" height="291" loading="lazy">
             </div>
-            <h3 class="blog-card__title">{{ post.title }}</h3>
-            <p class="blog-card__excerpt">{{ post.lead }}</p>
-          </div>
-        </a>
-      </article>
-      {% endfor %}
+            <div class="blog-card__body">
+              <div class="flex items-center gap-2">
+                <span class="blog-meta">{{ post.category }}</span><span class="text-muted-foreground text-xs" aria-hidden="true">—</span><time class="blog-meta" datetime="2026-05-10">{{ post.content.createdAt | date: '%B %-d, %Y' | localeDate: 'en-US'  }}</time>
+              </div>
+              <h3 class="blog-card__title">{{ post.title }}</h3>
+              <p class="blog-card__excerpt">{{ post.lead }}</p>
+            </div>
+          </a>
+        </article>
+        {% endfor %}
+      {% if index0 = 0 %}
       </div>
+      {% endif %}
     </template>
     <template data-for="all-posts" data-query="list('blog-post', {order: 'updated_at:desc', limit: 10})">
       {% for post in items %}
@@ -200,12 +203,7 @@
 
         <!-- Featured -->
         <section id="featured" class="container py-16">
-      
-    <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
-      
-      </div>
-    </section>
+        </section>
 
         <!-- All posts -->
         <section aria-labelledby="all-posts-heading">
