@@ -53,7 +53,7 @@
   "pages": [
     {
       "name": "blank-page.html",
-      "editableElements": "#main-content:htmlBlocks(styling:[\n  { selector: 'section, div, h1, h2, h3, p, button, a, span, time',\n    collection: 'classes',\n    categories: 'background-color spacing border border-color text-style typography display flexbox container grid gap sizing radius shadows position object-fit-aspect effects navigation rich-text' },\n    { selector: 'img',                 collection: 'classes', categories: 'radius effects' },\n    { selector: 'root',                 collection: 'classes', categories: 'background-color' }\n])"
+      "editableElements": "#main-content:htmlBlocks(styling:[\n  { selector: 'section, div, h1, h2, h3, p, button, a, span, time',\n    collection: 'classes',\n    categories: 'layout flexbox grid spacing typography colors-backgrounds borders effects Transforms transitions-animation  lists tables miscellaneous' },\n    { selector: 'img',                 collection: 'classes', categories: 'radius effects' },\n    { selector: 'root',                 collection: 'classes', categories: 'background-color' }\n])"
     },
     {
       "name": "blog/blog-post-1.html",
@@ -282,14 +282,15 @@
     },
     {
       "name": "index.html",
-      "editableElements": ":field(name:featured, type:reference, pageType:blog-post)",
+      "editableElements": ".featured-title:field(title:Featured title, name:featuredTitle, type:string),\n:field(title: featured, name:featured, type:reference, pageType:blog-post)",
       "sharedSections": "#header",
       "content": {
         "featured": [
           "blog/blog-post-6.html",
           "blog/blog-post-3.html",
-          "blog/blog-post-5.html"
-        ]
+          "blog/blog-post-2.html"
+        ],
+        "featuredTitle": "En blogg för alla de som tycker det är kul att blogg"
       }
     },
     {
