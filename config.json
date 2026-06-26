@@ -318,6 +318,11 @@
       "Klar Karlsson",
       "Niklas Svensson",
       "Per Oscarsson"
+    ],
+    "featured": [
+      "blog/blog-post-6.html",
+      "blog/blog-post-3.html",
+      "blog/blog-post-5.html"
     ]
   }
 }
