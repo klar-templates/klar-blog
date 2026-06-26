@@ -55,10 +55,8 @@
       {% endfor %}
     </template>
     <template data-for="featured" data-query="list('blog-post', { only: page.content.featured })">
-      {% if forloop.index == 1 %}
       <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
-      {% endif %}
         {% for post in items %}
         <article class="blog-card">
           <a class="block" href="{{ post.filePath }}" aria-label="Read article">
@@ -75,9 +73,7 @@
           </a>
         </article>
         {% endfor %}
-      {% if forloop.index == 1 %}
       </div>
-      {% endif %}
     </template>
     <template data-for="all-posts" data-query="list('blog-post', {order: 'updated_at:desc', limit: 10})">
       {% for post in items %}
@@ -203,7 +199,8 @@
 
         <!-- Featured -->
         <section id="featured" class="container py-16">
-      
+      <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
         
         <article class="blog-card">
           <a class="block" href="blog/blog-post-1.html" aria-label="Read article">
@@ -250,7 +247,7 @@
           </a>
         </article>
         
-      
+      </div>
     </section>
 
         <!-- All posts -->
