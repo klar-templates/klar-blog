@@ -282,8 +282,15 @@
     },
     {
       "name": "index.html",
-      "editableElements": "body,\nnav[]",
-      "sharedSections": "#header"
+      "editableElements": ":field(name:featured, type:reference, pageType:blog-post)",
+      "sharedSections": "#header",
+      "content": {
+        "featured": [
+          "blog/blog-post-1.html",
+          "blog/blog-post-4.html",
+          "blog/blog-post-3.html"
+        ]
+      }
     },
     {
       "name": "nice.html",
