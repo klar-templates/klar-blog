@@ -286,9 +286,9 @@
       "sharedSections": "#header",
       "content": {
         "featured": [
-          "blog/blog-post-1.html",
           "blog/blog-post-4.html",
-          "blog/blog-post-3.html"
+          "blog/blog-post-6.html",
+          "blog/blog-post-2.html"
         ]
       }
     },
