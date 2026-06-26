@@ -54,6 +54,9 @@
       </div>
       {% endfor %}
     </template>
+    <template data-for="featured" data-query="list('blog-post', { only: page.content.featured })">
+      {% for post in items %}<a href="{{ post.url }}">{{ post.title }}</a>{% endfor %}
+    </template>
     <template data-for="all-posts" data-query="list('blog-post', {order: 'updated_at:desc', limit: 10})">
       {% for post in items %}
       <article class="blog-card">
@@ -175,6 +178,16 @@
       </div>
       
     </article>
+
+        <!-- Featured -->
+        <section>
+          <div class="container py-16">
+            <h2 id="all-posts-heading" class="section-title mb-8">Featured</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="featured" data-klar-readonly>
+      
+    </div>
+          </div>
+        </section>
 
         <!-- All posts -->
         <section aria-labelledby="all-posts-heading">
