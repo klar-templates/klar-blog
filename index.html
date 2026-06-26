@@ -57,7 +57,7 @@
     <template data-for="featured" data-query="list('blog-post', { only: page.content.featured })">
       {% if items.length > 0 %}
       <div class="container py-16">
-        <h2 class="section-title mb-8 featured-title">{{ page.content.featuredTitle }}</h2>
+        <h2 class="section-title mb-8 featured-title">{{page.content.featuredTitle}}</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-klar-readonly>
           {% for post in items %}
           <article class="blog-card">
