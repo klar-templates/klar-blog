@@ -282,15 +282,18 @@
     },
     {
       "name": "index.html",
-      "editableElements": ".featured-title:field(title:Featured title, name:featuredTitle, type:string),\n:field(title: featured, name:featured, type:reference, pageType:blog-post)",
+      "editableElements": ".featured-heading:field(title:Featured title, name:featuredHeading, type:string),\n:field(title: featured, name:featured, type:reference, pageType:blog-post)",
       "sharedSections": "#header",
       "content": {
         "featured": [
-          "blog/blog-post-6.html",
-          "blog/blog-post-3.html",
+          "blog/blog-post-5.html",
+          "blog/blog-post-4.html",
           "blog/blog-post-2.html"
         ],
-        "featuredTitle": "En blogg för alla de som tycker det är kul att blogg"
+        "featuredTitle": "En blogg för alla de som tycker det är kul att blogg",
+        "title": "En blogg för alla de som tycker det är kul att blogg",
+        "re": "En blogg för alla de som tycker det är kul att blogg",
+        "asd": "testddddddd"
       }
     },
     {
