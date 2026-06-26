@@ -1211,16 +1211,17 @@
     <script type="application/json" data-klar-ds>
       {
         "classes": {
-          "Background color": [{
+          "Utilities": [
+            {
               "label": "Page",
               "value": "bg-background"
             },
             {
-              "label": "Foreground (inverse)",
+              "label": "Foreground",
               "value": "bg-foreground"
             },
             {
-              "label": "Brand",
+              "label": "Primary",
               "value": "bg-primary"
             },
             {
@@ -1228,7 +1229,7 @@
               "value": "bg-secondary"
             },
             {
-              "label": "Muted",
+              "label": "Muted surface",
               "value": "bg-muted"
             },
             {
@@ -1246,14 +1247,13 @@
             {
               "label": "Transparent",
               "value": "bg-transparent"
-            }
-          ],
-          "Text color": [{
+            },
+            {
               "label": "Body",
               "value": "text-foreground"
             },
             {
-              "label": "Inverse",
+              "label": "On foreground",
               "value": "text-background"
             },
             {
@@ -1261,7 +1261,7 @@
               "value": "text-primary"
             },
             {
-              "label": "On brand",
+              "label": "On primary",
               "value": "text-primary-foreground"
             },
             {
@@ -1287,47 +1287,44 @@
             {
               "label": "Black",
               "value": "text-black"
-            }
-          ],
-          "Border": [{
-              "label": "All",
+            },
+            {
+              "label": "Border",
               "value": "border"
             },
             {
-              "label": "Top",
+              "label": "Border top",
               "value": "border-t"
             },
             {
-              "label": "Bottom",
+              "label": "Border bottom",
               "value": "border-b"
             },
             {
-              "label": "None",
+              "label": "Border none",
               "value": "border-0"
-            }
-          ],
-          "Border color": [{
-              "label": "Default",
+            },
+            {
+              "label": "Border default",
               "value": "border-default"
             },
             {
-              "label": "Muted",
+              "label": "Border muted",
               "value": "border-muted"
             },
             {
-              "label": "Foreground",
+              "label": "Border foreground",
               "value": "border-foreground"
             },
             {
-              "label": "Primary",
+              "label": "Border primary",
               "value": "border-primary"
             },
             {
-              "label": "Transparent",
+              "label": "Border transparent",
               "value": "border-transparent"
-            }
-          ],
-          "Font size": [{
+            },
+            {
               "label": "XS",
               "value": "text-xs"
             },
@@ -1374,9 +1371,8 @@
             {
               "label": "5XL",
               "value": "md:text-5xl"
-            }
-          ],
-          "Font weight": [{
+            },
+            {
               "label": "Normal",
               "value": "font-normal"
             },
@@ -1391,9 +1387,8 @@
             {
               "label": "Bold",
               "value": "font-bold"
-            }
-          ],
-          "Line height": [{
+            },
+            {
               "label": "Tight",
               "value": "leading-tight"
             },
@@ -1408,18 +1403,16 @@
             {
               "label": "Relaxed",
               "value": "leading-relaxed"
-            }
-          ],
-          "Letter spacing": [{
+            },
+            {
               "label": "Tight",
               "value": "tracking-tight"
             },
             {
               "label": "Wide",
               "value": "tracking-wide"
-            }
-          ],
-          "Text": [{
+            },
+            {
               "label": "Align left",
               "value": "text-left"
             },
@@ -1430,6 +1423,10 @@
             {
               "label": "Align right",
               "value": "text-right"
+            },
+            {
+              "label": "Align left",
+              "value": "md:text-left"
             },
             {
               "label": "Uppercase",
@@ -1452,48 +1449,6 @@
               "value": "font-sans"
             },
             {
-              "label": "Align left",
-              "value": "md:text-left"
-            }
-          ],
-          "Typography": [{
-              "label": "Display",
-              "value": "text-5xl font-bold tracking-tight leading-tight"
-            },
-            {
-              "label": "Heading 1",
-              "value": "text-4xl font-bold tracking-tight leading-tight"
-            },
-            {
-              "label": "Heading 2",
-              "value": "text-3xl font-bold tracking-tight leading-snug"
-            },
-            {
-              "label": "Heading 3",
-              "value": "text-2xl font-semibold leading-snug"
-            },
-            {
-              "label": "Heading 4",
-              "value": "text-xl font-semibold leading-snug"
-            },
-            {
-              "label": "Lead",
-              "value": "text-xl font-normal leading-relaxed"
-            },
-            {
-              "label": "Body",
-              "value": "text-base font-normal leading-normal"
-            },
-            {
-              "label": "Small",
-              "value": "text-sm font-normal leading-normal"
-            },
-            {
-              "label": "Meta",
-              "value": "text-xs font-medium uppercase tracking-wide"
-            }
-          ],
-          "Display": [{
               "label": "Block",
               "value": "block"
             },
@@ -1548,9 +1503,8 @@
             {
               "label": "Hidden",
               "value": "lg:hidden"
-            }
-          ],
-          "Flexbox": [{
+            },
+            {
               "label": "Row",
               "value": "flex-row"
             },
@@ -1605,9 +1559,8 @@
             {
               "label": "Row",
               "value": "md:flex-row"
-            }
-          ],
-          "Grid columns": [{
+            },
+            {
               "label": "1 column",
               "value": "grid-cols-1"
             },
@@ -1670,9 +1623,8 @@
             {
               "label": "Span 2",
               "value": "lg:col-span-2"
-            }
-          ],
-          "Gap": [{
+            },
+            {
               "label": "1",
               "value": "gap-1"
             },
@@ -1703,9 +1655,8 @@
             {
               "label": "12",
               "value": "lg:gap-12"
-            }
-          ],
-          "Margin": [{
+            },
+            {
               "label": "Reset",
               "value": "m-0"
             },
@@ -1760,9 +1711,8 @@
             {
               "label": "Top 2XL",
               "value": "lg:mt-16"
-            }
-          ],
-          "Padding": [{
+            },
+            {
               "label": "All none",
               "value": "p-0"
             },
@@ -1787,19 +1737,19 @@
               "value": "px-0"
             },
             {
-              "label": "Horizontal small",
+              "label": "Horizontal XS",
               "value": "px-3"
             },
             {
-              "label": "Horizontal medium",
+              "label": "Horizontal small",
               "value": "px-4"
             },
             {
-              "label": "Horizontal large",
+              "label": "Horizontal medium",
               "value": "px-6"
             },
             {
-              "label": "Horizontal XL",
+              "label": "Horizontal large",
               "value": "px-8"
             },
             {
@@ -1845,9 +1795,8 @@
             {
               "label": "Vertical XL",
               "value": "lg:py-16"
-            }
-          ],
-          "Sizing": [{
+            },
+            {
               "label": "Width full",
               "value": "w-full"
             },
@@ -1882,47 +1831,44 @@
             {
               "label": "Icon large",
               "value": "icon-lg"
-            }
-          ],
-          "Radius": [{
-              "label": "None",
+            },
+            {
+              "label": "Rounded none",
               "value": "rounded-none"
             },
             {
-              "label": "Small",
+              "label": "Rounded small",
               "value": "rounded-sm"
             },
             {
-              "label": "Medium",
+              "label": "Rounded medium",
               "value": "rounded-md"
             },
             {
-              "label": "Large",
+              "label": "Rounded large",
               "value": "rounded-lg"
             },
             {
-              "label": "Full",
+              "label": "Rounded full",
               "value": "rounded-full"
-            }
-          ],
-          "Shadows": [{
-              "label": "None",
+            },
+            {
+              "label": "Shadow none",
               "value": "shadow-none"
             },
             {
-              "label": "Small",
+              "label": "Shadow small",
               "value": "shadow-sm"
             },
             {
-              "label": "Medium",
+              "label": "Shadow medium",
               "value": "shadow-md"
             },
             {
-              "label": "Large",
+              "label": "Shadow large",
               "value": "shadow-lg"
-            }
-          ],
-          "Position": [{
+            },
+            {
               "label": "Relative",
               "value": "relative"
             },
@@ -1937,9 +1883,8 @@
             {
               "label": "Fixed",
               "value": "fixed"
-            }
-          ],
-          "Object fit & aspect": [{
+            },
+            {
               "label": "Object cover",
               "value": "object-cover"
             },
@@ -1954,47 +1899,84 @@
             {
               "label": "Aspect photo",
               "value": "aspect-photo"
-            }
-          ],
-          "Overflow": [{
-            "label": "Hidden",
-            "value": "overflow-hidden"
-          }],
-          "Transition": [{
-            "label": "Default",
-            "value": "transition"
-          }],
-          "Cursor": [{
-            "label": "Pointer",
-            "value": "cursor-pointer"
-          }],
-          "Accessibility": [{
-            "label": "Screen-reader only",
-            "value": "sr-only"
-          }],
-          "Navigation": [{
+            },
+            {
+              "label": "Overflow hidden",
+              "value": "overflow-hidden"
+            },
+            {
+              "label": "Transition",
+              "value": "transition"
+            },
+            {
+              "label": "Cursor pointer",
+              "value": "cursor-pointer"
+            },
+            {
+              "label": "Screen-reader only",
+              "value": "sr-only"
+            },
+            {
               "label": "Desktop nav",
               "value": "nav-desktop"
             },
             {
               "label": "Mobile toggle",
               "value": "nav-mobile-toggle"
-            }
-          ],
-          "Rich text": [{
-            "label": "Prose",
-            "value": "prose"
-          }],
-          "Container": [{
-              "label": "Default",
+            },
+            {
+              "label": "Prose",
+              "value": "prose"
+            },
+            {
+              "label": "Container",
               "value": "container"
             },
             {
-              "label": "Narrow",
+              "label": "Container narrow",
               "value": "container-narrow"
             }
           ],
-          "Grid": [{
+          "Typography": [
+            {
+              "label": "Display",
+              "value": "text-5xl font-bold tracking-tight leading-tight"
+            },
+            {
+              "label": "Heading 1",
+              "value": "text-4xl font-bold tracking-tight leading-tight"
+            },
+            {
+              "label": "Heading 2",
+              "value": "text-3xl font-bold tracking-tight leading-snug"
+            },
+            {
+              "label": "Heading 3",
+              "value": "text-2xl font-semibold leading-snug"
+            },
+            {
+              "label": "Heading 4",
+              "value": "text-xl font-semibold leading-snug"
+            },
+            {
+              "label": "Lead",
+              "value": "text-xl font-normal leading-relaxed"
+            },
+            {
+              "label": "Body",
+              "value": "text-base font-normal leading-normal"
+            },
+            {
+              "label": "Small",
+              "value": "text-sm font-normal leading-normal"
+            },
+            {
+              "label": "Meta",
+              "value": "text-xs font-medium uppercase tracking-wide"
+            }
+          ],
+          "Grid": [
+            {
               "label": "2 columns",
               "value": "grid grid-cols-2"
             },
@@ -2007,7 +1989,8 @@
               "value": "grid grid-cols-4"
             }
           ],
-          "Container and Grid": [{
+          "Container and Grid": [
+            {
               "label": "Default · 2 cols",
               "value": "container grid grid-cols-2"
             },
