@@ -20,7 +20,7 @@
         } catch (e) {}
       })();
     </script>
-
+    <script src="/klar-project.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
@@ -2317,7 +2317,7 @@
       } = React;
 
       /* ════════════════ Config ════════════════ */
-      const PROJECT_ID = 471; // ← set to your Klar project id
+      const PROJECT_ID = window.__KLAR_PROJECT_ID__; // ← set to your Klar project id
       const KLAR_HOST = "http://localhost:5173";
 
       // App namespace — lets this app share a Klar project with other apps
