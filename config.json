@@ -70,7 +70,7 @@
         "createdAt": "2026-06-15",
         "initial": "P",
         "readTime": "8 min read",
-        "lead": "Blog post excerpt — Brief description of the article content for preview.",
+        "lead": "Blog post excerpt — Brief description of the article content for preview. ",
         "categories": [
           "Technology",
           "Podcast",
@@ -112,7 +112,8 @@
         ],
         "topics": [
           "Digital Marketing"
-        ]
+        ],
+        "lead": "Blog post excerpt — Brief description of the article content for preview. "
       }
     },
     {
@@ -140,7 +141,8 @@
         ],
         "topics": [
           "Personal Branding"
-        ]
+        ],
+        "lead": "Blog post excerpt — Brief description of the article content for preview. "
       }
     },
     {
@@ -198,7 +200,8 @@
         ],
         "topics": [
           "Digital Marketing"
-        ]
+        ],
+        "lead": "Blog post excerpt — Brief description of the article content for preview. "
       }
     },
     {
@@ -226,7 +229,8 @@
         ],
         "tags": [
           "Personal Branding"
-        ]
+        ],
+        "lead": "Blog post excerpt — Brief description of the article content for preview. "
       }
     },
     {
