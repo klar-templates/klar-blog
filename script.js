@@ -259,7 +259,7 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
   }
 
   document.addEventListener("click", (e) => {
-    const menuToggle = e.target.closest("mobile-menu-toggle");
+    const menuToggle = e.target.closest("#mobile-menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
     console.log(menuToggle);
     if (!menuToggle) return;
