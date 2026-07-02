@@ -258,6 +258,13 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
     });
   }
 
+  document.addEventListener("click", (e) => {
+    const menuToggle = e.target.closest("mobile-menu-toggle");
+    if (!menuToggle) return;
+    const open = mobileMenu.classList.toggle("hidden") === false;
+    menuToggle.innerHTML = open ? ICON_X : ICON_MENU;
+  });
+
   /* ---- Filters ------------------------------------------------------- */
   // Drives the .filter dropdowns. When the Klar SDK + #all-posts-tpl are
   // present it filters server-side via setPosts; otherwise it falls back to
