@@ -140,16 +140,15 @@
             </button>
             <div class="filter__menu hidden" data-filter-menu="">
               <button class="filter__option is-selected" data-value="all">All Categories</button>
-              <div id="all-categories" data-klar-static><button class="filter__option" data-value="Lifestyle">Lifestyle <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Technology">Technology <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Business">Business <span class="text-muted-foreground">(3)</span></button><button class="filter__option" data-value="Podcast">Podcast <span class="text-muted-foreground">(2)</span></button></div>
+              <div id="all-categories" data-klar-static><button class="filter__option" data-value="Lifestyle">Lifestyle
+                  <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Technology">Technology <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Business">Business <span class="text-muted-foreground">(3)</span></button><button class="filter__option" data-value="Podcast">Podcast <span class="text-muted-foreground">(2)</span></button></div>
             </div>
-            <!-- klar:strip-start -->
             <template id="all-categories-template"><button class="filter__option" data-value="${value}">${value} <span class="text-muted-foreground">(${count})</span></button></template>
             <script type="module">
               const t = document.getElementById('all-categories-template').innerHTML;
               if (window.klarSdk) klarSdk.facets('blog-post', 'categories').then(f => klarSdk.insert('#all-categories',
                 'replace', klarSdk.render(f, t)));
             </script>
-            <!-- klar:strip-end -->
           </div>
           <div class="filter" data-facet="topics">
             <button class="filter__toggle" data-filter-toggle="topic" data-default-label="All Topics" aria-expanded="false" aria-label="Filter by Topic">
@@ -162,14 +161,14 @@
               <button class="filter__option is-selected" data-value="all">All Topics</button>
               <div id="all-topics" data-klar-static><button class="filter__option" data-value="Personal Branding">Personal Branding <span class="text-muted-foreground">(2)</span></button><button class="filter__option" data-value="Digital Marketing">Digital Marketing <span class="text-muted-foreground">(1)</span></button></div>
             </div>
-            <!-- klar:strip-start -->
+            
             <template id="all-topics-template"><button class="filter__option" data-value="${value}">${value} <span class="text-muted-foreground">(${count})</span></button></template>
             <script type="module">
               const t = document.getElementById('all-topics-template').innerHTML;
               if (window.klarSdk) klarSdk.facets('blog-post', 'topics').then(f => klarSdk.insert('#all-topics',
                 'replace', klarSdk.render(f, t)));
             </script>
-            <!-- klar:strip-end -->
+            
           </div>
           <div class="filter" data-facet="tags">
             <button class="filter__toggle" data-filter-toggle="tag" data-default-label="All Tags" aria-expanded="false" aria-label="Filter by Tag">
@@ -180,7 +179,8 @@
             </button>
             <div class="filter__menu hidden" data-filter-menu="">
               <button class="filter__option is-selected" data-value="all">All Tags</button>
-              <div id="all-tags" data-klar-static><button class="filter__option" data-value="Leadership">Leadership <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Authenticity">Authenticity <span class="text-muted-foreground">(4)</span></button></div>
+              <div id="all-tags" data-klar-static><button class="filter__option" data-value="Leadership">Leadership
+                  <span class="text-muted-foreground">(5)</span></button><button class="filter__option" data-value="Authenticity">Authenticity <span class="text-muted-foreground">(4)</span></button></div>
             </div>
             <!-- klar:strip-start -->
             <template id="all-tags-template"><button class="filter__option" data-value="${value}">${value} <span class="text-muted-foreground">(${count})</span></button></template>
