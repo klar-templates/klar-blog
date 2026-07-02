@@ -272,7 +272,164 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
   // present it filters server-side via setPosts; otherwise it falls back to
   // client-side filtering of the static cards by their data-* attributes so
   // the page still works standalone.
+  //
+  // All click handling is delegated to document so it survives SPA
+  // navigation (which replaces innerHTML and destroys element-level
+  // listeners). DOM elements are re-queried inside the handler.
   function setupFilters() {
+    let state = { category: "all", topic: "all", tag: "all" };
+    let lastBar = null;
+
+    document.addEventListener("click", (e) => {
+      const bar = document.querySelector("[data-filters]");
+      if (!bar) return;
+
+      const grid = document.getElementById("all-posts");
+      const fixed = grid ? grid.dataset.category || null : null;
+
+      // Reset state when the filter bar element changes (SPA navigation
+      // swapped in a new page with a fresh [data-filters] container).
+      if (bar !== lastBar) {
+        lastBar = bar;
+        state = { category: fixed || "all", topic: "all", tag: "all" };
+      }
+
+      const klarMode = !!(
+        window.klarSdk && document.getElementById("all-posts-tpl")
+      );
+      const totalEl = document.getElementById("filter-info");
+      const clearBtn = document.getElementById("clear-filters");
+
+      const cards = () =>
+        Array.prototype.slice.call(
+          document.querySelectorAll("#all-posts > [data-category]"),
+        );
+
+      function closeAll() {
+        bar
+          .querySelectorAll("[data-filter-menu]")
+          .forEach((m) => m.classList.add("hidden"));
+        bar
+          .querySelectorAll("[data-filter-toggle]")
+          .forEach((b) => b.setAttribute("aria-expanded", "false"));
+      }
+
+      // A filter is "active" when any control differs from its default (the
+      // category default is the page's locked category, if any).
+      function isActive() {
+        return (
+          state.category !== (fixed || "all") ||
+          state.topic !== "all" ||
+          state.tag !== "all"
+        );
+      }
+
+      // Client-side filtering of the static cards (used standalone and as the
+      // offline fallback when the Klar SDK can't reach the dev server).
+      function applyClient() {
+        const list = cards();
+        let shown = 0;
+        list.forEach((card) => {
+          const ok =
+            (state.category === "all" ||
+              card.dataset.category === state.category) &&
+            (state.topic === "all" ||
+              (card.dataset.topic || "").split(",").indexOf(state.topic) >
+                -1) &&
+            (state.tag === "all" ||
+              (card.dataset.tag || "").split(",").indexOf(state.tag) > -1);
+          card.style.display = ok ? "" : "none";
+          if (ok) shown++;
+        });
+        if (totalEl)
+          totalEl.textContent =
+            "Showing " + shown + " of " + list.length + " posts";
+      }
+
+      function apply() {
+        // Network-independent UI state FIRST, so Clear always hides the button
+        // even if the SDK call later fails or hangs.
+        const active = isActive();
+        if (clearBtn) clearBtn.classList.toggle("hidden", !active);
+        if (totalEl) totalEl.classList.toggle("hidden", !active);
+
+        if (klarMode)
+          window.setPosts(
+            state.category,
+            state.tag,
+            state.topic,
+            applyClient,
+          );
+        else applyClient();
+      }
+
+      // --- Option selection -------------------------------------------
+      const opt = e.target.closest("[data-value]");
+      if (opt && bar.contains(opt)) {
+        const filter = opt.closest(".filter");
+        const toggle = filter.querySelector("[data-filter-toggle]");
+        const key = toggle.dataset.filterToggle; // category | topic | tag
+        const label = toggle.querySelector("span");
+        state[key] = opt.dataset.value;
+        label.textContent =
+          opt.dataset.value === "all"
+            ? toggle.dataset.defaultLabel
+            : opt.dataset.value;
+        filter
+          .querySelectorAll("[data-value]")
+          .forEach((o) => o.classList.remove("is-selected"));
+        opt.classList.add("is-selected");
+        closeAll();
+        apply();
+        return;
+      }
+
+      // --- Clear filters ----------------------------------------------
+      const clearEl = e.target.closest("#clear-filters");
+      if (clearEl && clearBtn && clearEl === clearBtn) {
+        state.category = fixed || "all";
+        state.topic = "all";
+        state.tag = "all";
+        bar.querySelectorAll("[data-filter-toggle]").forEach((t) => {
+          t.querySelector("span").textContent = t.dataset.defaultLabel;
+        });
+        bar
+          .querySelectorAll("[data-value]")
+          .forEach((o) =>
+            o.classList.toggle("is-selected", o.dataset.value === "all"),
+          );
+        apply();
+        return;
+      }
+
+      // --- Toggle open/close ------------------------------------------
+      const toggle = e.target.closest("[data-filter-toggle]");
+      if (toggle && bar.contains(toggle)) {
+        const filter = toggle.closest(".filter");
+        const menu = filter.querySelector("[data-filter-menu]");
+        const isOpen = !menu.classList.contains("hidden");
+        closeAll();
+        if (!isOpen) {
+          menu.classList.remove("hidden");
+          toggle.setAttribute("aria-expanded", "true");
+        }
+        return;
+      }
+
+      // --- Click outside any filter — close all -----------------------
+      if (!e.target.closest("[data-filters]")) {
+        closeAll();
+      }
+    });
+  }
+  setupFilters();
+
+  /* ---- Filters ------------------------------------------------------- */
+  // Drives the .filter dropdowns. When the Klar SDK + #all-posts-tpl are
+  // present it filters server-side via setPosts; otherwise it falls back to
+  // client-side filtering of the static cards by their data-* attributes so
+  // the page still works standalone.
+  function setupFilters1() {
     const bar = document.querySelector("[data-filters]");
     if (!bar) return;
 
@@ -396,7 +553,7 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
 
     document.addEventListener("click", closeAll);
   }
-  setupFilters();
+  // setupFilters(); 
 
   /* ---- Article table of contents + scroll spy ------------------------ */
   function setupToc() {
