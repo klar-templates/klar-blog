@@ -228,12 +228,20 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
     root.classList.toggle("light", !dark);
     root.style.colorScheme = dark ? "dark" : "light";
   }
-  document.querySelectorAll('[aria-label="Toggle theme"]').forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const next = localStorage.getItem("theme") === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", next);
-      applyTheme(next);
-    });
+  // document.querySelectorAll('[aria-label="Toggle theme"]').forEach((btn) => {
+  //   btn.addEventListener("click", () => {
+  //     const next = localStorage.getItem("theme") === "dark" ? "light" : "dark";
+  //     localStorage.setItem("theme", next);
+  //     applyTheme(next);
+  //   });
+  // });
+
+  document.addEventListener("click", (e) => {
+    const nav = e.target.closest('[aria-label="Toggle theme"]');
+    if (!nav) return;
+    const next = localStorage.getItem("theme") === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
   });
 
   /* ---- Mobile menu --------------------------------------------------- */
