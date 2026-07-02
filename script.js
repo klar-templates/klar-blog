@@ -261,7 +261,7 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
   document.addEventListener("click", (e) => {
     const menuToggle = e.target.closest("mobile-menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
-    console.log('d')
+    console.log(menuToggle);
     if (!menuToggle) return;
     const open = mobileMenu.classList.toggle("hidden") === false;
     menuToggle.innerHTML = open ? ICON_X : ICON_MENU;
