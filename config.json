@@ -131,7 +131,9 @@
         "initial": "K",
         "readTime": "5 min read",
         "categories": [
-          "Podcast"
+          "Podcast",
+          "Lifestyle",
+          "Business"
         ],
         "tags": [
           "Personal Branding"
@@ -187,7 +189,8 @@
         "categories": [
           "Podcast",
           "Lifestyle",
-          "Technology"
+          "Technology",
+          "Business"
         ],
         "tags": [
           "Leadership",
@@ -215,7 +218,8 @@
         "readTime": "9 min read",
         "categories": [
           "Technology",
-          "Lifestyle"
+          "Lifestyle",
+          "Business"
         ],
         "topics": [
           "Personal Branding"
