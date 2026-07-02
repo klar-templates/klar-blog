@@ -612,7 +612,7 @@ window.setPosts = function setPosts(category, tag, topic, onError) {
   // TOC runs after the SDK may have replaced the article body
   //if (document.readyState === "loading")
   //  document.addEventListener("DOMContentLoaded", () =>
-  //    setTimeout(setupToc, 0),
+      setTimeout(setupToc, 0),
   //  );
   //else setTimeout(setupToc, 0); 
 
