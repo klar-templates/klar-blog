@@ -18,11 +18,11 @@
     },
     {
       "name": "blog-post-liquid",
-      "editableElements": ".field-title        :field(title: Title, name: title, type:string, order:1, section: Content, sectionOrder:1),\n.field-image     \t:field(title: Image, name: image, type:image, order:2, col: 6, section:'Content'),\n.field-category  \t:field(title: Category, name: category, type:string, col:6, section:Meta, sectionOrder:2, options(vocab:categories)),\n.field-author    \t:field(title: Author, name: author, type:string, options(vocab:authors), col:6, section:'Meta', sectionOrder:2),\n.field-createdAt \t:field(title: Created, name: createdAt, type:string, format:date, default: now, readOnly: true, options(dateFormat:'MMMM D, YYYY', displayTimeZone:'Europe/Berlin')),\n.field-initial      :field(title: Initial, name: initial, type:string, order:5, col:6),\n.field-readTime  \t:field(title: Read time, name: readTime, type:string, order: 5, col: 6),\n.field-list         :field(title: List, name: list, type:array, options(layout:list)),\n.field-text      \t:field(title: Content, name: text, type:array, options(layout:blocks)),\n                 \t:field(title: Lead, name: lead, type:text, default: 'Blog post excerpt — Brief description of the article content for preview.', order:3, section:'Content', col: 6, options(layout:editor)),\n\n:field(title: Categories, name: categories, type: array, order: 6, col: 6, options(vocab: categories)),\n:field(title: Topics, name: topics, type: array, order: 7, col: 6, options(vocab: topics)),\n:field(title: Tags, name: tags, type: array, order: 6, col: 6, options(vocab: tags)),\n:field(title: Authors, name: authors, type: array, order: 6, col: 6, options(vocab: authors))",
+      "editableElements": ".field-title\n:field(title: Title, name: title, order:1, section: Content, sectionOrder:1),\n\n.field-image\n:field(title: Image, name: image, type:image, order:2, col: 6, section:'Content'),\n\n.field-category\n:field(title: Category, name: category, col:6, section:Meta, sectionOrder:2, options(vocab:categories)),\n\n.field-author\n:field(title: Author, name: author, options(vocab:authors), col:6, section:'Meta', sectionOrder:2),\n\n.field-createdAt\n:field(title: Created, name: createdAt, format:date, default: now, readOnly: true, options(dateFormat:'MMMM D, YYYY', displayTimeZone:'Europe/Berlin')),\n\n.field-initial\n:field(title: Initial, name: initial, order:5, col:6),\n\n.field-readTime\n:field(title: Read time, name: readTime, order: 5, col: 6),\n\n.field-list\n:field(title: List, name: list, type:array, options(layout:list)),\n\n.field-text\n:field(title: Content, name: text, type:array, options(layout:blocks)),\n\n:field(title: Lead, name: lead, type:text, default: 'Blog post excerpt — Brief description of the article content for preview.', order:3, section:'Content', col: 6, options(layout:editor)),\n\n:field(title: Categories, name: categories, type: array, order: 6, col: 6, options(vocab: categories)),\n\n:field(title: Topics, name: topics, type: array, order: 7, col: 6, options(vocab: topics)),\n\n:field(title: Tags, name: tags, type: array, order: 6, col: 6, options(vocab: tags)),\n\n:field(title: Authors, name: authors, type: array, order: 6, col: 6, options(vocab: authors))",
       "content": {
         "createdAt": "2026-06-13",
         "lead": "Blog post excerpt — Brief description of the article content for preview.",
-        "title": "En blogg för alla de som älskar att skriva och skratta nu",
+        "title": "En blogg för alla de som älskar att skriva och skratta nu 7",
         "image": {
           "src": "/images/work-lifestyle-Bg_wzXQT.jpg",
           "alt": "En blogg för alla de som älskar att skriva och skratta"
@@ -281,6 +281,10 @@
       }
     },
     {
+      "name": "editable-elements.html",
+      "editableElements": "main:attr(style)"
+    },
+    {
       "name": "index.html",
       "editableElements": ".featured-heading:field(title:Featured title, name:featuredHeading, type:string),\n:field(title: featured, name:featured, type:reference, pageType:blog-post)",
       "sharedSections": "#header",
@@ -303,6 +307,10 @@
     {
       "name": "nice.html",
       "editableElements": "body"
+    },
+    {
+      "name": "team.html",
+      "editableElements": ".grid:list"
     }
   ],
   "vocabularies": {
