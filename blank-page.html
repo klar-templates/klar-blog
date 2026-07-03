@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
     <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
-    <meta name="description" content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <meta name="description"
+      content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css">
     <script>
       (function() {
@@ -121,35 +123,59 @@
   </head>
   <body>
     <div class="min-h-screen bg-background">
-      
+
 
       <!-- ===== Main ===== -->
-      <main id="main-content"><header class="site-header">
-            <div class="container">
-              <div class="site-header__bar">
-                <a class="brand" href="/index.html">nexus</a>
-                <nav class="nav-desktop items-center gap-8" aria-label="Main navigation">
-                  <a class="nav-link" href="/posts.html">All Post</a>
-                  <a class="nav-link" href="/business.html">Business</a>
-                  <a class="nav-link" href="/technology.html">Technology</a>
-                  <a class="nav-link" href="/podcast.html">Podcast</a>
-                </nav>
-                <div class="nav-desktop items-center gap-2" style="">
-                  <a href="/search.html" class="btn btn-icon" aria-label="Search articles">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                  </a>
-                  <button class="btn btn-icon" aria-label="Toggle theme">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-                  </button>
-                </div>
-                <button class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+      <main id="main-content">
+        <header class="site-header">
+          <div class="container">
+            <div class="site-header__bar">
+              <a class="brand" href="/index.html">nexus</a>
+              <nav class="nav-desktop items-center gap-8" aria-label="Main navigation">
+                <a class="nav-link" href="/posts.html">All Post</a>
+                <a class="nav-link" href="/business.html">Business</a>
+                <a class="nav-link" href="/technology.html">Technology</a>
+                <a class="nav-link" href="/podcast.html">Podcast</a>
+              </nav>
+              <div class="nav-desktop items-center gap-2" style="">
+                <a href="/search.html" class="btn btn-icon" aria-label="Search articles">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </a>
+                <button class="btn btn-icon" aria-label="Toggle theme">
+                  <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                  </svg>
+                  <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                  </svg>
                 </button>
               </div>
+              <button class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" x2="20" y1="12" y2="12"></line>
+                  <line x1="4" x2="20" y1="6" y2="6"></line>
+                  <line x1="4" x2="20" y1="18" y2="18"></line>
+                </svg>
+              </button>
             </div>
-          </header>
-<section class="container lg:py-16 p-6">
+          </div>
+        </header>
+        <section class="container lg:py-16 p-6">
           <div class="hero lg:grid-cols-2 border p-6">
             <div class="hero__media rounded-none">
               <img src="/images/work-lifestyle-Bg_wzXQT.jpg" alt="Featured article" width="592" height="444">
@@ -166,52 +192,55 @@
               <p class="text-lg text-muted-foreground leading-relaxed">Fashion blogging began as personal style diaries
                 and grew into a billion-dollar force that reshapes trends, brands, and the way we shop.</p>
               <div class="pt-4">
-                <a href="/blog/blog-post-1.html" class="btn rounded-none uppercase">Read more <span aria-hidden="true">→</span></a>
+                <a href="/blog/blog-post-1.html" class="btn rounded-none uppercase">Read more <span
+                    aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
         </section>
-<footer class="site-footer">
-            <div class="container py-12">
-              <div class="grid md:grid-cols-4 gap-8">
-                <div class="flex flex-col gap-4">
-                  <h2 class="text-lg font-bold text-foreground">nexus</h2>
-                  <p class="text-sm text-muted-foreground">A personal blog exploring fashion, technology, business, and lifestyle trends.</p>
-                </div>
-                <div class="flex flex-col gap-4">
-                  <h3 class="font-medium text-foreground">Categories</h3>
-                  <ul class="flex flex-col gap-2 text-sm">
-                    <li><a class="footer-link" href="/posts.html">Fashion</a></li>
-                    <li><a class="footer-link" href="/technology.html">Technology</a></li>
-                    <li><a class="footer-link" href="/business.html">Business</a></li>
-                    <li><a class="footer-link" href="/posts.html">Lifestyle</a></li>
-                  </ul>
-                </div>
-                <div class="flex flex-col gap-4">
-                  <h3 class="font-medium text-foreground">Quick Links</h3>
-                  <ul class="flex flex-col gap-2 text-sm">
-                    <li><a class="footer-link" href="/about.html">About</a></li>
-                    <li><a class="footer-link" href="/contact.html">Contact</a></li>
-                    <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
-                    <li><a class="footer-link" href="/terms.html">Terms</a></li>
-                  </ul>
-                </div>
-                <div class="flex flex-col gap-4">
-                  <h3 class="font-medium text-foreground">Connect</h3>
-                  <div class="flex gap-4">
-                    <a class="footer-link" href="#" aria-label="Follow us on Facebook">Facebook</a>
-                    <a class="footer-link" href="#" aria-label="Follow us on Twitter">Twitter</a>
-                    <a class="footer-link" href="#" aria-label="Follow us on Instagram">Instagram</a>
-                  </div>
-                </div>
+        <footer class="site-footer">
+          <div class="container py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+              <div class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-foreground">nexus</h2>
+                <p class="text-sm text-muted-foreground">A personal blog exploring fashion, technology, business, and
+                  lifestyle trends.</p>
               </div>
-              <div class="border-t mt-8 pt-8 text-center">
-                <p class="text-sm text-muted-foreground">© 2026 Nexus Blog. All rights reserved.</p>
+              <div class="flex flex-col gap-4">
+                <h3 class="font-medium text-foreground">Categories</h3>
+                <ul class="flex flex-col gap-2 text-sm">
+                  <li><a class="footer-link" href="/posts.html">Fashion</a></li>
+                  <li><a class="footer-link" href="/technology.html">Technology</a></li>
+                  <li><a class="footer-link" href="/business.html">Business</a></li>
+                  <li><a class="footer-link" href="/posts.html">Lifestyle</a></li>
+                </ul>
+              </div>
+              <div class="flex flex-col gap-4">
+                <h3 class="font-medium text-foreground">Quick Links</h3>
+                <ul class="flex flex-col gap-2 text-sm">
+                  <li><a class="footer-link" href="/about.html">About</a></li>
+                  <li><a class="footer-link" href="/contact.html">Contact</a></li>
+                  <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
+                  <li><a class="footer-link" href="/terms.html">Terms</a></li>
+                </ul>
+              </div>
+              <div class="flex flex-col gap-4">
+                <h3 class="font-medium text-foreground">Connect</h3>
+                <div class="flex gap-4">
+                  <a class="footer-link" href="#" aria-label="Follow us on Facebook">Facebook</a>
+                  <a class="footer-link" href="#" aria-label="Follow us on Twitter">Twitter</a>
+                  <a class="footer-link" href="#" aria-label="Follow us on Instagram">Instagram</a>
+                </div>
               </div>
             </div>
-          </footer></main>
+            <div class="border-t mt-8 pt-8 text-center">
+              <p class="text-sm text-muted-foreground">© 2026 Nexus Blog. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </main>
 
-     
+
     </div>
   </body>
 </html>
