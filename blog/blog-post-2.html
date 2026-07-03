@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
-  <head>
+<!DOCTYPE html><html lang="en" class="light"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
     <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
     <meta name="description" content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css">
     <script>
       (function() {
@@ -31,7 +30,7 @@
     <template data-for="related-articles" data-query="list('blog-post', {order: 'updated_at:desc', limit: 10})">
       {% assign matched = 0 %}
       {% for post in items %}
-      {% if matched < 3
+      {% if matched &lt; 3
           and post.filePath != page.filePath
           and post.content.category == page.content.category %}
       <article class="blog-card">
@@ -379,60 +378,6 @@
       
       
       
-      <article class="blog-card">
-        <a class="block" href="/blog/blog-post-1.html">
-          <div class="blog-card__media">
-            <img src="/images/work-lifestyle-Bg_wzXQT.jpg" alt="" width="387" height="291" loading="lazy">
-          </div>
-          <div class="blog-card__body">
-            <div class="flex items-center gap-2">
-              <!--
-              <span class="blog-meta">Business</span><span class="text-muted-foreground text-xs"
-                aria-hidden="true">—</span><span class="blog-meta">8 min read</span>
-              -->
-              <time class="blog-meta" datetime="2026-06-15">June 15, 2026</time>
-            </div>
-            <h4 class="blog-card__title">
-              The Rise of Fashion Blogging: How Digital Voices Reshaped the Style Industry
-            </h4>
-            <!--
-            <p class="blog-card__excerpt">
-              Blog post excerpt — Brief description of the article content for preview. 
-            </p>
-            -->
-          </div>
-        </a>
-      </article>
-      
-      
-      
-      
-      
-      
-      <article class="blog-card">
-        <a class="block" href="/blog/blog-post-5.html">
-          <div class="blog-card__media">
-            <img src="/images/work-lifestyle-Bg_wzXQT.jpg" alt="" width="387" height="291" loading="lazy">
-          </div>
-          <div class="blog-card__body">
-            <div class="flex items-center gap-2">
-              <!--
-              <span class="blog-meta">Business</span><span class="text-muted-foreground text-xs"
-                aria-hidden="true">—</span><span class="blog-meta">8 min read</span>
-              -->
-              <time class="blog-meta" datetime="2026-05-05">maj 5, 2026</time>
-            </div>
-            <h4 class="blog-card__title">
-              Fashion Forward: How Digital Voices Rewrote the Rules of Style
-            </h4>
-            <!--
-            <p class="blog-card__excerpt">
-              Blog post excerpt — Brief description of the article content for preview. 
-            </p>
-            -->
-          </div>
-        </a>
-      </article>
       
       
       
@@ -441,30 +386,6 @@
       
       
       
-      <article class="blog-card">
-        <a class="block" href="/blog/blog-post-3.html">
-          <div class="blog-card__media">
-            <img src="/images/fashion-post-4m_ykv-I.jpg" alt="" width="387" height="291" loading="lazy">
-          </div>
-          <div class="blog-card__body">
-            <div class="flex items-center gap-2">
-              <!--
-              <span class="blog-meta">Business</span><span class="text-muted-foreground text-xs"
-                aria-hidden="true">—</span><span class="blog-meta">5 min read</span>
-              -->
-              <time class="blog-meta" datetime="2026-06-14">June 14, 2026</time>
-            </div>
-            <h4 class="blog-card__title">
-              Fashion Blogging: The Digital Revolution That Reshaped the Style Industry
-            </h4>
-            <!--
-            <p class="blog-card__excerpt">
-              Blog post excerpt — Brief description of the article content for preview. 
-            </p>
-            -->
-          </div>
-        </a>
-      </article>
       
       
       
@@ -598,5 +519,5 @@
         </div>
       </footer>
     </div>
-  </body>
-</html>
+  
+</body></html>
