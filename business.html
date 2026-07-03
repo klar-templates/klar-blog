@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
     <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
     <meta name="description" content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css">
     <script>
       (function() {
@@ -142,7 +143,7 @@
               <button class="filter__option is-selected" data-value="all">All Topics</button>
               <div id="all-topics" data-klar-static><button class="filter__option" data-value="Personal Branding">Personal Branding <span class="text-muted-foreground">(2)</span></button><button class="filter__option" data-value="Digital Marketing">Digital Marketing <span class="text-muted-foreground">(1)</span></button></div>
             </div>
-            
+
             <template id="all-topics-template"><button class="filter__option" data-value="${value}">${value} <span class="text-muted-foreground">(${count})</span></button></template>
             <script type="module">
               const t = document.getElementById('all-topics-template').innerHTML;
@@ -156,7 +157,7 @@
                   'replace', klarSdk.render(f, t))
               });
             </script>
-            
+
           </div>
           <div class="filter" data-facet="tags">
             <button class="filter__toggle" data-filter-toggle="tag" data-default-label="All Tags" aria-expanded="false" aria-label="Filter by Tag">
@@ -170,7 +171,7 @@
               <div id="all-tags" data-klar-static><button class="filter__option" data-value="Leadership">Leadership
                   <span class="text-muted-foreground">(4)</span></button><button class="filter__option" data-value="Authenticity">Authenticity <span class="text-muted-foreground">(2)</span></button></div>
             </div>
-            
+
             <template id="all-tags-template"><button class="filter__option" data-value="${value}">${value} <span class="text-muted-foreground">(${count})</span></button></template>
             <script type="module">
               const t = document.getElementById('all-tags-template').innerHTML;
@@ -181,7 +182,7 @@
               }).then(f => klarSdk.insert('#all-tags', 'replace',
                 klarSdk.render(f, t)));
             </script>
-            
+
           </div>
           <button id="clear-filters" class="btn btn-sm hidden">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
