@@ -7,6 +7,7 @@
     <title>Nexus — Design System</title>
     <meta name="description"
       content="The Nexus design system: tokens, components, and section patterns rendered live from style.css." />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css" />
     <script>
       (function() {
@@ -383,7 +384,8 @@
           <h1 class="ds-showcase-hero__title">The Nexus design language, in one place.</h1>
           <p class="ds-showcase-hero__lead">A token-driven system for an editorial blog — typography, color, spacing,
             components, and ready-to-drop section patterns. Everything on this page renders live from
-            <strong>style.css</strong>.</p>
+            <strong>style.css</strong>.
+          </p>
           <div class="ds-showcase-hero__actions">
             <a href="#components" class="btn btn-primary btn-lg">Explore components</a>
             <a href="#sections" class="btn btn-lg">Browse sections</a>
@@ -1202,7 +1204,8 @@
     <footer class="site-footer">
       <div class="container py-12 text-center">
         <p class="text-sm text-muted-foreground">Nexus Design System — every pixel on this page is drawn from
-          <strong>style.css</strong>.</p>
+          <strong>style.css</strong>.
+        </p>
       </div>
     </footer>
 
@@ -1211,8 +1214,7 @@
     <script type="application/json" data-klar-ds>
       {
         "classes": {
-          "Utilities": [
-            {
+          "Utilities": [{
               "label": "Page",
               "value": "bg-background"
             },
@@ -1937,8 +1939,7 @@
               "value": "container-narrow"
             }
           ],
-          "Typography": [
-            {
+          "Typography": [{
               "label": "Display",
               "value": "text-5xl font-bold tracking-tight leading-tight"
             },
@@ -1975,8 +1976,7 @@
               "value": "text-xs font-medium uppercase tracking-wide"
             }
           ],
-          "Grid": [
-            {
+          "Grid": [{
               "label": "2 columns",
               "value": "grid grid-cols-2"
             },
@@ -1989,8 +1989,7 @@
               "value": "grid grid-cols-4"
             }
           ],
-          "Container and Grid": [
-            {
+          "Container and Grid": [{
               "label": "Default · 2 cols",
               "value": "container grid grid-cols-2"
             },
