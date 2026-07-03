@@ -181,7 +181,7 @@
       "content": {
         "title": "Fashion Forward: How Digital Voices Rewrote the Rules of Style",
         "image": {
-          "src": "/images/work-lifestyle-Bg_wzXQT.jpg",
+          "src": "/images/lifestyle-post-B2o5gHGK.jpg",
           "alt": "En blogg för alla de som älskar att skriva och skratta"
         },
         "category": "Business",
@@ -370,7 +370,7 @@
     },
     {
       "name": "team.html",
-      "editableElements": ".grid:list"
+      "editableElements": ".page-title,\n.page-title:attr(class),\n.grid:list"
     }
   ],
   "vocabularies": {
