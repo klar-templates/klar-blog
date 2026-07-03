@@ -8,8 +8,6 @@
    No build step. No framework. Every value flows from a token.
    ========================================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-
 /* DM Sans — variable font, one latin file each for roman + italic (covers weights 100–1000) */
 @font-face {
   font-family: 'DM Sans';
