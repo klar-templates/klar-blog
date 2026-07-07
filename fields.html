@@ -254,7 +254,7 @@
         min-width: 0;
       }
 
-      .fb-blocks .fb-block__label {
+      #blocks span {
         display: inline-flex;
         align-items: center;
         gap: var(--space-1);
@@ -266,7 +266,7 @@
         margin-bottom: var(--space-2);
       }
 
-      .fb-blocks .fb-block__heading {
+      #blocks h1,h2,h3 {
         font-size: var(--text-lg);
         font-weight: var(--font-bold);
         line-height: var(--leading-tight);
@@ -274,17 +274,17 @@
         margin-bottom: var(--space-2);
       }
 
-      .fb-blocks .fb-block__text {
+      #blocks p {
         font-size: var(--text-sm);
         line-height: var(--leading-relaxed);
         color: var(--muted-foreground);
       }
 
-      .fb-blocks .fb-block__text+.fb-block__text {
+      #blocks p+p {
         margin-top: var(--space-2);
       }
 
-      .fb-blocks .fb-block__list {
+      #blocks .ul {
         list-style: disc;
         padding-left: var(--space-6);
         margin-top: var(--space-3);
@@ -293,11 +293,11 @@
         color: var(--muted-foreground);
       }
 
-      .fb-blocks .fb-block__list li+li {
+      #blocks ul li+li {
         margin-top: var(--space-1);
       }
 
-      .fb-blocks .fb-block__quote {
+      #blocks blockquote {
         margin-top: var(--space-3);
         padding-left: var(--space-4);
         border-left: 3px solid var(--border);
@@ -767,7 +767,7 @@
                   — they map directly to editable regions in the visual editor.</blockquote>
               </div>
             </div>
-           
+
           </div>
         </div>
 
