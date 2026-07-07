@@ -177,9 +177,8 @@
         display: block;
       }
 
-      /* ---- List & Blocks showcase ---- */
-      .fb-list,
-      .fb-blocks {
+      /* ---- List showcase ---- */
+      .fb-list {
         background-color: var(--card);
         border: 1px solid var(--border);
         border-radius: var(--radius-lg);
@@ -187,8 +186,7 @@
         overflow: hidden;
       }
 
-      .fb-list li,
-      .fb-blocks li {
+      .fb-list li {
         display: flex;
         align-items: center;
         gap: var(--space-3);
@@ -199,14 +197,55 @@
         border-bottom: 1px solid var(--border);
       }
 
-      .fb-list li:last-child,
-      .fb-blocks li:last-child {
+      .fb-list li:last-child {
         border-bottom: 0;
       }
 
       .fb-list .dot {
         width: 0.375rem;
         height: 0.375rem;
+      }
+
+      /* ---- Blocks showcase ---- */
+      .fb-blocks {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+      }
+
+      .fb-blocks > div {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-3);
+        padding: var(--space-6);
+        font-size: var(--text-base);
+        font-weight: var(--font-normal);
+        line-height: var(--leading-relaxed);
+        color: var(--foreground);
+        border-bottom: 1px solid var(--border);
+        position: relative;
+      }
+
+      .fb-blocks > div:last-child {
+        border-bottom: 0;
+      }
+
+      .fb-blocks > div .dot {
+        margin-top: 0.375rem;
+        flex-shrink: 0;
+      }
+
+      .fb-blocks > div[data-klar-clipped]::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--muted-foreground);
+        opacity: 0.4;
       }
 
       .fb-section-header {
