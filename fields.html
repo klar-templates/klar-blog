@@ -266,7 +266,9 @@
         margin-bottom: var(--space-2);
       }
 
-      #blocks h1,h2,h3 {
+      #blocks h1,
+      h2,
+      h3 {
         font-size: var(--text-lg);
         font-weight: var(--font-bold);
         line-height: var(--leading-tight);
@@ -701,7 +703,7 @@
                     font-weight: 700;
                   }
                 </style>
-                <pre><code id="code"><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
+                <pre><code id="code" style="display:block"><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the description.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
@@ -749,14 +751,15 @@
           </div>
           <div class="fb-blocks">
             <div>
-              <div id="blocks" class="fb-block__content">
-                <span class="fb-block__label">Heading Block</span>
+              <div id="blocks" class="fb-block__content"><span class="fb-block__label">Heading Block</span>
                 <h3 class="fb-block__heading">Understanding Rich-Text Blocks</h3>
                 <p class="fb-block__text">A blocks field stores an array of HTML snippets — each block is independently
                   editable and can be reordered via drag-and-drop in the editor panel. This is Klar's rich-text field,
                   designed for article bodies and long-form content.</p>
-                <p class="fb-block__text">Blocks can mix headings, paragraphs, lists, and blockquotes freely. Each block
+                <p class="fb-block__text" data-klar-clipped="1">Blocks can mix headings, paragraphs, lists, and
+                  blockquotes freely. Each block
                   renders as its own HTML element, giving you full control over structure and formatting.</p>
+                <p>New paragraph</p>
                 <ul class="fb-block__list">
                   <li>Headings (H2, H3, H4) for structure</li>
                   <li>Paragraphs with inline formatting</li>
