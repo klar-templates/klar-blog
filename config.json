@@ -342,9 +342,11 @@
     },
     {
       "name": "fields.html",
-      "editableElements": "#style        \t:field(title: CSS, type: string, format: css),\n\n#string      \t\n:field(title: String, type:string),\n\n#text\n:field(title: Text, type:text),\n\n#number\n:field(title: Number, type:number),\n\n#integer\n:field(title: Integer, type:integer),\n\n#boolean\n:field(title: Boolean, type:boolean),\n\n#date-time   \t:field(title:'Date time', type:string, format:'date-time'),\n#date        \t:field(title: Date, name: date, type: string, format:date),\n#time        \t:field(title: Time, type: string, format:time),\n#email       \t:field(title: Email, type: string, format:email),\n#url            :field(title: URL, type: string, format:url),\n#data-url    \t:field(title: Data URL, type: string, format:data-url),\n#json        \t:field(title: JSON, type: string, format: json),\n#markdown       :field(title: Markdown, type: string, format: markdown),\n#html        \t:field(title: HTML, type: string, format: html),\n\n#image       \t:field(title: Image, type:image, col: 4),\n\n#list        \t\t:field(title: List, type:string,\n             \t\toptions(layout:list)),\n#blocks      \t:field(title: Content, type:string,\n             \t\toptions(layout:blocks)),\n\nis(h2,p):attr(style)",
+      "editableElements": "#style        \t:field(title: CSS, type: string, format: css),\n\n#string      \t\n:field(title: String, type:string),\n\n#text\n:field(title: Text, type:text),\n\n#number\n:field(title: Number, type:number),\n\n#integer\n:field(title: Integer, type:integer),\n\n#boolean\n:field(title: Boolean, type:boolean),\n\n#date-time   \t:field(title:'Date time', type:string, format:'date-time'),\n#date        \t:field(title: Date, name: date, type: string, format:date),\n#time        \t:field(title: Time, type: string, format:time),\n#email       \t:field(title: Email, type: string, format:email),\n#url            :field(title: URL, type: string, format:url),\n#data-url    \t:field(title: Data URL, type: string, format:data-url),\n#json        \t:field(title: JSON, type: string, format: json),\n#markdown       :field(title: Markdown, type: string, name:markdown, format: markdown),\n#html          :field(title: HTML, type: string, name:html, format: html),\n\n#image       \t:field(title: Image, type:image, col: 4),\n\n#list        \t\t:field(title: List, type:string,\n             \t\toptions(layout:list)),\n#blocks      \t:field(title: Content, type:string,\n             \t\toptions(layout:blocks)),\n\nis(h2,p):attr(style)",
       "content": {
-        "date": "2026-05-17"
+        "date": "2026-05-17",
+        "html": "<div>sdfsadf</div>",
+        "markdown": "### Markdown # Test"
       }
     },
     {
