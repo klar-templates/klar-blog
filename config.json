@@ -346,7 +346,12 @@
       "content": {
         "date": "2026-05-17",
         "html": "<div>sdfsadf</div>",
-        "markdown": "### Markdown # Test"
+        "markdown": "### Markdown # Test",
+        "object": {
+          "street": "Torsvikssvängen",
+          "streetNo": "4A",
+          "city": "Lidingö"
+        }
       }
     },
     {
