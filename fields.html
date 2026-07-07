@@ -538,11 +538,13 @@
                 <p class="fb-field__type">array</p>
               </div>
               <div class="fb-field__value">
-                <div id="array"><div>
+                <div id="array">
+                  <div>
                     <p class="street">Torsvikssvängen 7</p>
                     <p class="streetNo">4A</p>
                     <p class="city">Lidingö</p>
-                  </div></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -742,7 +744,7 @@
                 <span class="fb-field__name">Tag</span>
                 <span class="fb-field__type">string</span>
               </div>
-              <div class="fb-field__value">
+              <div class="fb-field__value" id="layoutTag">
                 <span class="tag">Technology</span>
               </div>
             </div>
@@ -753,7 +755,7 @@
                 <span class="fb-field__type">array</span>
               </div>
               <div class="fb-field__value">
-                <div class="fb-layout-tags">
+                <div class="fb-layout-tags" id="layoutTags">
                   <span class="tag">css</span>
                   <span class="tag">javascript</span>
                   <span class="tag">design</span>
@@ -768,7 +770,7 @@
                 <span class="fb-field__type">array · layout:list</span>
               </div>
               <div class="fb-field__value">
-                <ul class="fb-list">
+                <ul class="fb-list" id="layoutList">
                   <li><span class="dot"></span>Feature one</li>
                   <li><span class="dot"></span>Feature two</li>
                   <li><span class="dot"></span>Feature three</li>
@@ -782,18 +784,20 @@
                 <span class="fb-field__type">array · layout:blocks</span>
               </div>
               <div class="fb-field__value">
-                <div class="fb-blocks">
+                <div class="fb-blocks" id="layoutBlocks">
                   <div>
                     <div class="fb-block__content">
                       <span class="fb-block__label">Heading Block</span>
                       <h3>Layout Fields in Klar</h3>
-                      <p>Array fields can use two layout options: <strong>list</strong> for repeating uniform items, and <strong>blocks</strong> for rich prose content.</p>
+                      <p>Array fields can use two layout options: <strong>list</strong> for repeating uniform items, and
+                        <strong>blocks</strong> for rich prose content.</p>
                     </div>
                   </div>
                   <div>
                     <div class="fb-block__content">
                       <span class="fb-block__label">Paragraph Block</span>
-                      <p>Each block in a blocks array is independently editable and reorderable — ideal for article bodies and long-form content.</p>
+                      <p>Each block in a blocks array is independently editable and reorderable — ideal for article
+                        bodies and long-form content.</p>
                     </div>
                   </div>
                 </div>
