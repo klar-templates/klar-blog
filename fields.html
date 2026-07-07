@@ -412,7 +412,7 @@
               <path d="M15 22V7"></path>
             </svg>
             String
-            <span class="fb-tab-count">12</span>
+            <span class="fb-tab-count">15</span>
           </button>
           <button class="fb-tab" role="tab" aria-selected="false" data-tab="text">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -476,7 +476,7 @@
         <div class="fb-panel is-active" role="tabpanel" data-panel="string">
           <div class="fb-section-header">
             <h2 class="section-title">String</h2>
-            <span class="badge badge-outline">12 fields</span>
+            <span class="badge badge-outline">15 fields</span>
           </div>
           <div class="grid md:grid-cols-2 gap-4">
             <!-- String (type) -->
@@ -677,6 +677,36 @@
                 <span class="fb-field__type">string · layout:tag</span>
               </div>
               <div class="fb-field__value" id="layoutTag"><span>Technology</span></div>
+            </div>
+            <!-- Chip (layout:chip) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Tags</span>
+                <span class="fb-field__type">string · layout:chip · vocab</span>
+              </div>
+              <div class="fb-field__value">
+                <p id="layoutChip">Technology</p>
+              </div>
+            </div>
+            <!-- Radio (layout:radio) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Radio</span>
+                <span class="fb-field__type">string · layout:radio · horizontal</span>
+              </div>
+              <div class="fb-field__value">
+                <p id="layoutRadio">color-500-red</p>
+              </div>
+            </div>
+            <!-- Select (list) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Select</span>
+                <span class="fb-field__type">string · list</span>
+              </div>
+              <div class="fb-field__value">
+                <p id="layoutTag">color-500-red</p>
+              </div>
             </div>
           </div>
         </div>
@@ -880,8 +910,10 @@
                   <div>
                     <div id="blocks" class="fb-block__content"><span class="fb-block__label">Heading Block</span>
                       <h3 class="fb-block__heading">Understanding Rich-Text Blocks</h3>
-                      <p class="fb-block__text">A blocks field stores an array of HTML snippets — each block is independently
-                        editable and can be reordered via drag-and-drop in the editor panel. This is Klar's rich-text field,
+                      <p class="fb-block__text">A blocks field stores an array of HTML snippets — each block is
+                        independently
+                        editable and can be reordered via drag-and-drop in the editor panel. This is Klar's rich-text
+                        field,
                         designed for article bodies and long-form content.</p>
                       <p class="fb-block__text" data-klar-clipped="1">Blocks can mix headings, paragraphs, lists, and
                         blockquotes freely. Each block
@@ -893,7 +925,8 @@
                         <li>Bullet and numbered lists</li>
                         <li>Blockquotes for emphasis</li>
                       </ul>
-                      <blockquote class="fb-block__quote">Blocks are the preferred way to author rich article content in Klar
+                      <blockquote class="fb-block__quote">Blocks are the preferred way to author rich article content in
+                        Klar
                         — they map directly to editable regions in the visual editor.</blockquote>
                     </div>
                   </div>
