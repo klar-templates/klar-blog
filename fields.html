@@ -247,6 +247,64 @@
         opacity: 0.4;
       }
 
+      /* ---- Blocks content styling ---- */
+      .fb-blocks .fb-block__content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .fb-blocks .fb-block__label {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        font-size: var(--text-xs);
+        font-weight: var(--font-semibold);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: var(--muted-foreground);
+        margin-bottom: var(--space-2);
+      }
+
+      .fb-blocks .fb-block__heading {
+        font-size: var(--text-lg);
+        font-weight: var(--font-bold);
+        line-height: var(--leading-tight);
+        letter-spacing: var(--tracking-tight);
+        margin-bottom: var(--space-2);
+      }
+
+      .fb-blocks .fb-block__text {
+        font-size: var(--text-sm);
+        line-height: var(--leading-relaxed);
+        color: var(--muted-foreground);
+      }
+
+      .fb-blocks .fb-block__text + .fb-block__text {
+        margin-top: var(--space-2);
+      }
+
+      .fb-blocks .fb-block__list {
+        list-style: disc;
+        padding-left: var(--space-6);
+        margin-top: var(--space-3);
+        font-size: var(--text-sm);
+        line-height: var(--leading-relaxed);
+        color: var(--muted-foreground);
+      }
+
+      .fb-blocks .fb-block__list li + li {
+        margin-top: var(--space-1);
+      }
+
+      .fb-blocks .fb-block__quote {
+        margin-top: var(--space-3);
+        padding-left: var(--space-4);
+        border-left: 3px solid var(--border);
+        font-style: italic;
+        font-size: var(--text-sm);
+        color: var(--muted-foreground);
+      }
+
       .fb-section-header {
         display: flex;
         align-items: center;
@@ -577,7 +635,30 @@
             <h2 class="section-title">Blocks</h2>
             <span class="badge badge-outline">2 blocks</span>
           </div>
-          <div id="blocks" class="fb-blocks">Block 1 Block 2</div>
+          <div id="blocks" class="fb-blocks">
+            <div>
+              <span class="dot"></span>
+              <div class="fb-block__content">
+                <span class="fb-block__label">Heading Block</span>
+                <h3 class="fb-block__heading">Understanding Rich-Text Blocks</h3>
+                <p class="fb-block__text">A blocks field stores an array of HTML snippets — each block is independently editable and can be reordered via drag-and-drop in the editor panel. This is Klar's rich-text field, designed for article bodies and long-form content.</p>
+              </div>
+            </div>
+            <div>
+              <span class="dot"></span>
+              <div class="fb-block__content">
+                <span class="fb-block__label">Content Block</span>
+                <p class="fb-block__text">Blocks can mix headings, paragraphs, lists, and blockquotes freely. Each block renders as its own HTML element, giving you full control over structure and formatting.</p>
+                <ul class="fb-block__list">
+                  <li>Headings (H2, H3, H4) for structure</li>
+                  <li>Paragraphs with inline formatting</li>
+                  <li>Bullet and numbered lists</li>
+                  <li>Blockquotes for emphasis</li>
+                </ul>
+                <blockquote class="fb-block__quote">Blocks are the preferred way to author rich article content in Klar — they map directly to editable regions in the visual editor.</blockquote>
+              </div>
+            </div>
+          </div>
         </div>
 
       </main>
