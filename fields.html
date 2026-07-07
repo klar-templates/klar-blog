@@ -634,16 +634,13 @@
     <script>
       (function() {
         'use strict';
-        // Tab switching — survives SPA navigation via event delegation
-        document.addEventListener('click', function(e) {
-          var tab = e.target.closest('[data-tab]');
-          if (!tab) return;
 
-          var target = tab.getAttribute('data-tab');
+        var STORAGE_KEY = 'fb-active-tab';
 
+        function activateTab(target) {
           // Toggle tab button states
           document.querySelectorAll('[data-tab]').forEach(function(t) {
-            var active = t === tab;
+            var active = t.getAttribute('data-tab') === target;
             t.classList.toggle('is-active', active);
             t.setAttribute('aria-selected', active ? 'true' : 'false');
           });
@@ -652,7 +649,32 @@
           document.querySelectorAll('[data-panel]').forEach(function(p) {
             p.classList.toggle('is-active', p.getAttribute('data-panel') === target);
           });
+        }
+
+        // Tab switching — survives SPA navigation via event delegation
+        document.addEventListener('click', function(e) {
+          var tab = e.target.closest('[data-tab]');
+          if (!tab) return;
+
+          var target = tab.getAttribute('data-tab');
+          activateTab(target);
+
+          // Persist the selected tab
+          try {
+            localStorage.setItem(STORAGE_KEY, target);
+          } catch (err) {}
         });
+
+        // On load, restore the previously selected tab (falls back to 'types')
+        var saved = null;
+        try {
+          saved = localStorage.getItem(STORAGE_KEY);
+        } catch (err) {}
+
+        // Only restore if a matching tab actually exists on the page
+        if (saved && document.querySelector('[data-tab="' + saved + '"]')) {
+          activateTab(saved);
+        }
       })();
     </script>
   </body>
