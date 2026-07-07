@@ -321,6 +321,13 @@
       .fb-section-header .badge {
         font-size: var(--text-xs);
       }
+
+      /* ---- Layout panel: tags showcase ---- */
+      .fb-layout-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
     </style>
   </head>
   <body>
@@ -416,6 +423,16 @@
             </svg>
             Format
             <span class="fb-tab-count">9</span>
+          </button>
+          <button class="fb-tab" role="tab" aria-selected="false" data-tab="layout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+              <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+              <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+              <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+            </svg>
+            Layout
+            <span class="fb-tab-count">4</span>
           </button>
           <button class="fb-tab" role="tab" aria-selected="false" data-tab="image">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -707,6 +724,79 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 </code>
 </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Panel: Layout ── -->
+        <div class="fb-panel" role="tabpanel" data-panel="layout">
+          <div class="fb-section-header">
+            <h2 class="section-title">Layout</h2>
+            <span class="badge badge-outline">4 fields</span>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- Tag (string) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Tag</span>
+                <span class="fb-field__type">string</span>
+              </div>
+              <div class="fb-field__value">
+                <span class="tag">Technology</span>
+              </div>
+            </div>
+            <!-- Tags (array) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Tags</span>
+                <span class="fb-field__type">array</span>
+              </div>
+              <div class="fb-field__value">
+                <div class="fb-layout-tags">
+                  <span class="tag">css</span>
+                  <span class="tag">javascript</span>
+                  <span class="tag">design</span>
+                  <span class="tag">tutorial</span>
+                </div>
+              </div>
+            </div>
+            <!-- List (array, layout:list) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">List</span>
+                <span class="fb-field__type">array · layout:list</span>
+              </div>
+              <div class="fb-field__value">
+                <ul class="fb-list">
+                  <li><span class="dot"></span>Feature one</li>
+                  <li><span class="dot"></span>Feature two</li>
+                  <li><span class="dot"></span>Feature three</li>
+                </ul>
+              </div>
+            </div>
+            <!-- Blocks (array, layout:blocks) -->
+            <div class="fb-field">
+              <div class="fb-field__label">
+                <span class="fb-field__name">Blocks</span>
+                <span class="fb-field__type">array · layout:blocks</span>
+              </div>
+              <div class="fb-field__value">
+                <div class="fb-blocks">
+                  <div>
+                    <div class="fb-block__content">
+                      <span class="fb-block__label">Heading Block</span>
+                      <h3>Layout Fields in Klar</h3>
+                      <p>Array fields can use two layout options: <strong>list</strong> for repeating uniform items, and <strong>blocks</strong> for rich prose content.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="fb-block__content">
+                      <span class="fb-block__label">Paragraph Block</span>
+                      <p>Each block in a blocks array is independently editable and reorderable — ideal for article bodies and long-form content.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
