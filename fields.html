@@ -326,9 +326,13 @@
   <body>
     <template data-for="data" data-query="page()">
       {{ page.content.object | json }}
+      <br>
+      {{ page.content.array | json }}
     </template>
     <div id="data">
       {"street":"Torsvikssvängen","streetNo":"4A","city":"Lidingö"}
+      <br>
+      [{"street":"Torsvikssvängen","streetNo":"Torsvikssvängen","city":"Torsvikssvängen"}]
     </div>
     <div class="min-h-screen bg-background">
       <header class="site-header" id="header">
