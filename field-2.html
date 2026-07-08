@@ -162,6 +162,31 @@
         margin-bottom: var(--space-1)
       }
 
+      .list-teaser {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition)
+      }
+
+      .list-teaser:hover {
+        background-color: var(--muted)
+      }
+
+      .list-teaser__title {
+        font-size: var(--text-sm);
+        font-weight: var(--font-semibold);
+        color: var(--foreground)
+      }
+
+      .list-teaser__desc {
+        font-size: var(--text-xs);
+        color: var(--muted-foreground);
+        line-height: var(--leading-snug)
+      }
+
       @media (max-width:768px) {
         .field-row {
           grid-template-columns: 1fr;
@@ -258,7 +283,8 @@
             <button class="field-tab" data-tab="datetime">Date &amp; Time</button>
             <button class="field-tab" data-tab="numeric">Numbers &amp; Boolean</button>
             <button class="field-tab" data-tab="rich">Rich Content</button>
-            <button class="field-tab" data-tab="media">Media &amp; Lists</button>
+            <button class="field-tab" data-tab="media">Media</button>
+            <button class="field-tab" data-tab="lists">Lists</button>
             <button class="field-tab" data-tab="pickers">Pickers</button>
             <button class="field-tab" data-tab="complex">Object &amp; Array</button>
           </div>
@@ -509,7 +535,7 @@ This is **bold** and *italic* text.
             </div>
           </div>
 
-          <!-- ── Panel 5 · Media &amp; Lists ───────────────────────────── -->
+          <!-- ── Panel 5 · Media ────────────────────────────────────── -->
           <div class="field-panel" data-panel="media">
             <div class="field-row">
               <div>
@@ -520,16 +546,35 @@ This is **bold** and *italic* text.
                 <img id="image" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="A clean desk with laptop, notebook and coffee" style="width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover">
               </div>
             </div>
+          </div>
+
+          <!-- ── Panel 6 · Lists ─────────────────────────────────────── -->
+          <div class="field-panel" data-panel="lists">
             <div class="field-row">
               <div>
                 <div class="field-label">Layout List</div>
                 <div class="field-desc">type:string, layout:list</div>
               </div>
               <div class="field-value">
-                <ul style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-1)" id="layoutList">
-                  <li>First list item</li>
-                  <li>Second list item</li>
-                  <li>Third list item</li>
+                <ul style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="layoutList">
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">The Future of Wearable Technology</div>
+                      <div class="list-teaser__desc">How smart fabrics and biometric sensors are reshaping everyday fashion.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Sustainable Fashion Brands to Watch</div>
+                      <div class="list-teaser__desc">A curated list of eco-conscious labels making waves in 2026.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Minimalist Desk Setup Ideas</div>
+                      <div class="list-teaser__desc">Practical tips for a clean, productive workspace that sparks creativity.</div>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -539,28 +584,31 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:string, layout:list</div>
               </div>
               <div class="field-value">
-                <ol style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-1)" id="list">
-                  <li>Step one</li>
-                  <li>Step two</li>
-                  <li>Step three</li>
+                <ol style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="list">
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Define your content strategy</div>
+                      <div class="list-teaser__desc">Identify your audience, tone of voice, and the topics that align with your brand.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Choose your publishing cadence</div>
+                      <div class="list-teaser__desc">Decide whether weekly, bi-weekly, or monthly posts work best for your goals.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Measure and iterate</div>
+                      <div class="list-teaser__desc">Track engagement metrics and refine your editorial calendar based on what resonates.</div>
+                    </div>
+                  </li>
                 </ol>
-              </div>
-            </div>
-            <div class="field-row">
-              <div>
-                <div class="field-label">Tags</div>
-                <div class="field-desc">type:array, layout:tags, vocab:categories, name:tags</div>
-              </div>
-              <div class="field-value" id="layoutTags" style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
-                <span class="tag is-active">Fashion</span>
-                <span class="tag is-active">Technology</span>
-                <span class="tag">Business</span>
-                <span class="tag">Lifestyle</span>
               </div>
             </div>
           </div>
 
-          <!-- ── Panel 6 · Pickers ───────────────────────────────────── -->
+          <!-- ── Panel 7 · Pickers ───────────────────────────────────── -->
           <div class="field-panel" data-panel="pickers">
             <div class="field-row">
               <div>
@@ -591,9 +639,21 @@ This is **bold** and *italic* text.
               </div>
               <div class="field-value" id="layoutSelectStr" style="display:flex;align-items:center;justify-content:space-between">color-500-red</div>
             </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Tags</div>
+                <div class="field-desc">type:array, layout:tags, vocab:categories, name:tags</div>
+              </div>
+              <div class="field-value" id="layoutTags" style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
+                <span class="tag is-active">Fashion</span>
+                <span class="tag is-active">Technology</span>
+                <span class="tag">Business</span>
+                <span class="tag">Lifestyle</span>
+              </div>
+            </div>
           </div>
 
-          <!-- ── Panel 7 · Object &amp; Array ────────────────────────────── -->
+          <!-- ── Panel 8 · Object &amp; Array ────────────────────────────── -->
           <div class="field-panel" data-panel="complex">
             <div class="field-row">
               <div>
