@@ -187,6 +187,73 @@
         line-height: var(--leading-snug)
       }
 
+      /* ── Prose inside field-value (blocks panels) ─────────────────── */
+      .field-value.prose {
+        max-width: none;
+        line-height: var(--leading-relaxed)
+      }
+
+      .field-value.prose > * + * {
+        margin-top: var(--space-6)
+      }
+
+      .field-value.prose h2 {
+        font-size: var(--text-2xl);
+        margin-top: var(--space-12)
+      }
+
+      .field-value.prose h2:first-child {
+        margin-top: 0
+      }
+
+      .field-value.prose h3 {
+        font-size: var(--text-xl);
+        margin-top: var(--space-8)
+      }
+
+      .field-value.prose p {
+        color: var(--foreground)
+      }
+
+      .field-value.prose a {
+        text-decoration: underline;
+        text-underline-offset: 2px
+      }
+
+      .field-value.prose strong {
+        font-weight: var(--font-semibold)
+      }
+
+      .field-value.prose code {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-sm);
+        background-color: var(--muted);
+        color: var(--foreground);
+        padding: 0.125em 0.375em;
+        border-radius: var(--radius-sm)
+      }
+
+      .field-value.prose blockquote {
+        padding-left: var(--space-6);
+        border-left: 3px solid var(--border);
+        color: var(--muted-foreground);
+        font-style: italic
+      }
+
+      .field-value.prose ul {
+        list-style: disc;
+        padding-left: var(--space-6)
+      }
+
+      .field-value.prose ol {
+        list-style: decimal;
+        padding-left: var(--space-6)
+      }
+
+      .field-value.prose li + li {
+        margin-top: var(--space-2)
+      }
+
       @media (max-width:768px) {
         .field-row {
           grid-template-columns: 1fr;
@@ -282,9 +349,10 @@
             <button class="field-tab is-active" data-tab="text">Text &amp; Strings</button>
             <button class="field-tab" data-tab="datetime">Date &amp; Time</button>
             <button class="field-tab" data-tab="numeric">Numbers &amp; Boolean</button>
-            <button class="field-tab" data-tab="rich">Rich Content</button>
+            <button class="field-tab" data-tab="rich">Code</button>
             <button class="field-tab" data-tab="media">Media</button>
             <button class="field-tab" data-tab="lists">Lists</button>
+            <button class="field-tab" data-tab="blocks">Blocks</button>
             <button class="field-tab" data-tab="pickers">Pickers</button>
             <button class="field-tab" data-tab="complex">Object &amp; Array</button>
           </div>
@@ -387,7 +455,7 @@
             </div>
           </div>
 
-          <!-- ── Panel 4 · Rich Content ──────────────────────────────── -->
+          <!-- ── Panel 4 · Code ──────────────────────────────────────── -->
           <div class="field-panel" data-panel="rich">
             <div class="field-row">
               <div>
@@ -511,28 +579,6 @@ This is **bold** and *italic* text.
   border-radius: var(--radius-md);
 }</div>
             </div>
-            <div class="field-row">
-              <div>
-                <div class="field-label">Layout Blocks</div>
-                <div class="field-desc">type:string, layout:blocks</div>
-              </div>
-              <div class="field-value" id="layoutBlocks">
-                <h3 style="font-size:var(--text-lg);font-weight:var(--font-bold);margin-bottom:var(--space-2)">
-                  Drag-and-drop blocks</h3>
-                <p style="color:var(--muted-foreground)">A blocks-layout container. Add headings, paragraphs, lists, and
-                  quotes by dragging from the block palette.</p>
-              </div>
-            </div>
-            <div class="field-row">
-              <div>
-                <div class="field-label">Blocks</div>
-                <div class="field-desc">type:string, layout:blocks</div>
-              </div>
-              <div class="field-value" id="blocks">
-                <p style="color:var(--muted-foreground)">Another blocks container — same rich-text editing experience
-                  with a different field binding.</p>
-              </div>
-            </div>
           </div>
 
           <!-- ── Panel 5 · Media ────────────────────────────────────── -->
@@ -608,7 +654,68 @@ This is **bold** and *italic* text.
             </div>
           </div>
 
-          <!-- ── Panel 7 · Pickers ───────────────────────────────────── -->
+          <!-- ── Panel 7 · Blocks ────────────────────────────────────── -->
+          <div class="field-panel" data-panel="blocks">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Layout Blocks</div>
+                <div class="field-desc">type:array, options(layout:blocks)</div>
+              </div>
+              <div class="field-value prose" id="layoutBlocks">
+                <h2>The Art of Digital Storytelling</h2>
+                <p>In an era of infinite content, the stories that resonate are those crafted with intention. Every heading, paragraph, and list should serve your reader's journey through an idea.</p>
+                <h3>Building a Narrative Arc</h3>
+                <p>Think of each article as a small journey. Your headline is the invitation; your opening paragraph is the threshold. Every section that follows should reward the reader's decision to keep reading.</p>
+                <blockquote>The best writing doesn't just inform — it makes the reader feel they've arrived somewhere new.</blockquote>
+                <p>Consider these pillars of compelling content:</p>
+                <ul>
+                  <li>Clarity over cleverness — say what you mean</li>
+                  <li>Rhythm — vary sentence length to create pace</li>
+                  <li>Evidence — support claims with real examples</li>
+                  <li>Empathy — anticipate your reader's questions</li>
+                </ul>
+                <h3>From Draft to Published</h3>
+                <p>A reliable publishing workflow turns good ideas into finished articles:</p>
+                <ol>
+                  <li>Capture the idea and write a rough outline</li>
+                  <li>Draft freely without self-editing</li>
+                  <li>Step away, then return with fresh eyes</li>
+                  <li>Revise for structure, then for language</li>
+                  <li>Publish, share, and engage with responses</li>
+                </ol>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Blocks</div>
+                <div class="field-desc">type:array, options(layout:blocks)</div>
+              </div>
+              <div class="field-value prose" id="blocks">
+                <h2>Designing for Readability</h2>
+                <p>Typography and whitespace are the silent architects of reading comfort. A well-set page invites the eye to linger; a cramped one drives it away.</p>
+                <h3>The Power of Restraint</h3>
+                <p>Resist the urge to fill every pixel. Generous margins, consistent line height, and a measured type scale create a rhythm that carries the reader from first word to last.</p>
+                <blockquote>White space is to be regarded as an active element, not a passive background.</blockquote>
+                <p>Practical guidelines for readable layouts:</p>
+                <ul>
+                  <li>Keep line length between 45 and 75 characters</li>
+                  <li>Set line height to 1.5–1.7 for body text</li>
+                  <li>Use a modular type scale with clear hierarchy</li>
+                  <li>Limit font families to two — one for headings, one for body</li>
+                </ul>
+                <h3>Testing Across Devices</h3>
+                <p>What looks perfect on a large monitor may collapse on a phone. Always preview at multiple breakpoints:</p>
+                <ol>
+                  <li>Start with mobile — the most constrained canvas</li>
+                  <li>Scale up to tablet and verify spacing</li>
+                  <li>Check desktop for line length and column balance</li>
+                  <li>Read the entire article on each size</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Panel 8 · Pickers ───────────────────────────────────── -->
           <div class="field-panel" data-panel="pickers">
             <div class="field-row">
               <div>
@@ -653,7 +760,7 @@ This is **bold** and *italic* text.
             </div>
           </div>
 
-          <!-- ── Panel 8 · Object &amp; Array ────────────────────────────── -->
+          <!-- ── Panel 9 · Object &amp; Array ────────────────────────────── -->
           <div class="field-panel" data-panel="complex">
             <div class="field-row">
               <div>
