@@ -297,7 +297,7 @@
       .field-copy__tooltip {
         position: absolute;
         bottom: calc(100% + var(--space-2));
-        right: 0;
+        left: 0;
         z-index: 60;
         ax-width: 600px;
         text-align: left;
@@ -329,19 +329,19 @@
         content: "";
         position: absolute;
         top: 100%;
-        right: .5rem;
+        left: .5rem;
         border: 5px solid transparent;
         border-top-color: var(--popover)
       }
 
       .field-copy__tooltip.is-flipped {
-        right: auto;
-        left: 0
+        left: auto;
+        right: 0
       }
 
       .field-copy__tooltip.is-flipped::after {
-        right: auto;
-        left: .5rem
+        left: auto;
+        right: .5rem
       }
 
       @media (max-width:768px) {
@@ -1102,9 +1102,11 @@
 
               label.appendChild(btn);
 
-              // Position tooltip: flip to opposite side if it overflows the
-              // viewport; if NEITHER side fits, pin it to left: 16px from the
-              // viewport edge so it stays on screen.
+              // Position tooltip: default is left-aligned (extends rightward
+              // from the button). If it overflows the viewport's right edge,
+              // try flipped (right-aligned, extends leftward). If the flipped
+              // version overflows the left edge, pin the tooltip so its right
+              // edge sits 16px from the viewport right and constrain its width.
               function positionTooltip() {
                 var tooltip = btn.querySelector('.field-copy__tooltip');
                 if (!tooltip) return;
@@ -1118,19 +1120,21 @@
                 var vw = window.innerWidth;
                 var rect = tooltip.getBoundingClientRect();
 
-                // Step 1: does it overflow the LEFT edge?
-                if (rect.left < 8) {
-                  // Try flipped (left-aligned, extends rightward)
+                // Step 1: does the default (left-aligned) overflow the RIGHT edge?
+                if (rect.right > vw - 8) {
+                  // Try flipped (right-aligned, extends leftward)
                   tooltip.classList.add('is-flipped');
                   rect = tooltip.getBoundingClientRect();
 
-                  // Step 2: does the flipped version overflow the RIGHT edge?
-                  if (rect.right > vw - 8) {
-                    // Neither side fits — pin to 16px from viewport left
+                  // Step 2: does the flipped version overflow the LEFT edge?
+                  if (rect.left < 8) {
+                    // Neither side fits — pin to 16px from viewport right
                     tooltip.classList.remove('is-flipped');
                     var btnRect = btn.getBoundingClientRect();
-                    tooltip.style.right = 'auto';
-                    tooltip.style.left = (16 - btnRect.left) + 'px';
+                    tooltip.style.left = 'auto';
+                    // right offset = btnRect.right - (vw - 16) so tooltip's
+                    // right edge lands at vw - 16 in viewport coordinates
+                    tooltip.style.right = (btnRect.right - vw + 16) + 'px';
                     // Allow wrapping so it doesn't overflow the right edge
                     tooltip.style.maxWidth = (vw - 32) + 'px';
                   }
