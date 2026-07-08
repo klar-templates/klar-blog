@@ -335,6 +335,16 @@
         border-top-color: var(--popover)
       }
 
+      .field-copy__tooltip.is-flipped {
+        right: auto;
+        left: 0
+      }
+
+      .field-copy__tooltip.is-flipped::after {
+        right: auto;
+        left: .5rem
+      }
+
       @media (max-width:768px) {
         .field-row {
           grid-template-columns: 1fr;
@@ -1090,6 +1100,20 @@
               });
 
               label.appendChild(btn);
+
+              // Flip tooltip to the opposite side if it would overflow the viewport
+              function positionTooltip() {
+                var tooltip = btn.querySelector('.field-copy__tooltip');
+                if (!tooltip) return;
+                // Temporarily reset flip state to measure the default position
+                tooltip.classList.remove('is-flipped');
+                var rect = tooltip.getBoundingClientRect();
+                if (rect.left < 8) {
+                  tooltip.classList.add('is-flipped');
+                }
+              }
+              btn.addEventListener('mouseenter', positionTooltip);
+              btn.addEventListener('focusin', positionTooltip);
             });
           })();
         </script>
