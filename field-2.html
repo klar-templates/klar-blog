@@ -63,6 +63,9 @@
       }
 
       .field-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: var(--text-sm);
         font-weight: var(--font-semibold);
         color: var(--foreground)
@@ -254,6 +257,81 @@
         margin-top: var(--space-2)
       }
 
+      /* ── Field copy button + tooltip ──────────────────────────────── */
+      .field-copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--background);
+        color: var(--muted-foreground);
+        cursor: pointer;
+        position: relative;
+        transition: all var(--transition)
+      }
+
+      .field-copy:hover {
+        background: var(--muted);
+        color: var(--foreground);
+        border-color: var(--foreground)
+      }
+
+      .field-copy.is-copied {
+        background: var(--primary);
+        color: var(--primary-foreground);
+        border-color: var(--primary)
+      }
+
+      .field-copy svg {
+        width: .875rem;
+        height: .875rem;
+        flex-shrink: 0
+      }
+
+      .field-copy__tooltip {
+        position: absolute;
+        bottom: calc(100% + var(--space-2));
+        right: 0;
+        z-index: 60;
+        max-width: 380px;
+        min-width: 180px;
+        padding: var(--space-3) var(--space-4);
+        background: var(--popover);
+        color: var(--popover-foreground);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-xs);
+        line-height: var(--leading-snug);
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(4px);
+        transition: opacity var(--transition), transform var(--transition)
+      }
+
+      .field-copy:hover .field-copy__tooltip,
+      .field-copy:focus-visible .field-copy__tooltip {
+        opacity: 1;
+        transform: translateY(0)
+      }
+
+      .field-copy__tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        right: .5rem;
+        border: 5px solid transparent;
+        border-top-color: var(--popover)
+      }
+
       @media (max-width:768px) {
         .field-row {
           grid-template-columns: 1fr;
@@ -262,6 +340,10 @@
 
         .field-object-grid {
           grid-template-columns: 1fr
+        }
+
+        .field-copy__tooltip {
+          max-width: calc(100vw - 3rem)
         }
       }
     </style>
@@ -871,6 +953,102 @@ This is **bold** and *italic* text.
               try {
                 localStorage.setItem(STORAGE_KEY, target);
               } catch (e) {}
+            });
+          })();
+        </script>
+
+        <!-- ── Field config copy buttons ────────────────────────────── -->
+        <script>
+          (function() {
+            var configs = {
+              'string':           '#string:field(title: String, type:string)',
+              'date-time':        "#date-time:field(title:'Date time', type:string, format:'date-time')",
+              'date':             '#date:field(title: Date, name: date, type: string, format:date)',
+              'time':             '#time:field(title: Time, type: string, format:time)',
+              'email':            '#email:field(title: Email, type: string, format:email)',
+              'url':              '#url:field(title: URL, type: string, format:url)',
+              'data-url':         '#data-url:field(title: Data URL, type: string, format:data-url)',
+              'json':             '#json:field(title: JSON, type: string, format: json)',
+              'markdown':         '#markdown:field(title: Markdown, type: string, name:markdown, format: markdown)',
+              'html':             '#html:field(title: HTML, type: string, name:html, format: html)',
+              'code':             '#code:field(title: Code, type: string, name:code, format: code)',
+              'style':            '#style:field(title: CSS, type: string, format: css)',
+              'image':            '#image:field(title: Image, type:image)',
+              'text':             '#text:field(title: Text, type:text)',
+              'textEditor':       '#textEditor:field(title:Lead, name:lead, type:text, options(layout:editor))',
+              'number':           '#number:field(title: Number, type:number)',
+              'integer':          '#integer:field(title: Integer, type:integer)',
+              'boolean':          '#boolean:field(title: Boolean, type:boolean)',
+              'layoutTag':        '#layoutTag:field(title:Tag with vocab, name:tag, type:string, options(layout: tag, vocab:categories))',
+              'layoutChip':       '#layoutChip:field(title: Tags, name:chip, type:string, options(layout:chip, vocab:categories))',
+              'layoutRadio':      "#layoutRadio:field(title: Radio, name: radio, type: string, options(layout:radio, direction: horizontal, list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
+              'layoutSelectStr':  "#layoutSelectStr:field(title: Select, name: select, type: string, options(list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
+              'layoutTags':       '#layoutTags:field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories))',
+              'layoutList':       '#layoutList:field(title: List, type:string, options(layout:list))',
+              'list':             '#list:field(title: List, type:string, options(layout:list))',
+              'layoutBlocks':     '#layoutBlocks:field(title: Content, type:string, options(layout:blocks))',
+              'blocks':           '#blocks:field(title: Content, type:string, options(layout:blocks))',
+              'object':           "#object:field(title:Object, title:Object, name:object, type:object, fields:[{title:Link, name:link, type:string, attr:data-link, selector:'&scope'}, {title:'Street name', name:street, type:string, selector:#street}, {name:streetNo, type:string, title:'Street number', selector:#streetNo}, {name:city, type:string, title:City, selector:#city}], options(collapsible: true, collapsed: false))",
+              'array':            "#array:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false), of:[{title: Array item, type:object, options(collapsible: true, collapsed: false), fields:[{title:'Street name', name:street, type:string, selector:.street}, {name:streetNo, type:string, title:'Street number', selector:.streetNo}, {name:city, type:string, title:City, selector:.city}]}])"
+            };
+
+            var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+            var ICON_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
+
+            function escapeHtml(s) {
+              return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
+            function copyToClipboard(text) {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text);
+              }
+              return new Promise(function(resolve, reject) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); resolve(); }
+                catch (e) { reject(e); }
+                finally { document.body.removeChild(ta); }
+              });
+            }
+
+            document.querySelectorAll('.field-row').forEach(function(row) {
+              var elWithId = row.querySelector('[id]');
+              if (!elWithId) return;
+              var config = configs[elWithId.id];
+              if (!config) return;
+
+              var label = row.querySelector('.field-label');
+              if (!label) return;
+
+              var btn = document.createElement('button');
+              btn.className = 'field-copy';
+              btn.type = 'button';
+              btn.setAttribute('aria-label', 'Copy field config to clipboard');
+              btn.innerHTML =
+                ICON_COPY +
+                '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+
+              btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                copyToClipboard(config).then(function() {
+                  btn.innerHTML = ICON_CHECK +
+                    '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+                  btn.classList.add('is-copied');
+                  setTimeout(function() {
+                    btn.innerHTML = ICON_COPY +
+                      '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+                    btn.classList.remove('is-copied');
+                  }, 2000);
+                }).catch(function() {});
+              });
+
+              label.appendChild(btn);
             });
           })();
         </script>
