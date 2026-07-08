@@ -599,16 +599,37 @@
 
         <script>
           (function() {
-            document.addEventListener('click', function(e) {
-              var tab = e.target.closest('.field-tab');
-              if (!tab) return;
-              var target = tab.dataset.tab;
+            var STORAGE_KEY = 'field-showcase-active-tab';
+
+            function activateTab(target) {
               document.querySelectorAll('.field-tab').forEach(function(t) {
-                t.classList.toggle('is-active', t === tab)
+                t.classList.toggle('is-active', t.dataset.tab === target)
               });
               document.querySelectorAll('.field-panel').forEach(function(p) {
                 p.classList.toggle('is-active', p.dataset.panel === target)
               });
+            }
+
+            // Restore active tab on load
+            try {
+              var savedTab = localStorage.getItem(STORAGE_KEY);
+              if (savedTab) {
+                var tab = document.querySelector('.field-tab[data-tab="' + savedTab + '"]');
+                if (tab) {
+                  activateTab(savedTab);
+                }
+              }
+            } catch (e) {}
+
+            // Tab click handler — save to localStorage
+            document.addEventListener('click', function(e) {
+              var tab = e.target.closest('.field-tab');
+              if (!tab) return;
+              var target = tab.dataset.tab;
+              activateTab(target);
+              try {
+                localStorage.setItem(STORAGE_KEY, target);
+              } catch (e) {}
             });
           })();
         </script>
