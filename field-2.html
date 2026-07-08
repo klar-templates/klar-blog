@@ -377,7 +377,7 @@
             <div class="field-row">
               <div>
                 <div class="field-label">Text Editor</div>
-                <div class="field-desc">type:text, layout:editor</div>
+                <div class="field-desc">type:text, options(layout:editor)</div>
               </div>
               <div class="field-value" id="textEditor">A lead paragraph rendered with the lightweight editor layout —
                 supports bold, italic, and links.</div>
@@ -599,7 +599,7 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Layout List</div>
-                <div class="field-desc">type:string, layout:list</div>
+                <div class="field-desc">type:string, options(layout:list)</div>
               </div>
               <div class="field-value">
                 <ul style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="layoutList">
@@ -627,7 +627,7 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">List</div>
-                <div class="field-desc">type:string, layout:list</div>
+                <div class="field-desc">type:string, options(layout:list)</div>
               </div>
               <div class="field-value">
                 <ol style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="list">
@@ -720,21 +720,21 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Tag Picker</div>
-                <div class="field-desc">type:string, layout:tag, vocab:categories, name:tag</div>
+                <div class="field-desc">type:string, options(layout:tag, vocab:categories), name:tag</div>
               </div>
               <div class="field-value" id="layoutTag">Podcast</div>
             </div>
             <div class="field-row">
               <div>
                 <div class="field-label">Chip Picker</div>
-                <div class="field-desc">type:string, layout:chip, vocab:categories, name:chip</div>
+                <div class="field-desc">type:string, options(layout:chip, vocab:categories), name:chip</div>
               </div>
               <div class="field-value" id="layoutChip">Technology,Lifestyle</div>
             </div>
             <div class="field-row">
               <div>
                 <div class="field-label">Radio</div>
-                <div class="field-desc">type:string, layout:radio, name:radio</div>
+                <div class="field-desc">type:string, options(layout:radio, direction:horizontal, list:[…]), name:radio</div>
               </div>
               <div class="field-value" id="layoutRadio" style="display:flex;gap:var(--space-4);align-items:center">
                 color-500-green</div>
@@ -742,14 +742,14 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Select</div>
-                <div class="field-desc">type:string, list[…], name:select</div>
+                <div class="field-desc">type:string, options(list:[…]), name:select</div>
               </div>
               <div class="field-value" id="layoutSelectStr" style="display:flex;align-items:center;justify-content:space-between">color-500-red</div>
             </div>
             <div class="field-row">
               <div>
                 <div class="field-label">Tags</div>
-                <div class="field-desc">type:array, layout:tags, vocab:categories, name:tags</div>
+                <div class="field-desc">type:array, options(layout:tags, vocab:categories), name:tags</div>
               </div>
               <div class="field-value" id="layoutTags" style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
                 <span class="tag is-active">Fashion</span>
@@ -765,7 +765,7 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Object</div>
-                <div class="field-desc">type:object, collapsible</div>
+                <div class="field-desc">type:object, options(collapsible:true)</div>
               </div>
               <div class="field-card" id="object" data-link="https://maps.google.com">
                 <div class="field-sublabel">Link (data-link attr)</div>
@@ -792,7 +792,7 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Array</div>
-                <div class="field-desc">type:array, of:object, collapsible</div>
+                <div class="field-desc">type:array, of:object, options(collapsible:true)</div>
               </div>
               <div id="array">
                 <div class="field-array-item">
