@@ -301,7 +301,6 @@
         z-index: 60;
         ax-width: 600px;
         text-align: left;
-        
         padding: var(--space-3) var(--space-4);
         background: var(--popover);
         color: var(--popover-foreground);
@@ -311,10 +310,9 @@
         font-family: ui-monospace, "SF Mono", Menlo, monospace;
         font-size: var(--text-xs);
         line-height: var(--leading-snug);
-        white-space: pre-wrap;
         white-space: nowrap;
-        ord-break: break-word;
-        verflow-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
         opacity: 0;
         pointer-events: none;
         transform: translateY(4px);
@@ -1092,6 +1090,8 @@
                   btn.innerHTML = ICON_CHECK +
                     '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
                   btn.classList.add('is-copied');
+                  // Re-run positioning after innerHTML rebuild
+                  positionTooltip();
                   setTimeout(function() {
                     btn.innerHTML = ICON_COPY +
                       '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
@@ -1102,15 +1102,38 @@
 
               label.appendChild(btn);
 
-              // Flip tooltip to the opposite side if it would overflow the viewport
+              // Position tooltip: flip to opposite side if it overflows the
+              // viewport; if NEITHER side fits, pin it to left: 16px from the
+              // viewport edge so it stays on screen.
               function positionTooltip() {
                 var tooltip = btn.querySelector('.field-copy__tooltip');
                 if (!tooltip) return;
-                // Temporarily reset flip state to measure the default position
+
+                // Reset all modifications to measure the default position
                 tooltip.classList.remove('is-flipped');
+                tooltip.style.left = '';
+                tooltip.style.right = '';
+                tooltip.style.maxWidth = '';
+
+                var vw = window.innerWidth;
                 var rect = tooltip.getBoundingClientRect();
+
+                // Step 1: does it overflow the LEFT edge?
                 if (rect.left < 8) {
+                  // Try flipped (left-aligned, extends rightward)
                   tooltip.classList.add('is-flipped');
+                  rect = tooltip.getBoundingClientRect();
+
+                  // Step 2: does the flipped version overflow the RIGHT edge?
+                  if (rect.right > vw - 8) {
+                    // Neither side fits — pin to 16px from viewport left
+                    tooltip.classList.remove('is-flipped');
+                    var btnRect = btn.getBoundingClientRect();
+                    tooltip.style.right = 'auto';
+                    tooltip.style.left = (16 - btnRect.left) + 'px';
+                    // Allow wrapping so it doesn't overflow the right edge
+                    tooltip.style.maxWidth = (vw - 32) + 'px';
+                  }
                 }
               }
               btn.addEventListener('mouseenter', positionTooltip);
