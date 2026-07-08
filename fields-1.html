@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en" class="light"><head>
+<!DOCTYPE html>
+<html lang="en" class="light"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
@@ -95,7 +96,578 @@
             </nav>
           </div>
         </div>
-      </header><main></main><footer class="site-footer" role="contentinfo">
+      </header><main><section id="field-browser" class="cfb section bg-background">
+  <style>
+    /* ---- Content Field Browser ---- */
+    .cfb { font-family: var(--font-sans); }
+
+    .cfb__header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+    }
+    .cfb__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      color: var(--muted-foreground);
+    }
+    .cfb__eyebrow::before {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: var(--radius-full);
+      background: var(--primary);
+    }
+    .cfb__title {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-bold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--foreground);
+    }
+    .cfb__subtitle {
+      font-size: var(--text-lg);
+      color: var(--muted-foreground);
+      line-height: var(--leading-relaxed);
+      max-width: 42rem;
+    }
+
+    /* ---- Tabs ---- */
+    .cfb__tabs {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--space-8);
+    }
+    .cfb__tab {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--muted-foreground);
+      background-color: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .cfb__tab:hover {
+      background-color: var(--muted);
+      color: var(--foreground);
+    }
+    .cfb__tab.is-active {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+    }
+    .cfb__tab-count {
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      padding: 0.0625rem 0.375rem;
+      border-radius: var(--radius-full);
+      background-color: color-mix(in srgb, currentColor 14%, transparent);
+    }
+
+    /* ---- Grid ---- */
+    .cfb__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    @media (min-width: 640px) {
+      .cfb__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1024px) {
+      .cfb__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    /* ---- Card ---- */
+    .cfb__card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-6);
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .cfb__card:hover {
+      border-color: var(--foreground);
+      box-shadow: var(--shadow-md);
+    }
+    .cfb__card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .cfb__card:hover::after { opacity: 1; }
+    .cfb__card[data-type-color="string"]::after { background: #6366f1; }
+    .cfb__card[data-type-color="text"]::after { background: #8b5cf6; }
+    .cfb__card[data-type-color="number"]::after { background: #06b6d4; }
+    .cfb__card[data-type-color="boolean"]::after { background: #f59e0b; }
+    .cfb__card[data-type-color="object"]::after { background: #ec4899; }
+    .cfb__card[data-type-color="array"]::after { background: #10b981; }
+    .cfb__card[data-type-color="image"]::after { background: #f97316; }
+    .cfb__card[data-type-color="layout"]::after { background: #3b82f6; }
+
+    .cfb__card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .cfb__card-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .cfb__card-name {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--foreground);
+    }
+    .cfb__card-type {
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      color: var(--muted-foreground);
+    }
+    .cfb__card-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+      letter-spacing: var(--tracking-tight);
+    }
+    .cfb__card-badge[data-badge="string"] { background: color-mix(in srgb, #6366f1 15%, var(--card)); color: #818cf8; }
+    .cfb__card-badge[data-badge="text"] { background: color-mix(in srgb, #8b5cf6 15%, var(--card)); color: #a78bfa; }
+    .cfb__card-badge[data-badge="number"] { background: color-mix(in srgb, #06b6d4 15%, var(--card)); color: #22d3ee; }
+    .cfb__card-badge[data-badge="boolean"] { background: color-mix(in srgb, #f59e0b 15%, var(--card)); color: #fbbf24; }
+    .cfb__card-badge[data-badge="object"] { background: color-mix(in srgb, #ec4899 15%, var(--card)); color: #f472b6; }
+    .cfb__card-badge[data-badge="array"] { background: color-mix(in srgb, #10b981 15%, var(--card)); color: #34d399; }
+    .cfb__card-badge[data-badge="image"] { background: color-mix(in srgb, #f97316 15%, var(--card)); color: #fb923c; }
+    .cfb__card-badge[data-badge="layout"] { background: color-mix(in srgb, #3b82f6 15%, var(--card)); color: #60a5fa; }
+
+    .cfb__card-desc {
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--muted-foreground);
+    }
+
+    .cfb__card-code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: var(--text-xs);
+      line-height: var(--leading-normal);
+      color: var(--foreground);
+      background-color: var(--muted);
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .cfb__card-code .kw { color: var(--muted-foreground); }
+
+    .cfb__card-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: var(--space-2);
+    }
+    .cfb__chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: 0.125rem 0.5rem;
+      font-size: var(--text-xs);
+      font-weight: var(--font-medium);
+      border-radius: var(--radius-full);
+      background-color: var(--muted);
+      color: var(--muted-foreground);
+    }
+    .cfb__chip--accent {
+      background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+      color: var(--foreground);
+    }
+
+    /* ---- Search ---- */
+    .cfb__search-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .cfb__search {
+      position: relative;
+      flex: 1;
+      min-width: 16rem;
+    }
+    .cfb__search-icon {
+      position: absolute;
+      left: var(--space-3);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted-foreground);
+      pointer-events: none;
+    }
+    .cfb__search-icon svg { width: 1.125rem; height: 1.125rem; }
+    .cfb__search input {
+      width: 100%;
+      height: 2.75rem;
+      padding-left: 2.75rem;
+      font-size: var(--text-sm);
+      color: var(--foreground);
+      background-color: var(--background);
+      border: 1px solid var(--input);
+      border-radius: var(--radius-md);
+      transition: border-color var(--transition);
+    }
+    .cfb__search input:focus {
+      outline: none;
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 15%, transparent);
+    }
+    .cfb__search input::placeholder { color: var(--muted-foreground); }
+
+    .cfb__count {
+      font-size: var(--text-sm);
+      color: var(--muted-foreground);
+      white-space: nowrap;
+    }
+    .cfb__count strong { color: var(--foreground); font-weight: var(--font-semibold); }
+
+    /* ---- Empty state ---- */
+    .cfb__empty {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-16);
+      text-align: center;
+    }
+    .cfb__empty.is-visible { display: flex; }
+    .cfb__empty-icon {
+      width: 3rem;
+      height: 3rem;
+      color: var(--muted-foreground);
+      opacity: 0.5;
+    }
+    .cfb__empty-text {
+      font-size: var(--text-sm);
+      color: var(--muted-foreground);
+    }
+
+    /* ---- Animations ---- */
+    .cfb__card { animation: cfb-fade-in 0.3s ease both; }
+    .cfb__card:nth-child(2) { animation-delay: 0.04s; }
+    .cfb__card:nth-child(3) { animation-delay: 0.08s; }
+    .cfb__card:nth-child(4) { animation-delay: 0.12s; }
+    .cfb__card:nth-child(5) { animation-delay: 0.16s; }
+    .cfb__card:nth-child(6) { animation-delay: 0.20s; }
+    .cfb__card:nth-child(n+7) { animation-delay: 0.24s; }
+    @keyframes cfb-fade-in {
+      from { opacity: 0; transform: translateY(0.5rem); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="cfb__header">
+      <span class="cfb__eyebrow">Klar CMS Reference</span>
+      <h2 class="cfb__title">Content Field Browser</h2>
+      <p class="cfb__subtitle">Explore every field type and format available in the Klar CMS — click a tab to switch views, or search to filter instantly.</p>
+    </div>
+
+    <!-- Search + count -->
+    <div class="cfb__search-wrap mb-6">
+      <div class="cfb__search">
+        <span class="cfb__search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></span>
+        <input type="text" id="cfb-search-input" placeholder="Search field types, formats, or declarations…" autocomplete="off">
+      </div>
+      <span class="cfb__count" id="cfb-count">Showing <strong>0</strong> fields</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="cfb__tabs" id="cfb-tabs">
+      <button class="cfb__tab is-active" data-tab="all">All <span class="cfb__tab-count" data-count="all">0</span></button>
+      <button class="cfb__tab" data-tab="primitives">Primitives <span class="cfb__tab-count" data-count="primitives">0</span></button>
+      <button class="cfb__tab" data-tab="text">Text &amp; Rich <span class="cfb__tab-count" data-count="text">0</span></button>
+      <button class="cfb__tab" data-tab="formats">Formats <span class="cfb__tab-count" data-count="formats">0</span></button>
+      <button class="cfb__tab" data-tab="compound">Compound <span class="cfb__tab-count" data-count="compound">0</span></button>
+      <button class="cfb__tab" data-tab="layouts">Layouts <span class="cfb__tab-count" data-count="layouts">0</span></button>
+      <button class="cfb__tab" data-tab="media">Media <span class="cfb__tab-count" data-count="media">0</span></button>
+    </div>
+
+    <!-- Grid -->
+    <div class="cfb__grid" id="cfb-grid"></div>
+
+    <!-- Empty state -->
+    <div class="cfb__empty" id="cfb-empty">
+      <svg class="cfb__empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path><line x1="8" x2="14" y1="11" y2="11"></line></svg>
+      <p class="cfb__empty-text">No fields match your search. Try a different term or tab.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const FIELDS = [
+        // ---- Primitives ----
+        { name: "String", type: "string", category: "primitives", badge: "string", colorGroup: "string",
+          desc: "Single-line text — the fundamental scalar. Supports format narrowings for dates, URLs, emails, and more.",
+          code: ':field(title:String, type:string)',
+          chips: ["scalar", "default"] },
+        { name: "Number", type: "number", category: "primitives", badge: "number", colorGroup: "number",
+          desc: "Floating-point numeric value. Use integer when you need whole numbers only.",
+          code: ':field(title:Number, type:number)',
+          chips: ["scalar", "numeric"] },
+        { name: "Integer", type: "integer", category: "primitives", badge: "number", colorGroup: "number",
+          desc: "Whole-number numeric value. No decimals — ideal for counts, indices, and quantities.",
+          code: ':field(title:Integer, type:integer)',
+          chips: ["scalar", "numeric"] },
+        { name: "Boolean", type: "boolean", category: "primitives", badge: "boolean", colorGroup: "boolean",
+          desc: "A yes/no toggle. The only dedicated toggle type — rendered as a switch in the editor panel.",
+          code: ':field(title:Boolean, type:boolean)',
+          chips: ["scalar", "toggle"] },
+
+        // ---- Text & Rich ----
+        { name: "Text", type: "text", category: "text", badge: "text", colorGroup: "text",
+          desc: "Multi-line plain text. Use for short descriptions, leads, or captions — not rich body content.",
+          code: ':field(title:Text, type:text)',
+          chips: ["multi-line", "plain"] },
+        { name: "Text Editor", type: "text", category: "text", badge: "text", colorGroup: "text",
+          desc: "Multi-line text with a lightweight WYSIWYG editor toolbar. Great for leads and formatted snippets.",
+          code: ':field(title:Lead, name:lead, type:text, options(layout:editor))',
+          chips: ["multi-line", "editor"] },
+        { name: "Markdown", type: "string", category: "text", badge: "text", colorGroup: "text",
+          desc: "String narrowed to markdown format. Renders markdown source into HTML on the page.",
+          code: ':field(title:Markdown, type:string, format:markdown)',
+          chips: ["format", "markdown"] },
+        { name: "HTML", type: "string", category: "text", badge: "text", colorGroup: "text",
+          desc: "String narrowed to HTML format. Stores raw markup — pipe through | raw when rendering in Liquid.",
+          code: ':field(title:HTML, type:string, format:html)',
+          chips: ["format", "html"] },
+        { name: "Code", type: "string", category: "text", badge: "text", colorGroup: "text",
+          desc: "String narrowed to code format. Displays a monospace code editor in the panel.",
+          code: ':field(title:Code, type:string, format:code)',
+          chips: ["format", "code"] },
+        { name: "CSS", type: "string", category: "text", badge: "text", colorGroup: "text",
+          desc: "String narrowed to CSS format. Author styles directly in the content panel.",
+          code: ':field(title:CSS, type:string, format:css)',
+          chips: ["format", "css"] },
+
+        // ---- Formats ----
+        { name: "Date", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String with date format. Renders a date picker. Use dateFormat to control display.",
+          code: ':field(title:Date, type:string, format:date,\n  options(dateFormat:\'MMMM D, YYYY\'))',
+          chips: ["format", "date"] },
+        { name: "Time", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String with time format. Renders a time picker in the editor panel.",
+          code: ':field(title:Time, type:string, format:time)',
+          chips: ["format", "time"] },
+        { name: "Date-Time", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String with date-time format. Renders a combined date and time picker.",
+          code: ':field(title:DateTime, type:string, format:date-time)',
+          chips: ["format", "datetime"] },
+        { name: "Email", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String narrowed to email format. Validates input as an email address.",
+          code: ':field(title:Email, type:string, format:email)',
+          chips: ["format", "email"] },
+        { name: "URL", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String narrowed to URL format. Validates input as a web address.",
+          code: ':field(title:URL, type:string, format:url)',
+          chips: ["format", "url"] },
+        { name: "Data URL", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String narrowed to data-url format. Stores inline data URIs (e.g. base64 images).",
+          code: ':field(title:DataURL, type:string, format:data-url)',
+          chips: ["format", "data-url"] },
+        { name: "JSON", type: "string", category: "formats", badge: "string", colorGroup: "string",
+          desc: "String narrowed to JSON format. Displays a JSON editor with syntax highlighting.",
+          code: ':field(title:JSON, type:string, format:json)',
+          chips: ["format", "json"] },
+
+        // ---- Compound ----
+        { name: "Object", type: "object", category: "compound", badge: "object", colorGroup: "object",
+          desc: "A compound record with named child fields. Collapsible in the panel — group related sub-fields together.",
+          code: ':field(title:Object, name:obj, type:object,\n  fields:[\n    {title:City, name:city, type:string},\n    {title:ZIP, name:zip, type:string}\n  ])',
+          chips: ["nested", "collapsible"] },
+        { name: "Array", type: "array", category: "compound", badge: "array", colorGroup: "array",
+          desc: "A list of items of a declared type. Use of:[…] to define the item schema. Container whose children are repeatable items.",
+          code: ':field(title:Array, name:arr, type:array,\n  of:[{title:Item, type:object,\n    fields:[{title:Name, name:name, type:string}]}])',
+          chips: ["repeatable", "of:[]"] },
+
+        // ---- Layouts ----
+        { name: "List Layout", type: "array", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "Repeating uniform items of the same kind — features, cards, stats, steps, testimonials. The default for repeating sections.",
+          code: ':field(title:List, type:array,\n  options(layout:list))',
+          chips: ["layout", "uniform"] },
+        { name: "Blocks Layout", type: "array", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "Rich prose body — ONE region mixing headings, paragraphs, lists, and blockquotes. This is Klar's rich-text field. Each block stores .html.",
+          code: ':field(title:Body, name:body, type:array,\n  options(layout:blocks))',
+          chips: ["layout", "rich-text", "blocks"] },
+        { name: "Tags Layout", type: "array", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "Array rendered as editable tag chips. Typically bound to a vocabulary for multi-select.",
+          code: ':field(title:Tags, name:tags, type:array,\n  options(layout:tags, vocab:blog-tags))',
+          chips: ["layout", "vocab", "multi-select"] },
+        { name: "Tag Layout", type: "string", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "Single string rendered as a tag chip. Typically bound to a vocabulary for single-select.",
+          code: ':field(title:Tag, name:tag, type:string,\n  options(layout:tag, vocab:categories))',
+          chips: ["layout", "vocab", "single-select"] },
+        { name: "Chip Layout", type: "string", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "String rendered as a compact chip. Similar to tag but with a denser visual style.",
+          code: ':field(title:Chip, name:chip, type:string,\n  options(layout:chip, vocab:categories))',
+          chips: ["layout", "vocab", "compact"] },
+        { name: "Radio Layout", type: "string", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "String rendered as a radio button group. Define options inline with list:[{title, value}].",
+          code: ':field(title:Radio, name:radio, type:string,\n  options(layout:radio, direction:horizontal,\n    list:[{title:Red, value:red},{title:Blue, value:blue}]))',
+          chips: ["layout", "radio", "inline-list"] },
+        { name: "Select Layout", type: "string", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "String rendered as a dropdown select. Define options inline with list:[{title, value}].",
+          code: ':field(title:Select, name:select, type:string,\n  options(list:[{title:Red, value:red},{title:Blue, value:blue}]))',
+          chips: ["layout", "dropdown", "inline-list"] },
+        { name: "Vocab-bound", type: "string", category: "layouts", badge: "layout", colorGroup: "layout",
+          desc: "A string or array field bound to a project-global vocabulary. Creates a closed picker limited to curated values managed in Tags panel.",
+          code: ':field(title:Category, name:cat, type:string,\n  options(vocab:blog-categories))',
+          chips: ["vocab", "closed-picker"] },
+
+        // ---- Media ----
+        { name: "Image", type: "image", category: "media", badge: "image", colorGroup: "image",
+          desc: "Image with alt text. Stores { src, alt }. The editor writes through to the element's src and alt attributes automatically.",
+          code: ':field(title:Hero, name:image, type:image)',
+          chips: ["media", "src+alt"] },
+        { name: "Link", type: "link", category: "media", badge: "image", colorGroup: "image",
+          desc: "Hyperlink with visible text. Stores { href, text }. Writes through to the element's href attribute and text content.",
+          code: ':field(title:CTA, name:cta, type:link)',
+          chips: ["media", "href+text"] },
+        { name: "Location", type: "location", category: "media", badge: "image", colorGroup: "image",
+          desc: "Geographic point. Stores { lat, lng }. Ideal for maps and place data.",
+          code: ':field(title:Spot, name:spot, type:location)',
+          chips: ["geo", "lat+lng"] },
+        { name: "Reference", type: "reference", category: "media", badge: "image", colorGroup: "image",
+          desc: "Ordered hand-picked pages of a page-type. Stores an ordered string[] of file paths. Resolve against a list() to render.",
+          code: ':field(title:Featured, name:featured,\n  type:reference, pageType:blog-post)',
+          chips: ["pages", "ordered", "curated"] },
+        { name: "Slug", type: "slug", category: "media", badge: "image", colorGroup: "image",
+          desc: "URL-safe string generated from another field. Auto-derives a clean slug for routing and permalinks.",
+          code: ':field(title:Slug, name:slug, type:slug)',
+          chips: ["derived", "url-safe"] },
+      ];
+
+      const grid = document.getElementById('cfb-grid');
+      const empty = document.getElementById('cfb-empty');
+      const countEl = document.getElementById('cfb-count');
+      const searchInput = document.getElementById('cfb-search-input');
+      const tabsEl = document.getElementById('cfb-tabs');
+
+      let activeTab = 'all';
+      let searchQuery = '';
+
+      // Count per category
+      const counts = { all: FIELDS.length };
+      FIELDS.forEach(f => {
+        counts[f.category] = (counts[f.category] || 0) + 1;
+      });
+      Object.keys(counts).forEach(key => {
+        const el = tabsEl.querySelector('[data-count="' + key + '"]');
+        if (el) el.textContent = counts[key];
+      });
+
+      function render() {
+        const filtered = FIELDS.filter(f => {
+          const tabMatch = activeTab === 'all' || f.category === activeTab;
+          if (!tabMatch) return false;
+          if (!searchQuery) return true;
+          const q = searchQuery.toLowerCase();
+          return (
+            f.name.toLowerCase().includes(q) ||
+            f.type.toLowerCase().includes(q) ||
+            f.desc.toLowerCase().includes(q) ||
+            f.code.toLowerCase().includes(q) ||
+            f.chips.some(c => c.toLowerCase().includes(q))
+          );
+        });
+
+        // Update count
+        countEl.innerHTML = 'Showing <strong>' + filtered.length + '</strong> field' + (filtered.length !== 1 ? 's' : '');
+
+        // Empty state
+        empty.classList.toggle('is-visible', filtered.length === 0);
+
+        // Render cards
+        grid.innerHTML = filtered.map(f => {
+          const chipsHtml = f.chips.map((c, i) =>
+            '<span class="cfb__chip' + (i === 0 ? ' cfb__chip--accent' : '') + '">' + c + '</span>'
+          ).join('');
+
+          return (
+            '<article class="cfb__card" data-type-color="' + f.colorGroup + '">' +
+              '<div class="cfb__card-top">' +
+                '<div class="cfb__card-info">' +
+                  '<h3 class="cfb__card-name">' + f.name + '</h3>' +
+                  '<span class="cfb__card-type">' + f.type + '</span>' +
+                '</div>' +
+                '<span class="cfb__card-badge" data-badge="' + f.badge + '">' + f.badge.slice(0, 3).toUpperCase() + '</span>' +
+              '</div>' +
+              '<p class="cfb__card-desc">' + f.desc + '</p>' +
+              '<pre class="cfb__card-code">' + f.code.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>' +
+              '<div class="cfb__card-footer">' + chipsHtml + '</div>' +
+            '</article>'
+          );
+        }).join('');
+      }
+
+      // Tab clicks
+      tabsEl.addEventListener('click', (e) => {
+        const tab = e.target.closest('.cfb__tab');
+        if (!tab) return;
+        tabsEl.querySelectorAll('.cfb__tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        activeTab = tab.dataset.tab;
+        render();
+      });
+
+      // Search
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim();
+        render();
+      });
+
+      // Initial render
+      render();
+    })();
+  </script>
+</section></main><footer class="site-footer" role="contentinfo">
         <div class="container py-12">
           <div class="grid md:grid-cols-4 gap-8">
             <div class="flex flex-col gap-4">
