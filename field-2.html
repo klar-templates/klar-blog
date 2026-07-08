@@ -388,8 +388,86 @@
                 <div class="field-label">Code</div>
                 <div class="field-desc">type:string, format:code, name:code</div>
               </div>
-              <div class="field-value fv-code" id="code">const greeting = "Hello, World!";
-                console.log(greeting);</div>
+              <div class="field-value fv-code">
+
+                <style>
+                  /* highlight.js theming over our dark code blocks */
+                  .hljs {
+                    background: transparent !important;
+                    color: var(--code-fg) !important;
+                    padding: 0 !important;
+                  }
+
+                  .hljs-comment,
+                  .hljs-quote {
+                    color: var(--syntax-comment);
+                    font-style: italic;
+                  }
+
+                  .hljs-keyword,
+                  .hljs-selector-tag,
+                  .hljs-literal,
+                  .hljs-section,
+                  .hljs-name {
+                    color: #f9a8d4;
+                  }
+
+                  .hljs-string,
+                  .hljs-attr,
+                  .hljs-symbol,
+                  .hljs-bullet,
+                  .hljs-meta {
+                    color: #86efac;
+                  }
+
+                  .hljs-tag,
+                  .hljs-tag .hljs-name {
+                    color: #f9a8d4;
+                  }
+
+                  .hljs-tag .hljs-attr {
+                    color: #fcd34d;
+                  }
+
+                  .hljs-number,
+                  .hljs-link,
+                  .hljs-built_in,
+                  .hljs-type {
+                    color: #fcd34d;
+                  }
+
+                  .hljs-title,
+                  .hljs-class .hljs-title {
+                    color: #93c5fd;
+                  }
+
+                  .hljs-variable,
+                  .hljs-template-variable {
+                    color: #fbcfe8;
+                  }
+
+                  .hljs-emphasis {
+                    font-style: italic;
+                  }
+
+                  .hljs-strong {
+                    font-weight: 700;
+                  }
+                </style>
+                <pre id="code"><code><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the description.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- After editing with Klar — still clean! --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Updated Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>A better descdddription here.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></code>
+</pre>
+                
+              </div>
             </div>
             <div class="field-row">
               <div>
