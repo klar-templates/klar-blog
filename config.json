@@ -341,6 +341,45 @@
       "editableElements": ".page-title,\n.page-title:attr(class(title:Classes))"
     },
     {
+      "name": "field-2.html",
+      "editableElements": "#string      \t\n:field(title: String, type:string),\n#date-time   \t:field(title:'Date time', type:string, format:'date-time'),\n#date        \t:field(title: Date, name: date, type: string, format:date),\n#time        \t:field(title: Time, type: string, format:time),\n#email       \t:field(title: Email, type: string, format:email),\n#url            :field(title: URL, type: string, format:url),\n#data-url    \t:field(title: Data URL, type: string, format:data-url),\n#json        \t:field(title: JSON, type: string, format: json),\n#markdown       :field(title: Markdown, type: string, name:markdown, format: markdown),\n#html           :field(title: HTML, type: string, name:html, format: html),\n#code           :field(title: Code, type: string, name:code, format: code),\n#layoutTag      :field(title:Tag with vocab, name:tag, type:string, options(layout: tag, vocab:categories)),\n\n#layoutChip  :field(title: Tags, name:chip, type:string, options(layout:chip, vocab:categories)),\n\n#layoutRadio:field(title: Radio, name: radio, type: string,\noptions(layout:radio, direction: horizontal, list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}])),\n\n#layoutSelectStr:field(title: Select, name: select, type: string,\noptions(list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}])),\n\n#text\n:field(title: Text, type:text),\n#textEditor  :field(title:Lead, name:lead, type:text, options(layout:editor)),\n\n#number\n:field(title: Number, type:number),\n\n#integer\n:field(title: Integer, type:integer),\n\n#boolean\n:field(title: Boolean, type:boolean),\n\n#object\n:field(title:Object, title:Object, name:object, type:object,\nfields:[\n  {title:Link, name:link, type:string, attr:data-link, selector:'&scope'},\n  {title:'Street name', name:street, type:string, selector:#street},\n  {name:streetNo, type:string, title:'Street number', selector:#streetNo},\n  {name:city, type:string, title:City, selector:#city}\n],\noptions(collapsible: true, collapsed: false)),\n\n#array\n:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false),\n  of:[{\n    title: Array item,\n    type:object,\n    options(collapsible: true, collapsed: false),\n    fields:[\n      {title:'Street name', name:street, type:string, selector:.street},\n      {name:streetNo, type:string, title:'Street number', selector:.streetNo},\n      {name:city, type:string, title:City, selector:.city}\n    ]\n  }]),\n#layoutTags :field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories)),\n#image       \t:field(title: Image, type:image, col: 4),\n#layoutList     :field(title: List, type:string, options(layout:list)),\n#list        \t:field(title: List, type:string, options(layout:list)),\n#layoutBlocks   :field(title: Content, type:string, options(layout:blocks)),\n#blocks      \t:field(title: Content, type:string, options(layout:blocks)),\n\n#style        \t:field(title: CSS, type: string, format: css),",
+      "content": {
+        "date": "2025-01-15",
+        "markdown": "# Heading This is **bold** and *italic* text. - Item one - Item two",
+        "html": "<p>Hello <strong>World</strong></p>",
+        "code": "const greeting = \"Hello, World!\";\nconsole.log(greeting);",
+        "tag": "Technology",
+        "chip": "Fashion",
+        "radio": "Red Blue",
+        "select": "Blue",
+        "lead": "A lead paragraph rendered with the lightweight editor layout — supports bold, italic, and links.",
+        "object": {
+          "link": "https://maps.google.com",
+          "street": "Kungsgatan 12",
+          "streetNo": "12",
+          "city": "Stockholm"
+        },
+        "array": [
+          {
+            "street": "Drottninggatan 45",
+            "streetNo": "45",
+            "city": "Gothenburg"
+          },
+          {
+            "street": "Storgatan 8",
+            "streetNo": "8",
+            "city": "Malmö"
+          }
+        ],
+        "tags": [
+          "Fashion",
+          "Technology",
+          "Business",
+          "Lifestyle"
+        ]
+      }
+    },
+    {
       "name": "fields-1.html",
       "editableElements": "#string      \t\n:field(title: String, type:string),\n#date-time   \t:field(title:'Date time', type:string, format:'date-time'),\n#date        \t:field(title: Date, name: date, type: string, format:date),\n#time        \t:field(title: Time, type: string, format:time),\n#email       \t:field(title: Email, type: string, format:email),\n#url            :field(title: URL, type: string, format:url),\n#data-url    \t:field(title: Data URL, type: string, format:data-url),\n#json        \t:field(title: JSON, type: string, format: json),\n#markdown       :field(title: Markdown, type: string, name:markdown, format: markdown),\n#html           :field(title: HTML, type: string, name:html, format: html),\n#code           :field(title: Code, type: string, name:code, format: code),\n#layoutTag      :field(title:Tag with vocab, name:tag, type:string, options(layout: tag, vocab:categories)),\n\n#layoutChip  :field(title: Tags, name:chip, type:string, options(layout:chip, vocab:categories)),\n\n#layoutRadio:field(title: Radio, name: radio, type: string,\noptions(layout:radio, direction: horizontal, list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}])),\n\n#layoutSelectStr:field(title: Select, name: select, type: string,\noptions(list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}])),\n\n#text\n:field(title: Text, type:text),\n#textEditor  :field(title:Lead, name:lead, type:text, options(layout:editor)),\n\n#number\n:field(title: Number, type:number),\n\n#integer\n:field(title: Integer, type:integer),\n\n#boolean\n:field(title: Boolean, type:boolean),\n\n#object\n:field(title:Object, title:Object, name:object, type:object,\nfields:[\n  {title:Link, name:link, type:string, attr:data-link, selector:'&scope'},\n  {title:'Street name', name:street, type:string, selector:#street},\n  {name:streetNo, type:string, title:'Street number', selector:#streetNo},\n  {name:city, type:string, title:City, selector:#city}\n],\noptions(collapsible: true, collapsed: false)),\n\n#array\n:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false),\n  of:[{\n    title: Array item,\n    type:object,\n    options(collapsible: true, collapsed: false),\n    fields:[\n      {title:'Street name', name:street, type:string, selector:.street},\n      {name:streetNo, type:string, title:'Street number', selector:.streetNo},\n      {name:city, type:string, title:City, selector:.city}\n    ]\n  }]),\n#layoutTags :field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories)),\n#image       \t:field(title: Image, type:image, col: 4),\n#layoutList     :field(title: List, type:string, options(layout:list)),\n#list        \t:field(title: List, type:string, options(layout:list)),\n#layoutBlocks   :field(title: Content, type:string, options(layout:blocks)),\n#blocks      \t:field(title: Content, type:string, options(layout:blocks)),\n\n#style        \t:field(title: CSS, type: string, format: css),"
     },
