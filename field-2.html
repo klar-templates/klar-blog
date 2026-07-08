@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
-    <meta name="description" content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <meta name="description"
+      content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css">
     <style>
       /* ── Field showcase ───────────────────────────────────────────── */
@@ -196,7 +198,7 @@
         line-height: var(--leading-relaxed)
       }
 
-      .field-value.prose > * + * {
+      .field-value.prose>*+* {
         margin-top: var(--space-6)
       }
 
@@ -253,7 +255,7 @@
         padding-left: var(--space-6)
       }
 
-      .field-value.prose li + li {
+      .field-value.prose li+li {
         margin-top: var(--space-2)
       }
 
@@ -309,6 +311,7 @@
         font-size: var(--text-xs);
         line-height: var(--leading-snug);
         white-space: pre-wrap;
+        white-space: nowrap;
         word-break: break-word;
         overflow-wrap: break-word;
         opacity: 0;
@@ -373,18 +376,22 @@
         <div class="container">
           <div class="site-header__bar">
             <a class="brand" href="/index.html">nexus</a>
-            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link" href="/posts.html">ALL POST</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link"
+                href="/posts.html">ALL POST</a>
               <a class="nav-link" href="/business.html">BUSINESS</a>
               <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
               <a class="nav-link" href="/podcast.html">PODCAST</a>
             </nav>
             <div class="nav-desktop items-center gap-2">
-              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m21 21-4.3-4.3"></path>
                 </svg></a>
               <button class="btn btn-icon" aria-label="Toggle theme">
-                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="4"></circle>
                   <path d="M12 2v2"></path>
                   <path d="M12 20v2"></path>
@@ -395,13 +402,15 @@
                   <path d="m6.34 17.66-1.41 1.41"></path>
                   <path d="m19.07 4.93-1.41 1.41"></path>
                 </svg>
-                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
                 </svg>
               </button>
             </div>
             <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" x2="20" y1="12" y2="12"></line>
                 <line x1="4" x2="20" y1="6" y2="6"></line>
                 <line x1="4" x2="20" y1="18" y2="18"></line>
@@ -546,10 +555,10 @@
               </div>
               <div class="field-value fv-code" id="markdown"># Heading
 
-This is **bold** and *italic* text.
+                This is **bold** and *italic* text.
 
-- Item one
-- Item two</div>
+                - Item one
+                - Item two</div>
             </div>
             <div class="field-row">
               <div>
@@ -564,7 +573,8 @@ This is **bold** and *italic* text.
                 <div class="field-label">Code</div>
                 <div class="field-desc">type:string, format:code, name:code</div>
               </div>
-              <div class="field-value fv-code"><style>
+              <div class="field-value fv-code">
+                <style>
                   /* highlight.js theming over our dark code blocks */
                   .hljs {
                     background: transparent !important;
@@ -627,7 +637,8 @@ This is **bold** and *italic* text.
                   .hljs-strong {
                     font-weight: 700;
                   }
-                </style><pre id="code"><code><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
+                </style>
+                <pre id="code"><code><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the description.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
@@ -638,7 +649,8 @@ This is **bold** and *italic* text.
   <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Updated Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>A better descdddription here.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></code>
-</pre></div>
+</pre>
+              </div>
             </div>
             <div class="field-row">
               <div>
@@ -646,10 +658,10 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:string, format:json</div>
               </div>
               <div class="field-value fv-code" id="json">{
-  "name": "Nexus",
-  "version": "1.0.0",
-  "active": true
-}</div>
+                "name": "Nexus",
+                "version": "1.0.0",
+                "active": true
+                }</div>
             </div>
             <div class="field-row">
               <div>
@@ -657,9 +669,9 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:string, format:css</div>
               </div>
               <div class="field-value fv-code" id="style">.btn {
-  color: var(--primary);
-  border-radius: var(--radius-md);
-}</div>
+                color: var(--primary);
+                border-radius: var(--radius-md);
+                }</div>
             </div>
           </div>
 
@@ -671,7 +683,10 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:image</div>
               </div>
               <div class="field-value" style="padding:0;overflow:hidden">
-                <img id="image" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="A clean desk with laptop, notebook and coffee" style="width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover">
+                <img id="image"
+                  src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+                  alt="A clean desk with laptop, notebook and coffee"
+                  style="width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover">
               </div>
             </div>
           </div>
@@ -684,11 +699,14 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:string, options(layout:list)</div>
               </div>
               <div class="field-value">
-                <ul style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="layoutList">
+                <ul
+                  style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)"
+                  id="layoutList">
                   <li>
                     <div class="list-teaser">
                       <div class="list-teaser__title">The Future of Wearable Technology</div>
-                      <div class="list-teaser__desc">How smart fabrics and biometric sensors are reshaping everyday fashion.</div>
+                      <div class="list-teaser__desc">How smart fabrics and biometric sensors are reshaping everyday
+                        fashion.</div>
                     </div>
                   </li>
                   <li>
@@ -700,7 +718,8 @@ This is **bold** and *italic* text.
                   <li>
                     <div class="list-teaser">
                       <div class="list-teaser__title">Minimalist Desk Setup Ideas</div>
-                      <div class="list-teaser__desc">Practical tips for a clean, productive workspace that sparks creativity.</div>
+                      <div class="list-teaser__desc">Practical tips for a clean, productive workspace that sparks
+                        creativity.</div>
                     </div>
                   </li>
                 </ul>
@@ -712,23 +731,28 @@ This is **bold** and *italic* text.
                 <div class="field-desc">type:string, options(layout:list)</div>
               </div>
               <div class="field-value">
-                <ol style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="list">
+                <ol
+                  style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)"
+                  id="list">
                   <li>
                     <div class="list-teaser">
                       <div class="list-teaser__title">Define your content strategy</div>
-                      <div class="list-teaser__desc">Identify your audience, tone of voice, and the topics that align with your brand.</div>
+                      <div class="list-teaser__desc">Identify your audience, tone of voice, and the topics that align
+                        with your brand.</div>
                     </div>
                   </li>
                   <li>
                     <div class="list-teaser">
                       <div class="list-teaser__title">Choose your publishing cadence</div>
-                      <div class="list-teaser__desc">Decide whether weekly, bi-weekly, or monthly posts work best for your goals.</div>
+                      <div class="list-teaser__desc">Decide whether weekly, bi-weekly, or monthly posts work best for
+                        your goals.</div>
                     </div>
                   </li>
                   <li>
                     <div class="list-teaser">
                       <div class="list-teaser__title">Measure and iterate</div>
-                      <div class="list-teaser__desc">Track engagement metrics and refine your editorial calendar based on what resonates.</div>
+                      <div class="list-teaser__desc">Track engagement metrics and refine your editorial calendar based
+                        on what resonates.</div>
                     </div>
                   </li>
                 </ol>
@@ -745,10 +769,13 @@ This is **bold** and *italic* text.
               </div>
               <div class="field-value prose" id="layoutBlocks">
                 <h2>The Art of Digital Storytelling</h2>
-                <p>In an era of infinite content, the stories that resonate are those crafted with intention. Every heading, paragraph, and list should serve your reader's journey through an idea.</p>
+                <p>In an era of infinite content, the stories that resonate are those crafted with intention. Every
+                  heading, paragraph, and list should serve your reader's journey through an idea.</p>
                 <h3>Building a Narrative Arc</h3>
-                <p>Think of each article as a small journey. Your headline is the invitation; your opening paragraph is the threshold. Every section that follows should reward the reader's decision to keep reading.</p>
-                <blockquote>The best writing doesn't just inform — it makes the reader feel they've arrived somewhere new.</blockquote>
+                <p>Think of each article as a small journey. Your headline is the invitation; your opening paragraph is
+                  the threshold. Every section that follows should reward the reader's decision to keep reading.</p>
+                <blockquote>The best writing doesn't just inform — it makes the reader feel they've arrived somewhere
+                  new.</blockquote>
                 <p>Consider these pillars of compelling content:</p>
                 <ul>
                   <li>Clarity over cleverness — say what you mean</li>
@@ -774,9 +801,11 @@ This is **bold** and *italic* text.
               </div>
               <div class="field-value prose" id="blocks">
                 <h2>Designing for Readability</h2>
-                <p>Typography and whitespace are the silent architects of reading comfort. A well-set page invites the eye to linger; a cramped one drives it away.</p>
+                <p>Typography and whitespace are the silent architects of reading comfort. A well-set page invites the
+                  eye to linger; a cramped one drives it away.</p>
                 <h3>The Power of Restraint</h3>
-                <p>Resist the urge to fill every pixel. Generous margins, consistent line height, and a measured type scale create a rhythm that carries the reader from first word to last.</p>
+                <p>Resist the urge to fill every pixel. Generous margins, consistent line height, and a measured type
+                  scale create a rhythm that carries the reader from first word to last.</p>
                 <blockquote>White space is to be regarded as an active element, not a passive background.</blockquote>
                 <p>Practical guidelines for readable layouts:</p>
                 <ul>
@@ -786,7 +815,8 @@ This is **bold** and *italic* text.
                   <li>Limit font families to two — one for headings, one for body</li>
                 </ul>
                 <h3>Testing Across Devices</h3>
-                <p>What looks perfect on a large monitor may collapse on a phone. Always preview at multiple breakpoints:</p>
+                <p>What looks perfect on a large monitor may collapse on a phone. Always preview at multiple
+                  breakpoints:</p>
                 <ol>
                   <li>Start with mobile — the most constrained canvas</li>
                   <li>Scale up to tablet and verify spacing</li>
@@ -816,7 +846,8 @@ This is **bold** and *italic* text.
             <div class="field-row">
               <div>
                 <div class="field-label">Radio</div>
-                <div class="field-desc">type:string, options(layout:radio, direction:horizontal, list:[…]), name:radio</div>
+                <div class="field-desc">type:string, options(layout:radio, direction:horizontal, list:[…]), name:radio
+                </div>
               </div>
               <div class="field-value" id="layoutRadio" style="display:flex;gap:var(--space-4);align-items:center">
                 color-500-green</div>
@@ -826,14 +857,16 @@ This is **bold** and *italic* text.
                 <div class="field-label">Select</div>
                 <div class="field-desc">type:string, options(list:[…]), name:select</div>
               </div>
-              <div class="field-value" id="layoutSelectStr" style="display:flex;align-items:center;justify-content:space-between">color-500-red</div>
+              <div class="field-value" id="layoutSelectStr"
+                style="display:flex;align-items:center;justify-content:space-between">color-500-red</div>
             </div>
             <div class="field-row">
               <div>
                 <div class="field-label">Tags</div>
                 <div class="field-desc">type:array, options(layout:tags, vocab:categories), name:tags</div>
               </div>
-              <div class="field-value" id="layoutTags" style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
+              <div class="field-value" id="layoutTags"
+                style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
                 <span class="tag is-active">Fashion</span>
                 <span class="tag is-active">Technology</span>
                 <span class="tag">Business</span>
@@ -861,7 +894,8 @@ This is **bold** and *italic* text.
                   </div>
                   <div>
                     <div class="field-sublabel">Street No</div>
-                    <div class="field-value" id="streetNo" style="min-height:auto;padding:var(--space-2) var(--space-3)">12</div>
+                    <div class="field-value" id="streetNo"
+                      style="min-height:auto;padding:var(--space-2) var(--space-3)">12</div>
                   </div>
                   <div>
                     <div class="field-sublabel">City</div>
@@ -961,39 +995,41 @@ This is **bold** and *italic* text.
         <script>
           (function() {
             var configs = {
-              'string':           '#string:field(title: String, type:string)',
-              'date-time':        "#date-time:field(title:'Date time', type:string, format:'date-time')",
-              'date':             '#date:field(title: Date, name: date, type: string, format:date)',
-              'time':             '#time:field(title: Time, type: string, format:time)',
-              'email':            '#email:field(title: Email, type: string, format:email)',
-              'url':              '#url:field(title: URL, type: string, format:url)',
-              'data-url':         '#data-url:field(title: Data URL, type: string, format:data-url)',
-              'json':             '#json:field(title: JSON, type: string, format: json)',
-              'markdown':         '#markdown:field(title: Markdown, type: string, name:markdown, format: markdown)',
-              'html':             '#html:field(title: HTML, type: string, name:html, format: html)',
-              'code':             '#code:field(title: Code, type: string, name:code, format: code)',
-              'style':            '#style:field(title: CSS, type: string, format: css)',
-              'image':            '#image:field(title: Image, type:image)',
-              'text':             '#text:field(title: Text, type:text)',
-              'textEditor':       '#textEditor:field(title:Lead, name:lead, type:text, options(layout:editor))',
-              'number':           '#number:field(title: Number, type:number)',
-              'integer':          '#integer:field(title: Integer, type:integer)',
-              'boolean':          '#boolean:field(title: Boolean, type:boolean)',
-              'layoutTag':        '#layoutTag:field(title:Tag with vocab, name:tag, type:string, options(layout: tag, vocab:categories))',
-              'layoutChip':       '#layoutChip:field(title: Tags, name:chip, type:string, options(layout:chip, vocab:categories))',
-              'layoutRadio':      "#layoutRadio:field(title: Radio, name: radio, type: string, options(layout:radio, direction: horizontal, list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
-              'layoutSelectStr':  "#layoutSelectStr:field(title: Select, name: select, type: string, options(list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
-              'layoutTags':       '#layoutTags:field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories))',
-              'layoutList':       '#layoutList:field(title: List, type:string, options(layout:list))',
-              'list':             '#list:field(title: List, type:string, options(layout:list))',
-              'layoutBlocks':     '#layoutBlocks:field(title: Content, type:string, options(layout:blocks))',
-              'blocks':           '#blocks:field(title: Content, type:string, options(layout:blocks))',
-              'object':           "#object:field(title:Object, title:Object, name:object, type:object, fields:[{title:Link, name:link, type:string, attr:data-link, selector:'&scope'}, {title:'Street name', name:street, type:string, selector:#street}, {name:streetNo, type:string, title:'Street number', selector:#streetNo}, {name:city, type:string, title:City, selector:#city}], options(collapsible: true, collapsed: false))",
-              'array':            "#array:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false), of:[{title: Array item, type:object, options(collapsible: true, collapsed: false), fields:[{title:'Street name', name:street, type:string, selector:.street}, {name:streetNo, type:string, title:'Street number', selector:.streetNo}, {name:city, type:string, title:City, selector:.city}]}])"
+              'string': '#string:field(title: String, type:string)',
+              'date-time': "#date-time:field(title:'Date time', type:string, format:'date-time')",
+              'date': '#date:field(title: Date, name: date, type: string, format:date)',
+              'time': '#time:field(title: Time, type: string, format:time)',
+              'email': '#email:field(title: Email, type: string, format:email)',
+              'url': '#url:field(title: URL, type: string, format:url)',
+              'data-url': '#data-url:field(title: Data URL, type: string, format:data-url)',
+              'json': '#json:field(title: JSON, type: string, format: json)',
+              'markdown': '#markdown:field(title: Markdown, type: string, name:markdown, format: markdown)',
+              'html': '#html:field(title: HTML, type: string, name:html, format: html)',
+              'code': '#code:field(title: Code, type: string, name:code, format: code)',
+              'style': '#style:field(title: CSS, type: string, format: css)',
+              'image': '#image:field(title: Image, type:image)',
+              'text': '#text:field(title: Text, type:text)',
+              'textEditor': '#textEditor:field(title:Lead, name:lead, type:text, options(layout:editor))',
+              'number': '#number:field(title: Number, type:number)',
+              'integer': '#integer:field(title: Integer, type:integer)',
+              'boolean': '#boolean:field(title: Boolean, type:boolean)',
+              'layoutTag': '#layoutTag:field(title:Tag with vocab, name:tag, type:string, options(layout: tag, vocab:categories))',
+              'layoutChip': '#layoutChip:field(title: Tags, name:chip, type:string, options(layout:chip, vocab:categories))',
+              'layoutRadio': "#layoutRadio:field(title: Radio, name: radio, type: string, options(layout:radio, direction: horizontal, list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
+              'layoutSelectStr': "#layoutSelectStr:field(title: Select, name: select, type: string, options(list:[{title: Red, value: color-500-red},{title: Blue, value: color-500-green}]))",
+              'layoutTags': '#layoutTags:field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories))',
+              'layoutList': '#layoutList:field(title: List, type:string, options(layout:list))',
+              'list': '#list:field(title: List, type:string, options(layout:list))',
+              'layoutBlocks': '#layoutBlocks:field(title: Content, type:string, options(layout:blocks))',
+              'blocks': '#blocks:field(title: Content, type:string, options(layout:blocks))',
+              'object': "#object:field(title:Object, title:Object, name:object, type:object, fields:[{title:Link, name:link, type:string, attr:data-link, selector:'&scope'}, {title:'Street name', name:street, type:string, selector:#street}, {name:streetNo, type:string, title:'Street number', selector:#streetNo}, {name:city, type:string, title:City, selector:#city}], options(collapsible: true, collapsed: false))",
+              'array': "#array:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false), of:[{title: Array item, type:object, options(collapsible: true, collapsed: false), fields:[{title:'Street name', name:street, type:string, selector:.street}, {name:streetNo, type:string, title:'Street number', selector:.streetNo}, {name:city, type:string, title:City, selector:.city}]}])"
             };
 
-            var ICON_COPY = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
-            var ICON_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
+            var ICON_COPY =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+            var ICON_CHECK =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
 
             function escapeHtml(s) {
               return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -1010,9 +1046,14 @@ This is **bold** and *italic* text.
                 ta.style.opacity = '0';
                 document.body.appendChild(ta);
                 ta.select();
-                try { document.execCommand('copy'); resolve(); }
-                catch (e) { reject(e); }
-                finally { document.body.removeChild(ta); }
+                try {
+                  document.execCommand('copy');
+                  resolve();
+                } catch (e) {
+                  reject(e);
+                } finally {
+                  document.body.removeChild(ta);
+                }
               });
             }
 
