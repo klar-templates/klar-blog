@@ -299,7 +299,9 @@
         bottom: calc(100% + var(--space-2));
         left: 0;
         z-index: 60;
-        ax-width: 600px;
+        max-width: 600px;
+        overflow: hidden;
+        text-overflow: ellipsis;
         text-align: left;
         padding: var(--space-3) var(--space-4);
         background: var(--popover);
@@ -311,8 +313,8 @@
         font-size: var(--text-xs);
         line-height: var(--leading-snug);
         white-space: nowrap;
-        word-break: break-word;
-        overflow-wrap: break-word;
+        ord-break: break-word;
+        verflow-wrap: break-word;
         opacity: 0;
         pointer-events: none;
         transform: translateY(4px);
