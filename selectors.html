@@ -131,6 +131,11 @@
         flex-wrap: wrap;
         gap: var(--space-2);
       }
+
+      /* ── Smooth scroll offset for TOC pills ─────────────────────────── */
+      html {
+        scroll-padding-top: calc(var(--header-height) + 16px);
+      }
     </style>
     <script>
       (function() {
@@ -272,7 +277,7 @@
               <div class="sd-card__head">
                 <span class="sd-card__num">2</span>
                 <h2 class="sd-card__title">Exclude</h2>
-                <code class="sd-directive sd-card__syntax">.hero:exclude(img, a)</code>
+                <code class="sd-directive sd-card__syntax">.hero:Exclude(img, a)</code>
               </div>
               <p class="sd-card__lead">
                 Keeps the container editable but carves specific descendants out of it. Everything inside stays
@@ -469,5 +474,27 @@
         </div>
       </footer>
     </div>
+    <script>
+      (function () {
+        // Smooth-scroll TOC pills to their target, landing 16px above the card
+        // (accounting for the sticky header height).
+        document.addEventListener('click', function (e) {
+          var pill = e.target.closest('.sd-toc a[href^="#"]');
+          if (!pill) return;
+          var id = pill.getAttribute('href').slice(1);
+          var target = document.getElementById(id);
+          if (!target) return;
+          e.preventDefault();
+          var headerH = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--header-height')
+          ) || 80;
+          var offset = 16; // px above the target card
+          var top = target.getBoundingClientRect().top + window.pageYOffset - headerH - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+          // Update the URL hash without jumping
+          history.pushState(null, '', '#' + id);
+        });
+      })();
+    </script>
   </body>
 </html>
