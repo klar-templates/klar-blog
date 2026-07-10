@@ -485,9 +485,11 @@
           var target = document.getElementById(id);
           if (!target) return;
           e.preventDefault();
-          var headerH = parseFloat(
-            getComputedStyle(document.documentElement).getPropertyValue('--header-height')
-          ) || 80;
+          // Measure the actual sticky header height (offsetHeight) instead of
+          // parsing the --header-height CSS variable, which returns "5rem" and
+          // parseFloat("5rem") === 5 — far too small for a real offset.
+          var headerEl = document.getElementById('header');
+          var headerH = headerEl ? headerEl.offsetHeight : 80;
           var offset = 16; // px above the target card
           var top = target.getBoundingClientRect().top + window.pageYOffset - headerH - offset;
           window.scrollTo({ top: top, behavior: 'smooth' });
