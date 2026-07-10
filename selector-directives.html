@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Personal Blog | Fashion, Technology &amp; Lifestyle</title>
+    <meta name="description" content="Explore the latest in fashion trends, technology insights, business strategies, and lifestyle inspiration on Nexus personal blog.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      /* ── Field showcase ───────────────────────────────────────────── */
+      .field-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: var(--space-6);
+        margin-bottom: var(--space-12)
+      }
+
+      .field-tab {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-full);
+        background: var(--background);
+        color: var(--muted-foreground);
+        transition: all var(--transition)
+      }
+
+      .field-tab:hover {
+        background: var(--muted);
+        color: var(--foreground)
+      }
+
+      .field-tab.is-active {
+        background: var(--primary);
+        color: var(--primary-foreground);
+        border-color: var(--primary)
+      }
+
+      .field-panel {
+        display: none
+      }
+
+      .field-panel.is-active {
+        display: block
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: var(--space-8);
+        align-items: start;
+        padding: var(--space-6) 0;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .field-row:last-child {
+        border-bottom: none
+      }
+
+      .field-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: var(--text-sm);
+        font-weight: var(--font-semibold);
+        color: var(--foreground)
+      }
+
+      .field-desc {
+        font-size: var(--text-xs);
+        color: var(--muted-foreground);
+        margin-top: var(--space-1);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace
+      }
+
+      .field-value {
+        font-size: var(--text-base);
+        color: var(--foreground);
+        min-height: 2.5rem;
+        padding: var(--space-3) var(--space-4);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--card)
+      }
+
+      .fv-code {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-sm);
+        white-space: pre-wrap;
+        word-break: break-word;
+        line-height: var(--leading-relaxed)
+      }
+
+      .fv-muted {
+        color: var(--muted-foreground);
+        font-style: italic
+      }
+
+      .fv-bool {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3)
+      }
+
+      .fv-bool__pill {
+        width: 2.75rem;
+        height: 1.5rem;
+        border-radius: var(--radius-full);
+        background: var(--primary);
+        position: relative;
+        flex-shrink: 0
+      }
+
+      .fv-bool__pill::after {
+        content: "";
+        position: absolute;
+        top: .1875rem;
+        right: .1875rem;
+        width: 1.125rem;
+        height: 1.125rem;
+        border-radius: var(--radius-full);
+        background: var(--primary-foreground)
+      }
+
+      .field-card {
+        padding: var(--space-6);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        background: var(--card)
+      }
+
+      .field-array-item {
+        padding: var(--space-4);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--background)
+      }
+
+      .field-array-item+.field-array-item {
+        margin-top: var(--space-3)
+      }
+
+      .field-object-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-3);
+        margin-top: var(--space-3)
+      }
+
+      .field-object-grid .field-value {
+        min-height: auto
+      }
+
+      .field-sublabel {
+        font-size: var(--text-xs);
+        font-weight: var(--font-medium);
+        color: var(--muted-foreground);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        margin-bottom: var(--space-1)
+      }
+
+      .list-teaser {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition)
+      }
+
+      .list-teaser:hover {
+        background-color: var(--muted)
+      }
+
+      .list-teaser__title {
+        font-size: var(--text-sm);
+        font-weight: var(--font-semibold);
+        color: var(--foreground)
+      }
+
+      .list-teaser__desc {
+        font-size: var(--text-xs);
+        color: var(--muted-foreground);
+        line-height: var(--leading-snug)
+      }
+
+      /* ── Prose inside field-value (blocks panels) ─────────────────── */
+      .field-value.prose {
+        max-width: none;
+        line-height: var(--leading-relaxed)
+      }
+
+      .field-value.prose>*+* {
+        margin-top: var(--space-6)
+      }
+
+      .field-value.prose h2 {
+        font-size: var(--text-2xl);
+        margin-top: var(--space-12)
+      }
+
+      .field-value.prose h2:first-child {
+        margin-top: 0
+      }
+
+      .field-value.prose h3 {
+        font-size: var(--text-xl);
+        margin-top: var(--space-8)
+      }
+
+      .field-value.prose p {
+        color: var(--foreground)
+      }
+
+      .field-value.prose a {
+        text-decoration: underline;
+        text-underline-offset: 2px
+      }
+
+      .field-value.prose strong {
+        font-weight: var(--font-semibold)
+      }
+
+      .field-value.prose code {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-sm);
+        background-color: var(--muted);
+        color: var(--foreground);
+        padding: 0.125em 0.375em;
+        border-radius: var(--radius-sm)
+      }
+
+      .field-value.prose blockquote {
+        padding-left: var(--space-6);
+        border-left: 3px solid var(--border);
+        color: var(--muted-foreground);
+        font-style: italic
+      }
+
+      .field-value.prose ul {
+        list-style: disc;
+        padding-left: var(--space-6)
+      }
+
+      .field-value.prose ol {
+        list-style: decimal;
+        padding-left: var(--space-6)
+      }
+
+      .field-value.prose li+li {
+        margin-top: var(--space-2)
+      }
+
+      /* ── Field copy button + tooltip ──────────────────────────────── */
+      .field-copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--background);
+        color: var(--muted-foreground);
+        cursor: pointer;
+        position: relative;
+        transition: all var(--transition)
+      }
+
+      .field-copy:hover {
+        background: var(--muted);
+        color: var(--foreground);
+        border-color: var(--foreground)
+      }
+
+      .field-copy.is-copied {
+        background: var(--primary);
+        color: var(--primary-foreground);
+        border-color: var(--primary)
+      }
+
+      .field-copy svg {
+        width: .875rem;
+        height: .875rem;
+        flex-shrink: 0
+      }
+
+      .field-copy__tooltip {
+        position: absolute;
+        bottom: calc(100% + var(--space-2));
+        left: 0;
+        z-index: 60;
+        max-width: 800px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        padding: var(--space-3) var(--space-4);
+        background: var(--popover);
+        color: var(--popover-foreground);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-xs);
+        line-height: var(--leading-snug);
+        white-space: nowrap;
+        ord-break: break-word;
+        verflow-wrap: break-word;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(4px);
+        transition: opacity var(--transition), transform var(--transition)
+      }
+
+      .field-copy:hover .field-copy__tooltip,
+      .field-copy:focus-visible .field-copy__tooltip {
+        opacity: 1;
+        transform: translateY(0)
+      }
+
+      .field-copy__tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: .5rem;
+        border: 5px solid transparent;
+        border-top-color: var(--popover)
+      }
+
+      .field-copy__tooltip.is-flipped {
+        left: auto;
+        right: 0
+      }
+
+      .field-copy__tooltip.is-flipped::after {
+        left: auto;
+        right: .5rem
+      }
+
+      @media (max-width:768px) {
+        .field-row {
+          grid-template-columns: 1fr;
+          gap: var(--space-2)
+        }
+
+        .field-object-grid {
+          grid-template-columns: 1fr
+        }
+
+        .field-copy__tooltip {
+          max-width: calc(100vw - 3rem)
+        }
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var d = document.documentElement,
+            c = d.classList;
+          if (localStorage.getItem("theme") === "dark") {
+            d.style.colorScheme = "dark";
+            c.remove("light");
+            c.add("dark");
+          } else {
+            d.style.colorScheme = "light";
+            c.remove("dark");
+            c.add("light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://editor.klar.website/sdk/content-static.iife.js"></script>
+    <script type="module" src="/script.js"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <header class="site-header hidden" id="header">
+        <div class="container">
+          <div class="site-header__bar">
+            <a class="brand" href="/index.html">nexus</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link" href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+            <div class="nav-desktop items-center gap-2">
+              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg></a>
+              <button class="btn btn-icon" aria-label="Toggle theme">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </button>
+            </div>
+            <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="mobile-menu" class="hidden border-t py-4">
+            <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+              <a class="nav-link" href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="container section">
+          <div class="mb-12">
+            <h1 class="page-title">Editable Field Types</h1>
+            <p class="lead mt-4">Every Klar field type wired to a live element — grouped in tabs. Click any field to
+              edit it inline.</p>
+          </div>
+
+          <!-- ── Tab navigation ─────────────────────────────────────── -->
+          <div class="field-tabs" role="tablist">
+            <button class="field-tab is-active" data-tab="text">Text &amp; Strings</button>
+            <button class="field-tab" data-tab="datetime">Date &amp; Time</button>
+            <button class="field-tab" data-tab="numeric">Numbers &amp; Boolean</button>
+            <button class="field-tab" data-tab="rich">Code</button>
+            <button class="field-tab" data-tab="media">Media</button>
+            <button class="field-tab" data-tab="lists">Lists</button>
+            <button class="field-tab" data-tab="blocks">Blocks</button>
+            <button class="field-tab" data-tab="pickers">Pickers</button>
+            <button class="field-tab" data-tab="complex">Object &amp; Array</button>
+          </div>
+
+          <!-- ── Panel 1 · Text &amp; Strings ─────────────────────────── -->
+          <div class="field-panel is-active" data-panel="text">
+            <div class="field-row">
+              <div>
+                <div class="field-label">String</div>
+                <div class="field-desc">type:string</div>
+              </div>
+              <div class="field-value" id="string">The quick brown fox jumps over the lazy dog</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Text</div>
+                <div class="field-desc">type:text</div>
+              </div>
+              <div class="field-value" id="text">Multi-line text field. Useful for descriptions, captions, and short
+                paragraphs that don't need rich formatting.</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Text Editor</div>
+                <div class="field-desc">type:text, options(layout:editor)</div>
+              </div>
+              <div class="field-value" id="textEditor">A lead paragraph rendered with the lightweight editor layout —
+                supports bold, italic, and links.</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Email</div>
+                <div class="field-desc">type:string, format:email</div>
+              </div>
+              <div class="field-value" id="email">hello@nexus.blog</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">URL</div>
+                <div class="field-desc">type:string, format:url</div>
+              </div>
+              <div class="field-value" id="url">https://nexus.blog/article</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Data URL</div>
+                <div class="field-desc">type:string, format:data-url</div>
+              </div>
+              <div class="field-value fv-code" id="data-url">data:text/plain;base64,SGVsbG8gV29ybGQ=</div>
+            </div>
+          </div>
+
+          <!-- ── Panel 2 · Date &amp; Time ─────────────────────────────── -->
+          <div class="field-panel" data-panel="datetime">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Date-Time</div>
+                <div class="field-desc">type:string, format:date-time</div>
+              </div>
+              <div class="field-value" id="date-time">2025-01-15T14:30:00Z</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Date</div>
+                <div class="field-desc">type:string, format:date, name:date</div>
+              </div>
+              <div class="field-value" id="date">2025-01-15</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Time</div>
+                <div class="field-desc">type:string, format:time</div>
+              </div>
+              <div class="field-value" id="time">14:30</div>
+            </div>
+          </div>
+
+          <!-- ── Panel 3 · Numbers &amp; Boolean ────────────────────────── -->
+          <div class="field-panel" data-panel="numeric">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Number</div>
+                <div class="field-desc">type:number</div>
+              </div>
+              <div class="field-value" id="number">42.5</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Integer</div>
+                <div class="field-desc">type:integer</div>
+              </div>
+              <div class="field-value" id="integer">100</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Boolean</div>
+                <div class="field-desc">type:boolean</div>
+              </div>
+              <div class="field-value fv-bool" id="boolean">false</div>
+            </div>
+          </div>
+
+          <!-- ── Panel 4 · Code ──────────────────────────────────────── -->
+          <div class="field-panel" data-panel="rich">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Markdown</div>
+                <div class="field-desc">type:string, format:markdown, name:markdown</div>
+              </div>
+              <div class="field-value fv-code" id="markdown"><pre># Heading This is **bold** and *italic* text. - Item one - Item two</pre></div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">HTML</div>
+                <div class="field-desc">type:string, format:html, name:html</div>
+              </div>
+              <div class="field-value fv-code" id="html">Hello <strong>World</strong>  </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Code</div>
+                <div class="field-desc">type:string, format:code, name:code</div>
+              </div>
+              <div class="field-value fv-code">
+                <style>
+                  /* highlight.js theming over our dark code blocks */
+                  .hljs {
+                    background: transparent !important;
+                    color: var(--code-fg) !important;
+                    padding: 0 !important;
+                  }
+
+                  .hljs-comment,
+                  .hljs-quote {
+                    color: var(--syntax-comment);
+                    font-style: italic;
+                  }
+
+                  .hljs-keyword,
+                  .hljs-selector-tag,
+                  .hljs-literal,
+                  .hljs-section,
+                  .hljs-name {
+                    color: #f9a8d4;
+                  }
+
+                  .hljs-string,
+                  .hljs-attr,
+                  .hljs-symbol,
+                  .hljs-bullet,
+                  .hljs-meta {
+                    color: #86efac;
+                  }
+
+                  .hljs-tag,
+                  .hljs-tag .hljs-name {
+                    color: #f9a8d4;
+                  }
+
+                  .hljs-tag .hljs-attr {
+                    color: #fcd34d;
+                  }
+
+                  .hljs-number,
+                  .hljs-link,
+                  .hljs-built_in,
+                  .hljs-type {
+                    color: #fcd34d;
+                  }
+
+                  .hljs-title,
+                  .hljs-class .hljs-title {
+                    color: #93c5fd;
+                  }
+
+                  .hljs-variable,
+                  .hljs-template-variable {
+                    color: #fbcfe8;
+                  }
+
+                  .hljs-emphasis {
+                    font-style: italic;
+                  }
+
+                  .hljs-strong {
+                    font-weight: 700;
+                  }
+                </style>
+                <pre id="code"><code><span class="hljs-comment">&lt;!-- Your original HTML --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Sissste<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the description.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- After editing with Klar — still clean! --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Welcome to My Updated Site<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>A better descdddription here.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></code>
+</pre>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">JSON</div>
+                <div class="field-desc">type:string, format:json</div>
+              </div>
+              <div class="field-value fv-code" id="json">{
+                "name": "Nexus",
+                "version": "1.0.0",
+                "active": true
+                }</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">CSS</div>
+                <div class="field-desc">type:string, format:css</div>
+              </div>
+              <div class="field-value fv-code" id="style">.btn {
+                color: var(--primary);
+                border-radius: var(--radius-md);
+                }</div>
+            </div>
+          </div>
+
+          <!-- ── Panel 5 · Media ────────────────────────────────────── -->
+          <div class="field-panel" data-panel="media">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Image</div>
+                <div class="field-desc">type:image</div>
+              </div>
+              <div class="field-value" style="padding:0;overflow:hidden">
+                <img id="image" src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="A clean desk with laptop, notebook and coffee" style="width:100%;height:auto;display:block;aspect-ratio:4/3;object-fit:cover">
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Panel 6 · Lists ─────────────────────────────────────── -->
+          <div class="field-panel" data-panel="lists">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Layout List</div>
+                <div class="field-desc">type:string, options(layout:list)</div>
+              </div>
+              <div class="field-value">
+                <ul style="list-style:disc;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="layoutList">
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">The Future of Wearable Technology</div>
+                      <div class="list-teaser__desc">How smart fabrics and biometric sensors are reshaping everyday
+                        fashion.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Sustainable Fashion Brands to Watch</div>
+                      <div class="list-teaser__desc">A curated list of eco-conscious labels making waves in 2026.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Minimalist Desk Setup Ideas</div>
+                      <div class="list-teaser__desc">Practical tips for a clean, productive workspace that sparks
+                        creativity.</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">List</div>
+                <div class="field-desc">type:string, options(layout:list)</div>
+              </div>
+              <div class="field-value">
+                <ol style="list-style:decimal;padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-2)" id="list">
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Define your content strategy</div>
+                      <div class="list-teaser__desc">Identify your audience, tone of voice, and the topics that align
+                        with your brand.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Choose your publishing cadence</div>
+                      <div class="list-teaser__desc">Decide whether weekly, bi-weekly, or monthly posts work best for
+                        your goals.</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-teaser">
+                      <div class="list-teaser__title">Measure and iterate</div>
+                      <div class="list-teaser__desc">Track engagement metrics and refine your editorial calendar based
+                        on what resonates.</div>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Panel 7 · Blocks ────────────────────────────────────── -->
+          <div class="field-panel" data-panel="blocks">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Layout Blocks</div>
+                <div class="field-desc">type:array, options(layout:blocks)</div>
+              </div>
+              <div class="field-value prose" id="layoutBlocks">
+                <h2>The Art of Digital Storytelling</h2>
+                <p>In an era of infinite content, the stories that resonate are those crafted with intention. Every
+                  heading, paragraph, and list should serve your reader's journey through an idea.</p>
+                <h3>Building a Narrative Arc</h3>
+                <p>Think of each article as a small journey. Your headline is the invitation; your opening paragraph is
+                  the threshold. Every section that follows should reward the reader's decision to keep reading.</p>
+                <blockquote>The best writing doesn't just inform — it makes the reader feel they've arrived somewhere
+                  new.</blockquote>
+                <p>Consider these pillars of compelling content:</p>
+                <ul>
+                  <li>Clarity over cleverness — say what you mean</li>
+                  <li>Rhythm — vary sentence length to create pace</li>
+                  <li>Evidence — support claims with real examples</li>
+                  <li>Empathy — anticipate your reader's questions</li>
+                </ul>
+                <h3>From Draft to Published</h3>
+                <p>A reliable publishing workflow turns good ideas into finished articles:</p>
+                <ol>
+                  <li>Capture the idea and write a rough outline</li>
+                  <li>Draft freely without self-editing</li>
+                  <li>Step away, then return with fresh eyes</li>
+                  <li>Revise for structure, then for language</li>
+                  <li>Publish, share, and engage with responses</li>
+                </ol>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Blocks</div>
+                <div class="field-desc">type:array, options(layout:blocks)</div>
+              </div>
+              <div class="field-value prose" id="blocks">
+                <h2>Designing for Readability</h2>
+                <p>Typography and whitespace are the silent architects of reading comfort. A well-set page invites the
+                  eye to linger; a cramped one drives it away.</p>
+                <h3>The Power of Restraint</h3>
+                <p>Resist the urge to fill every pixel. Generous margins, consistent line height, and a measured type
+                  scale create a rhythm that carries the reader from first word to last.</p>
+                <blockquote>White space is to be regarded as an active element, not a passive background.</blockquote>
+                <p>Practical guidelines for readable layouts:</p>
+                <ul>
+                  <li>Keep line length between 45 and 75 characters</li>
+                  <li>Set line height to 1.5–1.7 for body text</li>
+                  <li>Use a modular type scale with clear hierarchy</li>
+                  <li>Limit font families to two — one for headings, one for body</li>
+                </ul>
+                <h3>Testing Across Devices</h3>
+                <p>What looks perfect on a large monitor may collapse on a phone. Always preview at multiple
+                  breakpoints:</p>
+                <ol>
+                  <li>Start with mobile — the most constrained canvas</li>
+                  <li>Scale up to tablet and verify spacing</li>
+                  <li>Check desktop for line length and column balance</li>
+                  <li>Read the entire article on each size</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Panel 8 · Pickers ───────────────────────────────────── -->
+          <div class="field-panel" data-panel="pickers">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Tag Picker</div>
+                <div class="field-desc">type:string, options(layout:tag, vocab:categories), name:tag</div>
+              </div>
+              <div class="field-value" id="layoutTag">Podcast</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Chip Picker</div>
+                <div class="field-desc">type:string, options(layout:chip, vocab:categories), name:chip</div>
+              </div>
+              <div class="field-value" id="layoutChip">Technology,Lifestyle</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Radio</div>
+                <div class="field-desc">type:string, options(layout:radio, direction:horizontal, list:[…]), name:radio
+                </div>
+              </div>
+              <div class="field-value" id="layoutRadio" style="display:flex;gap:var(--space-4);align-items:center">
+                color-500-green</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Select</div>
+                <div class="field-desc">type:string, options(list:[…]), name:select</div>
+              </div>
+              <div class="field-value" id="layoutSelectStr" style="display:flex;align-items:center;justify-content:space-between">color-500-red</div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Tags</div>
+                <div class="field-desc">type:array, options(layout:tags, vocab:categories), name:tags</div>
+              </div>
+              <div class="field-value" id="layoutTags" style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center"><span class="tag is-active">Technology</span></div>
+            </div>
+          </div>
+
+          <!-- ── Panel 9 · Object &amp; Array ────────────────────────────── -->
+          <div class="field-panel" data-panel="complex">
+            <div class="field-row">
+              <div>
+                <div class="field-label">Object</div>
+                <div class="field-desc">type:object, options(collapsible:true)</div>
+              </div>
+              <div class="field-card" id="object" data-link="https://maps.google.com">
+                <div class="field-sublabel">Link (data-link attr)</div>
+                <div style="font-size:var(--text-sm);color:var(--muted-foreground);margin-bottom:var(--space-3)">
+                  https://maps.google.com</div>
+                <div class="field-object-grid">
+                  <div>
+                    <div class="field-sublabel">Street</div>
+                    <div class="field-value" id="street" style="min-height:auto;padding:var(--space-2) var(--space-3)">
+                      Kungsgatan 12</div>
+                  </div>
+                  <div>
+                    <div class="field-sublabel">Street No</div>
+                    <div class="field-value" id="streetNo" style="min-height:auto;padding:var(--space-2) var(--space-3)">12</div>
+                  </div>
+                  <div>
+                    <div class="field-sublabel">City</div>
+                    <div class="field-value" id="city" style="min-height:auto;padding:var(--space-2) var(--space-3)">
+                      Stockholm</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <div class="field-label">Array</div>
+                <div class="field-desc">type:array, of:object, options(collapsible:true)</div>
+              </div>
+              <div id="array">
+                <div class="field-array-item">
+                  <div class="field-object-grid">
+                    <div>
+                      <div class="field-sublabel">Street</div>
+                      <div class="field-value street" style="min-height:auto;padding:var(--space-2) var(--space-3)">
+                        Drottninggatan 45</div>
+                    </div>
+                    <div>
+                      <div class="field-sublabel">Street No</div>
+                      <div class="field-value streetNo" style="min-height:auto;padding:var(--space-2) var(--space-3)">45
+                      </div>
+                    </div>
+                    <div>
+                      <div class="field-sublabel">City</div>
+                      <div class="field-value city" style="min-height:auto;padding:var(--space-2) var(--space-3)">
+                        Gothenburg</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field-array-item">
+                  <div class="field-object-grid">
+                    <div>
+                      <div class="field-sublabel">Street</div>
+                      <div class="field-value street" style="min-height:auto;padding:var(--space-2) var(--space-3)">
+                        Storgatan 8</div>
+                    </div>
+                    <div>
+                      <div class="field-sublabel">Street No</div>
+                      <div class="field-value streetNo" style="min-height:auto;padding:var(--space-2) var(--space-3)">8
+                      </div>
+                    </div>
+                    <div>
+                      <div class="field-sublabel">City</div>
+                      <div class="field-value city" style="min-height:auto;padding:var(--space-2) var(--space-3)">Malmö
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            var STORAGE_KEY = 'field-showcase-active-tab';
+
+            function activateTab(target) {
+              document.querySelectorAll('.field-tab').forEach(function(t) {
+                t.classList.toggle('is-active', t.dataset.tab === target)
+              });
+              document.querySelectorAll('.field-panel').forEach(function(p) {
+                p.classList.toggle('is-active', p.dataset.panel === target)
+              });
+            }
+
+            // Restore active tab on load
+            try {
+              var savedTab = localStorage.getItem(STORAGE_KEY);
+              if (savedTab) {
+                var tab = document.querySelector('.field-tab[data-tab="' + savedTab + '"]');
+                if (tab) {
+                  activateTab(savedTab);
+                }
+              }
+            } catch (e) {}
+
+            // Tab click handler — save to localStorage
+            document.addEventListener('click', function(e) {
+              var tab = e.target.closest('.field-tab');
+              if (!tab) return;
+              var target = tab.dataset.tab;
+              activateTab(target);
+              try {
+                localStorage.setItem(STORAGE_KEY, target);
+              } catch (e) {}
+            });
+          })();
+        </script>
+
+        <!-- ── Field config copy buttons ────────────────────────────── -->
+        <script>
+          (function() {
+            var configs = {
+              'string': '.sel:field(title:String, type:string)',
+              'date-time': ".sel:field(title:'Date time', type:string, format:'date-time')",
+              'date': '.sel:field(title:Date, name:date, type:string, format:date)',
+              'time': '.sel:field(title:Time, type:string, format:time)',
+              'email': '.sel:field(title:Email, type:string, format:email)',
+              'url': '.sel:field(title:URL, type:string, format:url)',
+              'data-url': '.sel:field(title:Data URL, type:string, format:data-url)',
+              'json': '.sel:field(title:JSON, type:string, format:json)',
+              'markdown': '.sel:field(title:Markdown, name:markdown, type:string, format:markdown)',
+              'html': '.sel:field(title:HTML, name:html, type:string, format:html)',
+              'code': '.sel:field(title:Code, name:code, type:string, format:code)',
+              'style': '.sel:field(title:CSS, type:string, format:css)',
+              'image': '.sel:field(title:Image, type:image)',
+              'text': '.sel:field(title:Text, type:text)',
+              'textEditor': '.sel:field(title:Lead, name:lead, type:text, options(layout:editor))',
+              'number': '.sel:field(title:Number, type:number)',
+              'integer': '.sel:field(title:Integer, type:integer)',
+              'boolean': '.sel:field(title:Boolean, type:boolean)',
+              'layoutTag': '.sel:field(title:Tag with vocab, name:tag, type:string, options(layout:tag, vocab:categories))',
+              'layoutChip': '.sel:field(title:Tags, name:chip, type:string, options(layout:chip, vocab:categories))',
+              'layoutRadio': ".sel:field(title:Radio, name:radio, type:string, options(layout:radio, direction:horizontal, list:[{title:Red, value:color-500-red},{title:Blue, value:color-500-green}]))",
+              'layoutSelectStr': ".sel:field(title:Select, name:select, type:string, options(list:[{title:Red, value:color-500-red},{title:Blue, value:color-500-green}]))",
+              'layoutTags': '.sel:field(title:Tags, name:tags, type:array, options(layout:tags, vocab:categories))',
+              'layoutList': '.sel:field(title:List, type:string, options(layout:list))',
+              'list': '.sel:field(title:List, type:string, options(layout:list))',
+              'layoutBlocks': '.sel:field(title:Content, type:string, options(layout:blocks))',
+              'blocks': '.sel:field(title:Content, type:string, options(layout:blocks))',
+              'object': ".sel:field(title:Object, title:Object, name:object, type:object, fields:[{title:Link, name:link, type:string, attr:data-link, selector:'&scope'}, {title:'Street name', name:street, type:string, selector:.sel}, {name:streetNo, type:string, title:'Street number', selector:.sel}, {name:city, type:string, title:City, selector:.sel}], options(collapsible: true, collapsed: false))",
+              'array': ".sel:field(title:Array, name:array, type:array, options(collapsible: true, collapsed: false), of:[{title:Array item, type:object, options(collapsible: true, collapsed: false), fields:[{title:'Street name', name:street, type:string, selector:.sel}, {name:streetNo, type:string, title:'Street number', selector:.sel}, {name:city, type:string, title:City, selector:.sel}]}])"
+            };
+
+            var ICON_COPY =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+            var ICON_CHECK =
+              '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
+
+            function escapeHtml(s) {
+              return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
+            function copyToClipboard(text) {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text);
+              }
+              return new Promise(function(resolve, reject) {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                  document.execCommand('copy');
+                  resolve();
+                } catch (e) {
+                  reject(e);
+                } finally {
+                  document.body.removeChild(ta);
+                }
+              });
+            }
+
+            document.querySelectorAll('.field-row').forEach(function(row) {
+              var elWithId = row.querySelector('[id]');
+              if (!elWithId) return;
+              var config = configs[elWithId.id];
+              if (!config) return;
+
+              var label = row.querySelector('.field-label');
+              if (!label) return;
+
+              var btn = document.createElement('button');
+              btn.className = 'field-copy';
+              btn.type = 'button';
+              btn.setAttribute('aria-label', 'Copy field config to clipboard');
+              btn.innerHTML =
+                ICON_COPY +
+                '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+
+              btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                copyToClipboard(config).then(function() {
+                  btn.innerHTML = ICON_CHECK +
+                    '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+                  btn.classList.add('is-copied');
+                  // Re-run positioning after innerHTML rebuild
+                  positionTooltip();
+                  setTimeout(function() {
+                    btn.innerHTML = ICON_COPY +
+                      '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
+                    btn.classList.remove('is-copied');
+                  }, 2000);
+                }).catch(function() {});
+              });
+
+              label.appendChild(btn);
+
+              // Position tooltip: default is left-aligned (extends rightward
+              // from the button). If it overflows the viewport's right edge,
+              // try flipped (right-aligned, extends leftward). If the flipped
+              // version overflows the left edge, pin the tooltip so its right
+              // edge sits 16px from the viewport right and constrain its width.
+              function positionTooltip() {
+                var tooltip = btn.querySelector('.field-copy__tooltip');
+                if (!tooltip) return;
+
+                // Reset all modifications to measure the default position
+                tooltip.classList.remove('is-flipped');
+                tooltip.style.left = '';
+                tooltip.style.right = '';
+                tooltip.style.maxWidth = '';
+
+                var vw = window.innerWidth;
+                var rect = tooltip.getBoundingClientRect();
+
+                // Step 1: does the default (left-aligned) overflow the RIGHT edge?
+                if (rect.right > vw - 8) {
+                  // Try flipped (right-aligned, extends leftward)
+                  tooltip.classList.add('is-flipped');
+                  rect = tooltip.getBoundingClientRect();
+
+                  // Step 2: does the flipped version overflow the LEFT edge?
+                  if (rect.left < 8) {
+                    // Neither side fits — pin to 16px from viewport right
+                    tooltip.classList.remove('is-flipped');
+                    var btnRect = btn.getBoundingClientRect();
+                    tooltip.style.left = 'auto';
+                    // right offset = btnRect.right - (vw - 16) so tooltip's
+                    // right edge lands at vw - 16 in viewport coordinates
+                    tooltip.style.right = (btnRect.right - vw + 16) + 'px';
+                    // Allow wrapping so it doesn't overflow the right edge
+                    tooltip.style.maxWidth = (vw - 32) + 'px';
+                  }
+                }
+              }
+              btn.addEventListener('mouseenter', positionTooltip);
+              btn.addEventListener('focusin', positionTooltip);
+            });
+          })();
+        </script>
+      </main>
+      <footer class="site-footer hidden" role="contentinfo">
+        <div class="container py-12">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-lg font-bold text-foreground">nexus</h2>
+              <p class="text-sm text-muted-foreground">
+                A personal blog exploring fashion, technology, business, and
+                lifestyle trends.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Categories</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/posts.html">Fashion</a></li>
+                <li>
+                  <a class="footer-link" href="/technology.html">Technology</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="/business.html">Business</a>
+                </li>
+                <li><a class="footer-link" href="/posts.html">Lifestyle</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Quick Links</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/about.html">About</a></li>
+                <li><a class="footer-link" href="/contact.html">Contact</a></li>
+                <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
+                <li><a class="footer-link" href="/terms.html">Terms</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Connect</h3>
+              <div class="flex gap-4">
+                <a class="footer-link" href="#" aria-label="Follow us on Facebook">Facebook</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Twitter">Twitter</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Instagram">Instagram</a>
+              </div>
+            </div>
+          </div>
+          <div class="border-t mt-8 pt-8 text-center">
+            <p class="text-sm text-muted-foreground">
+              © 2026 Nexus Blog. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
