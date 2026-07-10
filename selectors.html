@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector Directives - Klar Editor Behavior | Nexus</title>
+    <meta name="description"
+      content="Klar's CSS selector directives — editor-behavior modifiers that control how elements behave in the visual editor.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      /* ── Directive showcase (namespaced .sd-*) ─────────────────────── */
+      .sd-hero {
+        background:
+          radial-gradient(60rem 30rem at 80% -10%, var(--muted), transparent),
+          radial-gradient(50rem 26rem at 0% 0%, var(--accent), transparent);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sd-hero__inner {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+        padding-block: var(--space-20);
+        max-width: 56rem;
+      }
+
+      .sd-directive {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.875em;
+        background-color: var(--muted);
+        color: var(--foreground);
+        padding: 0.125em 0.4em;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      .sd-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        padding: var(--space-8);
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .sd-card__head {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+
+      .sd-card__num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+        border-radius: var(--radius-md);
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        font-size: var(--text-sm);
+        font-weight: var(--font-bold);
+      }
+
+      .sd-card__title {
+        font-size: var(--text-xl);
+        font-weight: var(--font-bold);
+        letter-spacing: var(--tracking-tight);
+      }
+
+      .sd-card__syntax {
+        margin-left: auto;
+      }
+
+      .sd-card__lead {
+        font-size: var(--text-base);
+        color: var(--muted-foreground);
+        line-height: var(--leading-relaxed);
+      }
+
+      .sd-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        margin-top: var(--space-2);
+      }
+
+      .sd-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-3);
+        font-size: var(--text-sm);
+        line-height: var(--leading-relaxed);
+        color: var(--foreground);
+      }
+
+      .sd-list li .dot {
+        margin-top: 0.5rem;
+      }
+
+      .sd-note {
+        display: flex;
+        gap: var(--space-3);
+        align-items: flex-start;
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        background-color: var(--muted);
+        font-size: var(--text-sm);
+        line-height: var(--leading-relaxed);
+        color: var(--muted-foreground);
+      }
+
+      .sd-note svg {
+        width: 1.125rem;
+        height: 1.125rem;
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+        color: var(--foreground);
+      }
+
+      .sd-toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var d = document.documentElement,
+            c = d.classList;
+          if (localStorage.getItem("theme") === "dark") {
+            d.style.colorScheme = "dark";
+            c.remove("light");
+            c.add("dark");
+          } else {
+            d.style.colorScheme = "light";
+            c.remove("dark");
+            c.add("light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://editor.klar.website/sdk/content-static.iife.js"></script>
+    <script type="module" src="/script.js"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <!-- ===== Header ===== -->
+      <header class="site-header" id="header">
+        <div class="container">
+          <div class="site-header__bar">
+            <a class="brand" href="/index.html">nexus</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link"
+                href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+            <div class="nav-desktop items-center gap-2">
+              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg></a>
+              <button class="btn btn-icon" aria-label="Toggle theme">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </button>
+            </div>
+            <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="mobile-menu" class="hidden border-t py-4">
+            <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+              <a class="nav-link" href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <!-- ===== Hero ===== -->
+        <section class="sd-hero">
+          <div class="container">
+            <div class="sd-hero__inner">
+              <span class="flex justify-start"><span class="badge">Klar Reference</span></span>
+              <h1 class="page-title md:text-5xl">Selector Directives</h1>
+              <p class="lead">
+                Klar's CSS selector directives are editor-behavior modifiers — a suffix you attach to a selector to
+                control <em>how</em> a matching element behaves inside the visual editor. They decide what's editable,
+                what's frozen, what repeats, and which attributes a user can change. This page explains what each one
+                does to your content.
+              </p>
+              <div class="sd-toc">
+                <a class="tag field-tag" href="#bare">Bare selector</a>
+                <a class="tag field-tag" href="#exclude">:exclude</a>
+                <a class="tag field-tag" href="#list">:list</a>
+                <a class="tag field-tag" href="#attr">:attr</a>
+                <a class="tag field-tag" href="#style">:style</a>
+                <a class="tag field-tag" href="#readonly">:readonly</a>
+                <a class="tag field-tag" href="#snapshot">:snapshot</a>
+                <a class="tag field-tag" href="#blocks">:blocks</a>
+                <a class="tag field-tag" href="#htmlblocks">:htmlBlocks</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Directives ===== -->
+        <section class="container py-16">
+          <div class="grid lg:grid-cols-2 gap-8">
+
+            <!-- 1 · Bare selector -->
+            <article class="sd-card" id="bare">
+              <div class="sd-card__head">
+                <span class="sd-card__num">1</span>
+                <h2 class="sd-card__title">Bare selector</h2>
+                <code class="sd-directive sd-card__syntax">.hero</code>
+              </div>
+              <p class="sd-card__lead">
+                A selector with no suffix simply marks an element as editable. The element itself and its
+                default-editable descendants — headings (h1–h6), paragraphs, links, buttons and list items — become
+                click-to-edit. This is the everyday case: point at a region and its text turns into content a user can
+                change directly on the page.
+              </p>
+              <div class="sd-note">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 16v-4M12 8h.01"></path>
+                </svg>
+                <span>Once your <code>editableSelectors</code> list is non-empty, editability is opt-in — only listed
+                  selectors and their default-editable children can be edited.</span>
+              </div>
+            </article>
+
+            <!-- 2 · exclude -->
+            <article class="sd-card" id="exclude">
+              <div class="sd-card__head">
+                <span class="sd-card__num">2</span>
+                <h2 class="sd-card__title">Exclude</h2>
+                <code class="sd-directive sd-card__syntax">.hero:exclude(img, a)</code>
+              </div>
+              <p class="sd-card__lead">
+                Keeps the container editable but carves specific descendants out of it. Everything inside stays
+                click-to-edit <em>except</em> the elements matched by the selectors in the parentheses.
+              </p>
+              <ul class="sd-list">
+                <li><span class="dot"></span>The heading and paragraphs in the hero stay editable.</li>
+                <li><span class="dot"></span>The <code>img</code> and <code>a</code> are frozen — a user can't
+                  accidentally retype the link text or delete the image.</li>
+                <li><span class="dot"></span>Use it to protect structural or decorative pieces that live inside an
+                  otherwise-editable block.</li>
+              </ul>
+            </article>
+
+            <!-- 3 · list -->
+            <article class="sd-card" id="list">
+              <div class="sd-card__head">
+                <span class="sd-card__num">3</span>
+                <h2 class="sd-card__title">List</h2>
+                <code class="sd-directive sd-card__syntax">.features:list</code>
+              </div>
+              <p class="sd-card__lead">
+                Marks a repeatable container. Its direct children become items the editor can duplicate, reorder, and
+                remove — perfect for feature grids, card rows, stats and steps.
+              </p>
+              <ul class="sd-list">
+                <li><span class="dot"></span>Each direct child is treated as one repeatable item.</li>
+                <li><span class="dot"></span>Users add more by duplicating, drag to reorder, click to remove.</li>
+                <li><span class="dot"></span>Alias: <code class="sd-directive">.features[]</code> means the same thing.
+                </li>
+              </ul>
+            </article>
+
+            <!-- 4 · attr -->
+            <article class="sd-card" id="attr">
+              <div class="sd-card__head">
+                <span class="sd-card__num">4</span>
+                <h2 class="sd-card__title">Attribute</h2>
+                <code class="sd-directive sd-card__syntax">img.logo:attr(alt)</code>
+              </div>
+              <p class="sd-card__lead">
+                Makes an element's <em>attribute</em> editable rather than its text. The editor exposes the named
+                attribute in the panel so a user can change it without touching inline content.
+              </p>
+              <ul class="sd-list">
+                <li><span class="dot"></span><code>img.logo:attr(alt)</code> — edit the logo's alt text for
+                  accessibility.</li>
+                <li><span class="dot"></span>Add a value picker with labelled choices:</li>
+              </ul>
+              <div class="sd-note" style="align-items:center;gap:var(--space-4);flex-wrap:wrap">
+                <code class="sd-directive">.badge:attr(data-status[Active=active, Inactive=inactive])</code>
+                <span>The editor shows friendly labels (Active, Inactive) and writes the underlying values
+                  (active, inactive) to the attribute.</span>
+              </div>
+            </article>
+
+            <!-- 5 · style -->
+            <article class="sd-card" id="style">
+              <div class="sd-card__head">
+                <span class="sd-card__num">5</span>
+                <h2 class="sd-card__title">Style</h2>
+                <code class="sd-directive sd-card__syntax">.hero__bg:style(background-image)</code>
+              </div>
+              <p class="sd-card__lead">
+                Lets a user edit the element's CSS <code>background-image</code> through Klar's media picker. Instead of
+                editing text, they swap the background of a section by choosing an image — ideal for hero bands and
+                cover panels where the picture is applied as a background rather than an <code>&lt;img&gt;</code>.
+              </p>
+            </article>
+
+            <!-- 6 · readonly -->
+            <article class="sd-card" id="readonly">
+              <div class="sd-card__head">
+                <span class="sd-card__num">6</span>
+                <h2 class="sd-card__title">Read-only</h2>
+                <code class="sd-directive sd-card__syntax">footer:readonly</code>
+              </div>
+              <p class="sd-card__lead">
+                The element is selectable and listed in the editor panel, but not inline-editable. A user can see it in
+                the structure and click it, yet can't change its content directly — useful for legal footers, shared
+                boilerplate, or anything that shouldn't be casually rewritten.
+              </p>
+            </article>
+
+            <!-- 7 · snapshot -->
+            <article class="sd-card" id="snapshot">
+              <div class="sd-card__head">
+                <span class="sd-card__num">7</span>
+                <h2 class="sd-card__title">Snapshot</h2>
+                <code class="sd-directive sd-card__syntax">.cached-price:snapshot</code>
+              </div>
+              <p class="sd-card__lead">
+                Freezes the element's content at save time. Whatever the element contains when the page is saved is
+                captured and locked in — later dynamic changes won't alter it. It implies read-only, so the frozen
+                content can't be edited inline either. Handy for caching a computed value or a timestamp exactly as it
+                stood at publish.
+              </p>
+            </article>
+
+            <!-- 8 · blocks -->
+            <article class="sd-card" id="blocks">
+              <div class="sd-card__head">
+                <span class="sd-card__num">8</span>
+                <h2 class="sd-card__title">Blocks</h2>
+                <code class="sd-directive sd-card__syntax">.content:blocks</code>
+              </div>
+              <p class="sd-card__lead">
+                Turns the element into a drag-and-drop block container. A user can add, reorder and remove content
+                blocks inside it — headings, paragraphs, images and more — arranging a page section by dragging pieces
+                into place rather than editing a fixed layout.
+              </p>
+            </article>
+
+            <!-- 9 · htmlBlocks -->
+            <article class="sd-card" id="htmlblocks">
+              <div class="sd-card__head">
+                <span class="sd-card__num">9</span>
+                <h2 class="sd-card__title">htmlBlocks</h2>
+                <code class="sd-directive sd-card__syntax">.layout:htmlBlocks</code>
+              </div>
+              <p class="sd-card__lead">
+                Like <code>:blocks</code>, and additionally auto-discovers nested container descendants as block zones.
+                One directive on an outer wrapper makes not just it, but every nested container inside it, into its own
+                drag-and-drop region — ideal for multi-zone layouts where several areas should each accept blocks.
+              </p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="container py-16">
+          <div class="cta">
+            <h2 class="text-3xl font-bold mb-4 text-primary-foreground">Directives shape the editing experience.</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+              Combine a bare selector with <code>:exclude</code>, <code>:attr</code>, <code>:list</code> and the rest to
+              decide exactly what your editors can touch — and what stays safe.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/index.html" class="btn">Back to site</a>
+              <a href="/posts.html" class="btn">Browse articles</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ===== Footer ===== -->
+      <footer class="site-footer" role="contentinfo">
+        <div class="container py-12">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-lg font-bold text-foreground">nexus</h2>
+              <p class="text-sm text-muted-foreground">
+                A personal blog exploring fashion, technology, business, and
+                lifestyle trends.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Categories</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/posts.html">Fashion</a></li>
+                <li>
+                  <a class="footer-link" href="/technology.html">Technology</a>
+                </li>
+                <li>
+                  <a class="footer-link" href="/business.html">Business</a>
+                </li>
+                <li><a class="footer-link" href="/posts.html">Lifestyle</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Quick Links</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/about.html">About</a></li>
+                <li><a class="footer-link" href="/contact.html">Contact</a></li>
+                <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
+                <li><a class="footer-link" href="/terms.html">Terms</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Connect</h3>
+              <div class="flex gap-4">
+                <a class="footer-link" href="#" aria-label="Follow us on Facebook">Facebook</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Twitter">Twitter</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Instagram">Instagram</a>
+              </div>
+            </div>
+          </div>
+          <div class="border-t mt-8 pt-8 text-center">
+            <p class="text-sm text-muted-foreground">
+              © 2026 Nexus Blog. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
