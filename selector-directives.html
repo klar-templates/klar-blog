@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selector Directives - Klar Editor Behavior | Nexus</title>
-    <meta name="description" content="Klar's CSS selector directives — editor-behavior modifiers that control how elements behave in the visual editor.">
+    <meta name="description"
+      content="Klar's CSS selector directives — editor-behavior modifiers that control how elements behave in the visual editor.">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
-    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin=""
+      href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
     <link rel="stylesheet" href="/style.css">
     <style>
       /* ── Directive showcase ───────────────────────────────────────── */
@@ -19,7 +21,7 @@
         margin-bottom: var(--space-12)
       }
 
-      .dir-tab {
+      .field-tab {
         padding: var(--space-2) var(--space-4);
         font-size: var(--text-sm);
         font-weight: var(--font-medium);
@@ -30,12 +32,12 @@
         transition: all var(--transition)
       }
 
-      .dir-tab:hover {
+      .field-tab:hover {
         background: var(--muted);
         color: var(--foreground)
       }
 
-      .dir-tab.is-active {
+      .field-tab.is-active {
         background: var(--primary);
         color: var(--primary-foreground);
         border-color: var(--primary)
@@ -109,7 +111,7 @@
         line-height: var(--leading-relaxed)
       }
 
-      .dir-p + .dir-p {
+      .dir-p+.dir-p {
         margin-top: var(--space-2)
       }
 
@@ -223,7 +225,7 @@
         background: var(--background)
       }
 
-      .dir-zone + .dir-zone {
+      .dir-zone+.dir-zone {
         margin-top: var(--space-3)
       }
 
@@ -383,18 +385,22 @@
         <div class="container">
           <div class="site-header__bar">
             <a class="brand" href="/index.html">nexus</a>
-            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link" href="/posts.html">ALL POST</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link"
+                href="/posts.html">ALL POST</a>
               <a class="nav-link" href="/business.html">BUSINESS</a>
               <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
               <a class="nav-link" href="/podcast.html">PODCAST</a>
             </nav>
             <div class="nav-desktop items-center gap-2">
-              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <a href="/search.html" class="btn btn-icon" aria-label="Search articles"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m21 21-4.3-4.3"></path>
                 </svg></a>
               <button class="btn btn-icon" aria-label="Toggle theme">
-                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="4"></circle>
                   <path d="M12 2v2"></path>
                   <path d="M12 20v2"></path>
@@ -405,13 +411,15 @@
                   <path d="m6.34 17.66-1.41 1.41"></path>
                   <path d="m19.07 4.93-1.41 1.41"></path>
                 </svg>
-                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
                 </svg>
               </button>
             </div>
             <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="4" x2="20" y1="12" y2="12"></line>
                 <line x1="4" x2="20" y1="6" y2="6"></line>
                 <line x1="4" x2="20" y1="18" y2="18"></line>
@@ -432,20 +440,21 @@
         <div class="container section">
           <div class="mb-12">
             <h1 class="page-title">Selector Directives</h1>
-            <p class="lead mt-4">Klar's CSS selector directives — editor-behavior modifiers that control how elements behave in the visual editor.</p>
+            <p class="lead mt-4">Klar's CSS selector directives — editor-behavior modifiers that control how elements
+              behave in the visual editor.</p>
           </div>
 
           <!-- ── Tab navigation ─────────────────────────────────────── -->
           <div class="dir-tabs" role="tablist">
-            <button class="dir-tab is-active" data-tab="bare">Bare Selector</button>
-            <button class="dir-tab" data-tab="exclude">Exclude</button>
-            <button class="dir-tab" data-tab="list">List</button>
-            <button class="dir-tab" data-tab="attr">Attributes</button>
-            <button class="dir-tab" data-tab="style">Style</button>
-            <button class="dir-tab" data-tab="readonly">Read-only</button>
-            <button class="dir-tab" data-tab="snapshot">Snapshot</button>
-            <button class="dir-tab" data-tab="blocks">Blocks</button>
-            <button class="dir-tab" data-tab="htmlblocks">htmlBlocks</button>
+            <button class="field-tab is-active" data-tab="bare">Bare Selector</button>
+            <button class="field-tab" data-tab="exclude">Exclude</button>
+            <button class="field-tab" data-tab="list">List</button>
+            <button class="field-tab" data-tab="attr">Attributes</button>
+            <button class="field-tab" data-tab="style">Style</button>
+            <button class="field-tab" data-tab="readonly">Read-only</button>
+            <button class="field-tab" data-tab="snapshot">Snapshot</button>
+            <button class="field-tab" data-tab="blocks">Blocks</button>
+            <button class="field-tab" data-tab="htmlblocks">htmlBlocks</button>
           </div>
 
           <!-- ── Panel 1 · Bare selector ────────────────────────────── -->
@@ -458,10 +467,12 @@
               <div>
                 <div class="dir-value" id="bare">
                   <h3 class="dir-heading">Welcome to Nexus</h3>
-                  <p class="dir-p">Every heading, paragraph, and link inside this container becomes click-to-edit. This is the default editable behavior — no modifier needed.</p>
+                  <p class="dir-p">Every heading, paragraph, and link inside this container becomes click-to-edit. This
+                    is the default editable behavior — no modifier needed.</p>
                   <p class="dir-p"><a href="#" class="underline">Read the full story →</a></p>
                 </div>
-                <p class="dir-note">Makes the element and its default-editable descendants (h1–h6, p, a, button, li) click-to-edit.</p>
+                <p class="dir-note">Makes the element and its default-editable descendants (h1–h6, p, a, button, li)
+                  click-to-edit.</p>
               </div>
             </div>
           </div>
@@ -476,11 +487,17 @@
               <div>
                 <div class="dir-value" id="exclude">
                   <h3 class="dir-heading">Editable heading</h3>
-                  <p class="dir-p">This paragraph stays editable — but the image and link below are frozen out of the editor.</p>
-                  <img class="dir-excluded" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80" alt="Developer workstation with code on screen" style="border-radius:var(--radius-md);margin-top:var(--space-3);aspect-ratio:16/9;object-fit:cover;width:100%">
-                  <p style="margin-top:var(--space-3)"><a class="dir-excluded underline" href="#" style="display:inline-block;padding:0.125rem 0.375rem">Excluded link — not editable</a></p>
+                  <p class="dir-p">This paragraph stays editable — but the image and link below are frozen out of the
+                    editor.</p>
+                  <img class="dir-excluded"
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80"
+                    alt="Developer workstation with code on screen"
+                    style="border-radius:var(--radius-md);margin-top:var(--space-3);aspect-ratio:16/9;object-fit:cover;width:100%">
+                  <p style="margin-top:var(--space-3)"><a class="dir-excluded underline" href="#"
+                      style="display:inline-block;padding:0.125rem 0.375rem">Excluded link — not editable</a></p>
                 </div>
-                <p class="dir-note">Keeps the container editable but excludes the specified descendants (shown dashed &amp; dimmed).</p>
+                <p class="dir-note">Keeps the container editable but excludes the specified descendants (shown dashed
+                  &amp; dimmed).</p>
               </div>
             </div>
           </div>
@@ -509,7 +526,9 @@
                     </div>
                   </div>
                 </div>
-                <p class="dir-note">Marks a repeatable list container — direct children become items the editor can duplicate, reorder, and remove. Alias: <code style="font-family:ui-monospace,Menlo,monospace">.features[]</code></p>
+                <p class="dir-note">Marks a repeatable list container — direct children become items the editor can
+                  duplicate, reorder, and remove. Alias: <code
+                    style="font-family:ui-monospace,Menlo,monospace">.features[]</code></p>
               </div>
             </div>
           </div>
@@ -523,9 +542,14 @@
               </div>
               <div>
                 <div class="dir-value" id="attrAlt" style="padding:0;overflow:hidden">
-                  <img class="logo" src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1600&q=80" alt="Abstract gradient brand mark" style="width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover">
+                  <img class="logo"
+                    src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1600&q=80"
+                    alt="Abstract gradient brand mark"
+                    style="width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover">
                 </div>
-                <p class="dir-note">Makes the element's <code style="font-family:ui-monospace,Menlo,monospace">alt</code> attribute editable in the panel — not inline text.</p>
+                <p class="dir-note">Makes the element's <code
+                    style="font-family:ui-monospace,Menlo,monospace">alt</code> attribute editable in the panel — not
+                  inline text.</p>
               </div>
             </div>
             <div class="dir-row">
@@ -542,11 +566,14 @@
                     </div>
                     <div>
                       <div class="dir-sublabel">data-status attr</div>
-                      <div style="font-family:ui-monospace,Menlo,monospace;font-size:var(--text-sm);color:var(--muted-foreground);margin-top:var(--space-2)">active</div>
+                      <div
+                        style="font-family:ui-monospace,Menlo,monospace;font-size:var(--text-sm);color:var(--muted-foreground);margin-top:var(--space-2)">
+                        active</div>
                     </div>
                   </div>
                 </div>
-                <p class="dir-note">Editable attribute with a value picker — the editor shows labelled choices (Active → active, Inactive → inactive).</p>
+                <p class="dir-note">Editable attribute with a value picker — the editor shows labelled choices (Active →
+                  active, Inactive → inactive).</p>
               </div>
             </div>
           </div>
@@ -564,7 +591,9 @@
                     <span class="dir-media__caption">background-image via media picker</span>
                   </div>
                 </div>
-                <p class="dir-note">Edits the element's CSS <code style="font-family:ui-monospace,Menlo,monospace">background-image</code> through the media picker.</p>
+                <p class="dir-note">Edits the element's CSS <code
+                    style="font-family:ui-monospace,Menlo,monospace">background-image</code> through the media picker.
+                </p>
               </div>
             </div>
           </div>
@@ -579,7 +608,8 @@
               <div>
                 <div class="dir-value" id="readonly">
                   <div class="dir-sublabel">Static footer block <span class="dir-tag">read-only</span></div>
-                  <p class="dir-p" style="margin-top:var(--space-2)">© 2026 Nexus Blog. All rights reserved. This block is selectable in the editor panel but cannot be edited inline.</p>
+                  <p class="dir-p" style="margin-top:var(--space-2)">© 2026 Nexus Blog. All rights reserved. This block
+                    is selectable in the editor panel but cannot be edited inline.</p>
                 </div>
                 <p class="dir-note">Element is selectable / listed in the panel but not inline-editable.</p>
               </div>
@@ -596,10 +626,13 @@
               <div>
                 <div class="dir-value" id="snapshot">
                   <div class="dir-sublabel">Frozen at save time <span class="dir-tag">snapshot</span></div>
-                  <p class="dir-p" style="margin-top:var(--space-2);font-family:ui-monospace,Menlo,monospace">Saved: 2026-01-15T14:30:00Z — $49.00 / month</p>
-                  <p class="dir-p" style="margin-top:var(--space-2)">The content of this element is frozen to whatever it was when the page was last saved (implies read-only).</p>
+                  <p class="dir-p" style="margin-top:var(--space-2);font-family:ui-monospace,Menlo,monospace">Saved:
+                    2026-01-15T14:30:00Z — $49.00 / month</p>
+                  <p class="dir-p" style="margin-top:var(--space-2)">The content of this element is frozen to whatever
+                    it was when the page was last saved (implies read-only).</p>
                 </div>
-                <p class="dir-note">Freezes the element's content at save time (implies <code style="font-family:ui-monospace,Menlo,monospace">readonly</code>).</p>
+                <p class="dir-note">Freezes the element's content at save time (implies <code
+                    style="font-family:ui-monospace,Menlo,monospace">readonly</code>).</p>
               </div>
             </div>
           </div>
@@ -615,20 +648,48 @@
                 <div class="dir-value" id="blocks">
                   <div class="dir-blocks">
                     <div class="dir-block">
-                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="18" r="1"></circle><circle cx="15" cy="6" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="18" r="1"></circle></svg></span>
+                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round">
+                          <circle cx="9" cy="6" r="1"></circle>
+                          <circle cx="9" cy="12" r="1"></circle>
+                          <circle cx="9" cy="18" r="1"></circle>
+                          <circle cx="15" cy="6" r="1"></circle>
+                          <circle cx="15" cy="12" r="1"></circle>
+                          <circle cx="15" cy="18" r="1"></circle>
+                        </svg></span>
                       <span>Heading block</span>
                     </div>
                     <div class="dir-block">
-                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="18" r="1"></circle><circle cx="15" cy="6" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="18" r="1"></circle></svg></span>
+                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round">
+                          <circle cx="9" cy="6" r="1"></circle>
+                          <circle cx="9" cy="12" r="1"></circle>
+                          <circle cx="9" cy="18" r="1"></circle>
+                          <circle cx="15" cy="6" r="1"></circle>
+                          <circle cx="15" cy="12" r="1"></circle>
+                          <circle cx="15" cy="18" r="1"></circle>
+                        </svg></span>
                       <span>Paragraph block</span>
                     </div>
                     <div class="dir-block">
-                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="18" r="1"></circle><circle cx="15" cy="6" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="18" r="1"></circle></svg></span>
+                      <span class="dir-block__handle"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round">
+                          <circle cx="9" cy="6" r="1"></circle>
+                          <circle cx="9" cy="12" r="1"></circle>
+                          <circle cx="9" cy="18" r="1"></circle>
+                          <circle cx="15" cy="6" r="1"></circle>
+                          <circle cx="15" cy="12" r="1"></circle>
+                          <circle cx="15" cy="18" r="1"></circle>
+                        </svg></span>
                       <span>Image block</span>
                     </div>
                   </div>
                 </div>
-                <p class="dir-note">Element becomes a drag-and-drop block container — reorder blocks by dragging the handle.</p>
+                <p class="dir-note">Element becomes a drag-and-drop block container — reorder blocks by dragging the
+                  handle.</p>
               </div>
             </div>
           </div>
@@ -644,7 +705,8 @@
                 <div class="dir-value" id="htmlBlocks">
                   <div class="dir-zone">
                     <div class="dir-sublabel">Zone A — top section</div>
-                    <p class="dir-p" style="margin-top:var(--space-2)">This outer container is a block zone, and its nested containers are auto-discovered as block zones too.</p>
+                    <p class="dir-p" style="margin-top:var(--space-2)">This outer container is a block zone, and its
+                      nested containers are auto-discovered as block zones too.</p>
                     <div class="dir-nested">
                       <div class="dir-sublabel">Nested zone A.1</div>
                       <p class="dir-p" style="margin-top:var(--space-1)">Auto-discovered nested container.</p>
@@ -658,7 +720,8 @@
                     </div>
                   </div>
                 </div>
-                <p class="dir-note">Like <code style="font-family:ui-monospace,Menlo,monospace">:blocks</code>, and additionally auto-discovers nested container descendants as block zones.</p>
+                <p class="dir-note">Like <code style="font-family:ui-monospace,Menlo,monospace">:blocks</code>, and
+                  additionally auto-discovers nested container descendants as block zones.</p>
               </div>
             </div>
           </div>
@@ -670,7 +733,7 @@
             var STORAGE_KEY = 'directive-showcase-active-tab';
 
             function activateTab(target) {
-              document.querySelectorAll('.dir-tab').forEach(function(t) {
+              document.querySelectorAll('.field-tab').forEach(function(t) {
                 t.classList.toggle('is-active', t.dataset.tab === target)
               });
               document.querySelectorAll('.dir-panel').forEach(function(p) {
@@ -681,7 +744,7 @@
             try {
               var savedTab = localStorage.getItem(STORAGE_KEY);
               if (savedTab) {
-                var tab = document.querySelector('.dir-tab[data-tab="' + savedTab + '"]');
+                var tab = document.querySelector('.field-tab[data-tab="' + savedTab + '"]');
                 if (tab) {
                   activateTab(savedTab);
                 }
@@ -689,7 +752,7 @@
             } catch (e) {}
 
             document.addEventListener('click', function(e) {
-              var tab = e.target.closest('.dir-tab');
+              var tab = e.target.closest('.field-tab');
               if (!tab) return;
               var target = tab.dataset.tab;
               activateTab(target);
