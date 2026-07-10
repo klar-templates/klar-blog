@@ -230,15 +230,15 @@
                 does to your content.
               </p>
               <div class="sd-toc">
-                <a class="tag field-tag" href="#bare">Bare selector</a>
-                <a class="tag field-tag" href="#exclude">:exclude</a>
-                <a class="tag field-tag" href="#list">:list</a>
-                <a class="tag field-tag" href="#attr">:attr</a>
-                <a class="tag field-tag" href="#style">:style</a>
-                <a class="tag field-tag" href="#readonly">:readonly</a>
-                <a class="tag field-tag" href="#snapshot">:snapshot</a>
-                <a class="tag field-tag" href="#blocks">:blocks</a>
-                <a class="tag field-tag" href="#htmlblocks">:htmlBlocks</a>
+                <a class="tag field-tab" href="#bare">Bare selector</a>
+                <a class="tag field-tab" href="#exclude">:exclude</a>
+                <a class="tag field-tab" href="#list">:list</a>
+                <a class="tag field-tab" href="#attr">:attr</a>
+                <a class="tag field-tab" href="#style">:style</a>
+                <a class="tag field-tab" href="#readonly">:readonly</a>
+                <a class="tag field-tab" href="#snapshot">:snapshot</a>
+                <a class="tag field-tab" href="#blocks">:blocks</a>
+                <a class="tag field-tab" href="#htmlblocks">:htmlBlocks</a>
               </div>
             </div>
           </div>
@@ -475,10 +475,10 @@
       </footer>
     </div>
     <script>
-      (function () {
+      (function() {
         // Smooth-scroll TOC pills to their target, landing 16px above the card
         // (accounting for the sticky header height).
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
           var pill = e.target.closest('.sd-toc a[href^="#"]');
           if (!pill) return;
           var id = pill.getAttribute('href').slice(1);
@@ -492,7 +492,10 @@
           var headerH = headerEl ? headerEl.offsetHeight : 80;
           var offset = 16; // px above the target card
           var top = target.getBoundingClientRect().top + window.pageYOffset - headerH - offset;
-          window.scrollTo({ top: top, behavior: 'smooth' });
+          window.scrollTo({
+            top: top,
+            behavior: 'smooth'
+          });
           // Update the URL hash without jumping
           history.pushState(null, '', '#' + id);
         });
