@@ -13,6 +13,11 @@
         cursor: pointer !important;
       }
 
+      /* Note/callout background — a shade that stands out from the card in
+         dark mode (where --muted equals --card). Light mode keeps --muted. */
+      :root { --ee-note-bg: var(--muted); }
+      .dark { --ee-note-bg: #2a2a30; }
+
       /* ── Directive showcase (namespaced .sd-*) ─────────────────────── */
       .sd-hero {
         background:
@@ -114,7 +119,7 @@
         align-items: flex-start;
         padding: var(--space-4);
         border-radius: var(--radius-md);
-        background-color: var(--muted);
+        background-color: var(--ee-note-bg);
         font-size: var(--text-sm);
         line-height: var(--leading-relaxed);
         color: var(--muted-foreground);
@@ -217,7 +222,7 @@
               <h1 class="page-title md:text-5xl">Editable Elements</h1>
               <p class="lead">Editable Elements tell Klar which parts of your page can be edited — and how.<br>It works like CSS: you target elements with selectors, then attach behaviors with :directives. Where CSS says "make .hero blue," Klar says "make .hero editable."<br><br>"It's CSS, but for <em>editability</em>"</p>
               <div class="sd-toc">
-                <a class="tag field-tab" href="#bare">Bare selector</a>
+                <a class="tag field-tab" href="#bare">.selector</a>
                 <a class="tag field-tab" href="#list">:list</a>
                 <a class="tag field-tab" href="#blocks">:blocks</a>
                 <a class="tag field-tab" href="#attr">:attr</a>
@@ -669,7 +674,7 @@
             <article class="sd-demo-card" id="bare">
               <div class="sd-demo-card__head">
                 <span class="sd-demo-card__num">1</span>
-                <h3 class="sd-demo-card__title">Bare selector</h3>
+                <h3 class="sd-demo-card__title">.selector</h3>
                 <code class="sd-directive sd-demo-card__syntax">.hero</code>
               </div>
               <div class="sd-demo-frame">
@@ -766,10 +771,15 @@
               <p class="sd-demo-card__lead">Makes an element's <em>attribute</em> editable rather than its text. The
                 editor exposes the named attribute in the panel — like the alt text above — so a user can change it
                 without touching inline content. Perfect for accessibility text on logos and avatars.</p>
-              <div class="sd-note" style="align-items:center;gap:var(--space-4);flex-wrap:wrap">
-                <code class="sd-directive">.badge:attr(data-status[Active=active, Inactive=inactive])</code>
-                <span>Add a value picker with labelled choices: the editor shows friendly labels (Active, Inactive) and
-                  writes the underlying values (active, inactive) to the attribute.</span>
+              <div class="sd-note">
+                <code class="sd-directive">.selector:attr(class)</code>
+                <span>Edit the element's classes — the panel shows a class editor (add or remove class pills, or pick
+                  from your design system) instead of raw text.</span>
+              </div>
+              <div class="sd-note">
+                <code class="sd-directive">.selector:attr(style)</code>
+                <span>Edit inline styles through a visual property editor — spacing, color, borders and more, grouped
+                  like a design tool.</span>
               </div>
             </article>
 
@@ -1035,7 +1045,7 @@
               <pre class="ee-code">.title,
 .lead,
 .hero<span class="d">:field</span>(name:cover, attr:src),
-.tags<span class="d">:field</span>(type:tags),
+.tags<span class="d">:field</span>(type:array, options(layout:tag)),
 .posts<span class="d">:list</span>,
 footer<span class="d">:readonly</span></pre>
             </div>
@@ -1072,8 +1082,8 @@ footer<span class="d">:readonly</span></pre>
                 </tr>
                 <tr>
                   <td><code>:attr(name)</code></td>
-                  <td>Make an attribute editable (alt, href, data-*). Add <code>[Label=value]</code> for a labelled
-                    picker.</td>
+                  <td>Make an attribute editable (alt, href, data-*). Use <code>:attr(class)</code> or
+                    <code>:attr(style)</code> for the class and style editors.</td>
                   <td><code>img.logo:attr(alt)</code></td>
                 </tr>
                 <tr>
@@ -1138,7 +1148,7 @@ footer<span class="d">:readonly</span></pre>
           <div class="cta" style="background-color: #0d0d0f">
             <h2 class="text-3xl font-bold mb-4 text-primary-foreground">Directives shape the editing experience.</h2>
             <p class="text-lg mb-8 max-w-2xl mx-auto">
-              Combine a bare selector with <code>:exclude</code>, <code>:attr</code>, <code>:list</code> and the rest to
+              Combine a <code>.selector</code> with <code>:exclude</code>, <code>:attr</code>, <code>:list</code> and the rest to
               decide exactly what your editors can touch — and what stays safe.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1148,6 +1158,12 @@ footer<span class="d">:readonly</span></pre>
           </div>
         </section>
       </main>
+
+      <button id="back-to-top" class="back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m18 15-6-6-6 6"></path>
+        </svg>
+      </button>
 
       <!-- ===== Footer ===== -->
       <footer class="site-footer" role="contentinfo">
