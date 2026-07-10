@@ -436,10 +436,6 @@
       "editableElements": "body"
     },
     {
-      "name": "selectors.html",
-      "editableElements": ".sd-demo-hero, .sd-demo-product:exclude(img, a), .sd-demo-features:list, .sd-demo-avatar:attr(alt), .sd-demo-bg:style(background-image), .sd-demo-readonly:readonly, .sd-demo-price__value:snapshot, .sd-demo-blocks:blocks, .sd-demo-layout:htmlBlocks"
-    },
-    {
       "name": "team.html",
       "editableElements": ".page-title,\n.page-title:attr(class),\n.grid:list"
     }
