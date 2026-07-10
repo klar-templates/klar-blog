@@ -436,8 +436,8 @@
       "editableElements": "body"
     },
     {
-      "name": "selector-directives.html",
-      "editableElements": "#bare,\n#exclude:exclude(img, a),\n#list:list,\n#attrAlt:attr(alt),\n#blocks .dir-blocks:blocks"
+      "name": "selectors.html",
+      "editableElements": ".foo"
     },
     {
       "name": "team.html",
