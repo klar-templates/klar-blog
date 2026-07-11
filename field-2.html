@@ -1072,6 +1072,7 @@
                   '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
               } else {
                 var btn = row.querySelector('.field-copy');
+                  console.log('sdf')
               }
               btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1090,8 +1091,8 @@
                 }).catch(function() {});
               });
               if (label) {
-              label.appendChild(btn);
-                }
+                label.appendChild(btn);
+              }
 
               // Position tooltip: default is left-aligned (extends rightward
               // from the button). If it overflows the viewport's right edge,
