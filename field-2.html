@@ -1054,7 +1054,7 @@
             }
 
             document.querySelectorAll('.field-row').forEach(function(row) {
-              if (row.querySelector('.field-copy')) return;
+              if (!row.querySelector('.field-copy')) {
               var elWithId = row.querySelector('[id]');
               if (!elWithId) return;
               var config = configs[elWithId.id];
@@ -1070,7 +1070,9 @@
               btn.innerHTML =
                 ICON_COPY +
                 '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
-
+              } else {
+                var btn = row.querySelector('.field-copy');
+              }
               btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
