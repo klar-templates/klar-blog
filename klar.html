@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klar — Visual CMS for static sites on GitHub</title>
+    <meta name="description" content="Klar loads your live page and lets you edit text, images, links, and icons right where they sit. Each save commits clean HTML to your GitHub repo, and ⌘⇧P publishes to GitHub Pages.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      /* ── Klar landing helpers (namespaced .kl-*) ─────────────────────── */
+      html { scroll-padding-top: calc(var(--header-height) + 16px); }
+
+      /* Darker page canvas in dark mode (cards keep their lighter --card). */
+      .dark { --background: #08090a; }
+
+      /* Wider content column on this page. */
+      .container { max-width: 1400px; }
+
+      .kl-eyebrow {
+        font-size: var(--text-xs);
+        font-weight: var(--font-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: var(--muted-foreground);
+      }
+      /* Pill eyebrow with a glowing dot (from klar.website) */
+      .kl-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted-foreground);
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--card) 60%, transparent);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .kl-pill__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--kl-accent);
+        box-shadow: 0 0 10px var(--kl-accent);
+      }
+      .kl-ic {
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 0.85em;
+        background-color: var(--muted);
+        padding: 0.1em 0.4em;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+      }
+      .kl-list { display: flex; flex-direction: column; gap: var(--space-3); }
+      .kl-list li {
+        position: relative;
+        padding-left: var(--space-6);
+        color: var(--muted-foreground);
+        line-height: var(--leading-relaxed);
+      }
+      .kl-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: var(--radius-full);
+        background-color: var(--primary);
+      }
+      .kl-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-4); }
+      .kl-shot {
+        margin-inline: auto;
+        padding: 8px;
+        border-radius: 22px;
+        border: 1px solid var(--border);
+      }
+      .kl-shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .dark .kl-shot {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0, #000 60%, transparent 100%);
+      }
+
+      /* Aurora glow behind the hero (ported from klar.website) */
+      :root { --kl-accent: #525866; --kl-violet: #6b5d8a; --kl-cyan: #4a6880; --kl-aurora-op: 0.3; }
+      .dark { --kl-accent: #aeb4be; --kl-violet: #e9ebef; --kl-cyan: #8b909a; --kl-aurora-op: 0.42; }
+      .kl-page { position: relative; overflow-x: clip; }
+      #main-content { position: relative; z-index: 1; }
+      /* Transparent nav overlaid on the aurora at the top; solidifies on scroll */
+      #header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 50;
+        background: transparent;
+        border-bottom-color: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+      }
+      #header.is-scrolled {
+        background-color: color-mix(in srgb, var(--background) 85%, transparent);
+        -webkit-backdrop-filter: saturate(150%) blur(8px);
+        backdrop-filter: saturate(150%) blur(8px);
+        border-bottom-color: var(--border);
+      }
+      .kl-hero { position: relative; overflow: hidden; }
+      .kl-hero > section { position: relative; z-index: 1; }
+      .kl-aurora {
+        position: absolute;
+        inset: -20% -10% auto -10%;
+        height: 760px;
+        z-index: 0;
+        pointer-events: none;
+        filter: blur(90px);
+        opacity: var(--kl-aurora-op);
+      }
+      .kl-aurora::before,
+      .kl-aurora::after { content: ""; position: absolute; border-radius: 50%; }
+      .kl-aurora::before {
+        width: 620px; height: 620px; left: 50%; top: -120px; transform: translateX(-60%);
+        background: radial-gradient(circle, var(--kl-accent), transparent 62%);
+        animation: kl-drift 18s ease-in-out infinite;
+      }
+      .kl-aurora::after {
+        width: 520px; height: 520px; left: 50%; top: -40px; transform: translateX(-10%);
+        background: radial-gradient(circle, var(--kl-violet), transparent 60%);
+        animation: kl-drift 22s ease-in-out infinite reverse;
+      }
+      .kl-aurora__c {
+        position: absolute; width: 460px; height: 460px; left: 30%; top: 40px; border-radius: 50%;
+        background: radial-gradient(circle, var(--kl-cyan), transparent 60%);
+        opacity: 0.5; animation: kl-drift 26s ease-in-out infinite;
+      }
+      @keyframes kl-drift {
+        0%, 100% { transform: translate(-50%, 0) scale(1); }
+        50% { transform: translate(-42%, 36px) scale(1.08); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .kl-aurora::before, .kl-aurora::after, .kl-aurora__c { animation: none; }
+      }
+      .kl-code {
+        margin: 0;
+        padding: var(--space-6);
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: var(--text-xs);
+        line-height: 1.7;
+        color: var(--foreground);
+        overflow-x: auto;
+      }
+      .kl-code .c { color: var(--muted-foreground); }
+      .kl-code .k { color: var(--primary); font-weight: var(--font-semibold); }
+    </style>
+    <script>
+      (function() {
+        try {
+          var d = document.documentElement,
+            c = d.classList;
+          if (localStorage.getItem("theme") === "dark") {
+            d.style.colorScheme = "dark";
+            c.remove("light");
+            c.add("dark");
+          } else {
+            d.style.colorScheme = "light";
+            c.remove("dark");
+            c.add("light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://editor.klar.website/sdk/content-static.iife.js"></script>
+    <script type="module" src="/script.js"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background kl-page">
+      <!-- ===== Header ===== -->
+      <header class="site-header" id="header">
+        <div class="container">
+          <div class="site-header__bar">
+            <a class="brand" href="/klar.html">Klar</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation">
+              <a class="nav-link" href="#editor">FEATURES</a>
+              <a class="nav-link" href="#ai">AI</a>
+              <a class="nav-link" href="#content">CONTENT</a>
+              <a class="nav-link" href="#developers">DEVELOPERS</a>
+            </nav>
+            <div class="nav-desktop items-center gap-2">
+              <a href="#cta" class="btn btn-primary btn-sm">Start editing</a>
+              <button class="btn btn-icon" aria-label="Toggle theme">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </button>
+            </div>
+            <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="mobile-menu" class="hidden border-t py-4">
+            <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+              <a class="nav-link" href="#editor">FEATURES</a>
+              <a class="nav-link" href="#ai">AI</a>
+              <a class="nav-link" href="#content">CONTENT</a>
+              <a class="nav-link" href="#developers">DEVELOPERS</a>
+              <a class="nav-link" href="#cta">START EDITING</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== Main ===== -->
+      <main id="main-content">
+
+        <!-- Hero + screenshot share one relative box so the aurora anchors like klar.website -->
+        <div class="kl-hero">
+          <div class="kl-aurora" aria-hidden="true"><div class="kl-aurora__c"></div></div>
+
+        <!-- Hero -->
+        <section class="container" id="hero" style="padding-block: 12rem 2rem">
+          <div class="max-w-3xl mx-auto text-center flex flex-col items-center gap-6">
+            <span class="kl-pill"><span class="kl-pill__dot"></span>Visual CMS for static sites on GitHub</span>
+            <h1 class="page-title" style="font-size: clamp(2.75rem, 6vw, 4.5rem); line-height: 1.05">Edit your website by clicking on it</h1>
+            <p class="lead max-w-2xl">
+              Klar loads your live page and lets you edit text, images, links, and icons right where they sit. Each save
+              commits clean HTML to your GitHub repo — no injected wrappers, no data attributes — and
+              <code class="kl-ic">⌘⇧P</code> publishes to GitHub Pages.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#cta" class="btn btn-primary btn-lg">Start editing — free</a>
+              <a href="#developers" class="btn btn-lg">Read the docs →</a>
+            </div>
+            <p class="text-sm text-muted-foreground">Works with any static HTML site in a GitHub repo. Sign in with
+              Google to start.</p>
+          </div>
+        </section>
+
+        <!-- Product screenshot -->
+        <section class="container" style="margin-top: 3rem; padding-bottom: 3rem">
+          <div class="kl-shot">
+            <img src="/images/klar-editor.png" alt="The Klar editor: a live page preview in the center, a sections panel on the left, and an element panel on the right" width="1920" height="933" fetchpriority="high">
+          </div>
+        </section>
+        </div>
+        <!-- /.kl-hero -->
+
+        <!-- Trust strip -->
+        <section class="container">
+          <div class="flex flex-col items-center gap-5">
+            <p class="kl-eyebrow">No database · No build step · Just your GitHub repo</p>
+            <div class="kl-chips">
+              <span class="tag">Clean HTML</span>
+              <span class="tag">Git history</span>
+              <span class="tag">AI editing</span>
+              <span class="tag">GitHub Pages</span>
+              <span class="tag">No build step</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- The editor -->
+        <section class="container" id="editor" style="padding-block: 6rem 4rem">
+          <div class="max-w-2xl mb-12">
+            <span class="kl-pill"><span class="kl-pill__dot"></span>The editor</span>
+            <h2 class="section-title text-3xl mt-4">Edit on the page, not in a form</h2>
+            <p class="lead mt-3">
+              Klar renders your real page in a preview and lets you click any element to change it — text, images,
+              links, icons, even repeating lists. You edit what visitors see; Klar writes it back to your source HTML.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8">
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-3">Click-to-edit, exactly where it lives</h3>
+                <p class="text-muted-foreground leading-relaxed mb-5">
+                  Hover to highlight, click to edit inline. Paragraphs get a rich-text toolbar, every element gets a
+                  structured panel for its attributes, and a floating toolbar adds, duplicates, reorders, or removes
+                  blocks.
+                </p>
+                <ul class="kl-list">
+                  <li>Inline rich text with paste sanitization — no messy markup creeps in.</li>
+                  <li>Container &amp; list editing for cards, grids, and repeating rows.</li>
+                  <li>Undo / redo across structural changes, kept in sync with the preview.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-3">Clean HTML, committed to Git</h3>
+                <p class="text-muted-foreground leading-relaxed mb-5">
+                  Every save (<code class="kl-ic">⌘⇧S</code>) is a real commit to your repo. Klar edits the source HTML
+                  in place — no editor artifacts, wrappers, or data attributes — so your files stay exactly as you wrote
+                  them.
+                </p>
+                <ul class="kl-list">
+                  <li>Version history — browse commits and preview any past version.</li>
+                  <li>Publish to GitHub Pages with <code class="kl-ic">⌘⇧P</code> when you're ready.</li>
+                  <li>Shared sections sync a header or footer across every page.</li>
+                </ul>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- AI assistant -->
+        <section class="container" style="padding-block: 6rem 4rem" id="ai">
+          <div class="card bg-muted">
+            <div class="card__body py-12 px-8">
+              <div class="max-w-2xl">
+                <span class="kl-pill"><span class="kl-pill__dot"></span>AI assistant</span>
+                <h2 class="section-title text-3xl mt-4">Tell the AI what to change, in plain English</h2>
+                <p class="lead mt-3">
+                  Describe a change and Klar's assistant writes it. Generate a whole page or site, modify the current
+                  page, edit a section or the exact element you clicked, or just chat — it even edits content your own
+                  JavaScript or React renders at runtime, by changing the source.
+                </p>
+                <ul class="kl-list mt-6">
+                  <li>Review before you apply — see the change, then accept it.</li>
+                  <li>Six modes — page, site, section, element, modify, and chat.</li>
+                  <li>Bring your own key — add your AI provider's API key.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Structured content -->
+        <section class="container" style="padding-block: 6rem 4rem" id="content">
+          <div class="max-w-2xl">
+            <span class="kl-pill"><span class="kl-pill__dot"></span>Structured content</span>
+            <h2 class="section-title text-3xl mt-4">Turn pages into structured, reusable content</h2>
+            <p class="lead mt-3">
+              Mark parts of a page as named fields — title, image, tags, date — and Klar builds the lists that depend on
+              them: blog indexes, card grids, archives, rendered fresh every time you publish.
+            </p>
+            <p class="text-muted-foreground leading-relaxed mt-4">
+              Give each page type fields — strings, text, images, links, tags, dates, arrays, and more. Add a listing
+              template written in <code class="kl-ic">Liquid</code> and Klar renders the collection — a blog index, a
+              product grid — on every publish.
+            </p>
+            <ul class="kl-list mt-6">
+              <li>Page types — reusable templates for posts, products, people.</li>
+              <li>Tags &amp; vocabularies with faceted filtering out of the box.</li>
+              <li>Public content API — read it anywhere, no backend to run.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Built into every project -->
+        <section class="container" style="padding-block: 6rem 4rem" id="built-in">
+          <div class="max-w-2xl mb-12">
+            <h2 class="section-title text-3xl">Built into every project</h2>
+            <p class="lead mt-3">Media, icons, shared sections, members, forms, and shortcuts — nothing to install.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Media library</h3>
+                <p class="text-muted-foreground leading-relaxed">Upload, browse, and swap images from a GitHub-backed
+                  folder.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Icon picker</h3>
+                <p class="text-muted-foreground leading-relaxed">Search Heroicons, Lucide, and Material icons; drop them
+                  in as inline SVG.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Shared sections</h3>
+                <p class="text-muted-foreground leading-relaxed">Edit a nav or footer once; sync it across every page in
+                  one commit.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Members &amp; roles</h3>
+                <p class="text-muted-foreground leading-relaxed">Invite collaborators as admins or editors with email
+                  invites.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Form submissions</h3>
+                <p class="text-muted-foreground leading-relaxed">Post forms to a Klar endpoint — honeypot and rate
+                  limiting, an inbox, and email alerts.</p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6">
+                <h3 class="card__title mb-2">Keyboard-first</h3>
+                <p class="text-muted-foreground leading-relaxed">Save (<code class="kl-ic">⌘⇧S</code>), publish
+                  (<code class="kl-ic">⌘⇧P</code>), undo (<code class="kl-ic">⌘Z</code>), and toggle panels without the
+                  mouse.</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Developers -->
+        <section class="container" style="padding-block: 6rem 4rem" id="developers">
+          <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <span class="kl-pill"><span class="kl-pill__dot"></span>Developers</span>
+              <h2 class="section-title text-3xl mt-4">Your content, over a dependency-free SDK</h2>
+              <p class="lead mt-3">
+                A dependency-free SDK, served from your Klar host. Query published content with
+                <code class="kl-ic">list()</code>, or add Google visitor sign-in and per-user data — no build step, no
+                backend to run.
+              </p>
+              <ul class="kl-list mt-6">
+                <li>Content SDK — <code class="kl-ic">list / facets / vocabularies</code> with filtering.</li>
+                <li>Users SDK — Google sign-in and per-user key-value storage.</li>
+              </ul>
+            </div>
+            <pre class="kl-code"><span class="c">// served from your Klar host — no build step</span>
+<span class="k">import</span> { createKlarClient } <span class="k">from</span>
+  'https://your-klar-host/sdk/content.js';
+
+<span class="k">const</span> klar = createKlarClient({ projectId: 42 });
+
+<span class="c">// fetch published posts, newest first</span>
+<span class="k">const</span> posts = <span class="k">await</span> klar.list('blog-post', {
+  published: true,
+  order: 'published_at:desc',
+  limit: 10,
+});
+
+document.querySelector('#list').innerHTML =
+  klar.render(posts, `&lt;a href="${url}"&gt;${content.title}&lt;/a&gt;`);</pre>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container" style="padding-block: 6rem 4rem" id="cta">
+          <div class="card bg-muted">
+            <div class="card__body text-center py-12 px-8">
+              <h2 class="section-title mb-4">Make your first edit in minutes</h2>
+              <p class="text-muted-foreground max-w-2xl mx-auto mb-8">Sign in with Google, connect your repo, and click
+                on the page. No migration, no rebuild — your HTML stays exactly where it is.</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="btn btn-primary">Start editing — free</a>
+                <a href="#developers" class="btn">Browse the docs →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ===== Footer ===== -->
+      <footer class="site-footer" role="contentinfo">
+        <div class="container py-12">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-lg font-bold text-foreground">Klar</h2>
+              <p class="text-sm text-muted-foreground">
+                The visual CMS for static sites on GitHub. Click to edit, commit clean HTML, publish to GitHub Pages.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Product</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="#editor">Visual editing</a></li>
+                <li><a class="footer-link" href="#ai">AI assistant</a></li>
+                <li><a class="footer-link" href="#content">Content fields</a></li>
+                <li><a class="footer-link" href="#editor">Publishing</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Developers</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="#developers">Content SDK</a></li>
+                <li><a class="footer-link" href="#developers">Users SDK</a></li>
+                <li><a class="footer-link" href="#developers">Documentation</a></li>
+                <li><a class="footer-link" href="#developers">Content API</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Company</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/about.html">About</a></li>
+                <li><a class="footer-link" href="#">Changelog</a></li>
+                <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
+                <li><a class="footer-link" href="/contact.html">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="border-t mt-8 pt-8 text-center">
+            <p class="text-sm text-muted-foreground">
+              © 2026 Klar. Commits to your repo · Publishes to GitHub Pages.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      (function () {
+        var header = document.getElementById('header');
+        if (header) {
+          var onScroll = function () {
+            header.classList.toggle('is-scrolled', window.scrollY > 8);
+          };
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+        // Smooth-scroll in-page anchor links, offset for the fixed header.
+        document.addEventListener('click', function (e) {
+          var link = e.target.closest('a[href^="#"]');
+          if (!link) return;
+          var id = link.getAttribute('href').slice(1);
+          if (!id) return;
+          var target = document.getElementById(id);
+          if (!target) return;
+          e.preventDefault();
+          var headerH = header ? header.offsetHeight : 80;
+          var top = target.getBoundingClientRect().top + window.pageYOffset - headerH;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+          history.pushState(null, '', '#' + id);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo — Edit this page with Klar | Nexus</title>
+    <meta name="description" content="A living demo page built from the Nexus design system — every block shows what Klar lets you edit inline, and what stays locked in place.">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      /* ── Demo-only helpers (namespaced .dm-*) ─────────────────────────── */
+      .dm-eyebrow {
+        font-size: var(--text-xs);
+        font-weight: var(--font-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: var(--primary);
+      }
+      .dm-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: var(--radius-md);
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        flex-shrink: 0;
+      }
+      /* Feature cards: icon + title on one row, description spanning below */
+      #features .card__body {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: var(--space-3);
+        row-gap: var(--space-3);
+        align-items: center;
+        padding: 1.25rem;
+      }
+      #features .card__body > .card__title { margin: 0; }
+      #features .card__body > p { grid-column: 1 / -1; }
+      /* Lift on hover so the grid feels alive */
+      #features .card {
+        transition: transform var(--transition), box-shadow var(--transition);
+      }
+      #features .card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+      }
+      .dm-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-12);
+        align-items: center;
+      }
+      .dm-media {
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+      }
+      .dm-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .dm-caption { font-size: var(--text-xs); color: var(--muted-foreground); margin-top: var(--space-2); }
+      .dm-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-8);
+      }
+      .dm-stat__num {
+        font-size: var(--text-4xl);
+        font-weight: var(--font-bold);
+        letter-spacing: var(--tracking-tight);
+        line-height: 1;
+      }
+      .dm-stat__label { font-size: var(--text-sm); color: var(--muted-foreground); margin-top: var(--space-2); }
+      .dm-quote { font-size: var(--text-2xl); line-height: var(--leading-snug); letter-spacing: var(--tracking-tight); }
+      .dm-tags { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+      @media (max-width: 800px) {
+        .dm-split { grid-template-columns: 1fr; gap: var(--space-8); }
+        .dm-stats { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+    <script>
+      (function() {
+        try {
+          var d = document.documentElement,
+            c = d.classList;
+          if (localStorage.getItem("theme") === "dark") {
+            d.style.colorScheme = "dark";
+            c.remove("light");
+            c.add("dark");
+          } else {
+            d.style.colorScheme = "light";
+            c.remove("dark");
+            c.add("light");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://editor.klar.website/sdk/content-static.iife.js"></script>
+    <script type="module" src="/script.js"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <!-- ===== Header ===== -->
+      <header class="site-header" id="header">
+        <div class="container">
+          <div class="site-header__bar">
+            <a class="brand" href="/index.html">nexus</a>
+            <nav class="nav-desktop items-center gap-8" aria-label="Main navigation"><a class="nav-link" href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+            <div class="nav-desktop items-center gap-2">
+              <button class="btn btn-icon" aria-label="Toggle theme">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </button>
+            </div>
+            <button id="mobile-menu-toggle" class="btn btn-icon nav-mobile-toggle" aria-label="Toggle menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="mobile-menu" class="hidden border-t py-4">
+            <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+              <a class="nav-link" href="/posts.html">ALL POST</a>
+              <a class="nav-link" href="/business.html">BUSINESS</a>
+              <a class="nav-link" href="/technology.html">TECHNOLOGY</a>
+              <a class="nav-link" href="/podcast.html">PODCAST</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== Main ===== -->
+      <main id="main-content">
+
+        <!-- Hero -->
+        <section class="container py-16" id="hero">
+          <div class="hero lg:grid-cols-2">
+            <div class="hero__media">
+              <img src="/images/hero-image-xUp6gwWA.jpg" alt="Bright workspace with a laptop and notebook" width="592" height="444" fetchpriority="high">
+            </div>
+            <div class="hero__content">
+              <div><span class="badge">Live demo</span></div>
+              <h1 class="featured-title">A page you can edit. The words, the pictures, the lists.</h1>
+              <p class="text-lg text-muted-foreground leading-relaxed">
+                Click a heading, rewrite a paragraph, swap a photo. Most of the page gives — a few blocks are locked on
+                purpose.
+              </p>
+              <div class="flex flex-wrap gap-4 pt-2">
+                <a href="#story" class="btn btn-primary">Start editing</a>
+                <a href="/editable-elements.html" class="btn btn-outline">How it works</a>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <span class="blog-meta text-foreground">Editable</span>
+                <span class="text-muted-foreground" aria-hidden="true">—</span>
+                <span class="blog-meta">Text</span>
+                <span class="blog-meta">Images</span>
+                <span class="blog-meta">Lists</span>
+                <span class="blog-meta">Forms</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Feature cards -->
+        <section class="container py-16" id="features">
+          <div class="grid md:grid-cols-3 gap-8">
+
+            <article class="card">
+              <div class="card__body pt-6 flex flex-col gap-4">
+                <span class="dm-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" x2="15" y1="20" y2="20"></line><line x1="12" x2="12" y1="4" y2="20"></line>
+                  </svg>
+                </span>
+                <h3 class="card__title">Editable text</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  Click any heading, paragraph, link or button and type.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6 flex flex-col gap-4">
+                <span class="dm-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                  </svg>
+                </span>
+                <h3 class="card__title">Swappable images</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  Pick a new photo from the media library. Alt text lives in the side panel.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6 flex flex-col gap-4">
+                <span class="dm-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="8" x2="21" y1="6" y2="6"></line><line x1="8" x2="21" y1="12" y2="12"></line><line x1="8" x2="21" y1="18" y2="18"></line><line x1="3" x2="3.01" y1="6" y2="6"></line><line x1="3" x2="3.01" y1="12" y2="12"></line><line x1="3" x2="3.01" y1="18" y2="18"></line>
+                  </svg>
+                </span>
+                <h3 class="card__title">Dynamic lists</h3>
+                <p class="text-muted-foreground leading-relaxed">
+                  Point a section at a collection and it fills itself — publish a post and it appears here.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Collection (repeatable list) -->
+        <section class="container py-16" id="collection">
+          <div class="flex flex-col gap-2 mb-8 max-w-2xl">
+            <span class="blog-meta">Editor's desk</span>
+            <h2 class="section-title text-3xl">Latest stories</h2>
+            <p class="text-muted-foreground leading-relaxed">
+              Each card is a page of the <strong class="text-foreground font-medium">Blog Post</strong> type. Publish a
+              new one and it appears here automatically — no editing this list by hand.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="collection-grid">
+
+            <article class="blog-card">
+              <div class="blog-card__media">
+                <img src="/images/work-lifestyle-Bg_wzXQT.jpg" alt="" width="387" height="291" loading="lazy">
+              </div>
+              <div class="blog-card__body">
+                <div class="flex items-center gap-2">
+                  <span class="blog-meta">Business</span><span class="text-muted-foreground text-xs" aria-hidden="true">—</span><time class="blog-meta" datetime="2026-05-02">May 2, 2026</time>
+                </div>
+                <h3 class="blog-card__title">The quiet rise of the solo brand</h3>
+                <p class="blog-card__excerpt">How independent makers are outpacing the studios that once set the rules.</p>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-card__media">
+                <img src="/images/tech-post-HXCQgDvH.jpg" alt="" width="387" height="291" loading="lazy">
+              </div>
+              <div class="blog-card__body">
+                <div class="flex items-center gap-2">
+                  <span class="blog-meta">Technology</span><span class="text-muted-foreground text-xs" aria-hidden="true">—</span><time class="blog-meta" datetime="2026-05-06">May 6, 2026</time>
+                </div>
+                <h3 class="blog-card__title">Tools that get out of the way</h3>
+                <p class="blog-card__excerpt">The software worth keeping is the software you eventually stop noticing.</p>
+              </div>
+            </article>
+
+            <article class="blog-card">
+              <div class="blog-card__media">
+                <img src="/images/business-post-6IsrfXyD.jpg" alt="" width="387" height="291" loading="lazy">
+              </div>
+              <div class="blog-card__body">
+                <div class="flex items-center gap-2">
+                  <span class="blog-meta">Culture</span><span class="text-muted-foreground text-xs" aria-hidden="true">—</span><time class="blog-meta" datetime="2026-05-11">May 11, 2026</time>
+                </div>
+                <h3 class="blog-card__title">A slower kind of ambition</h3>
+                <p class="blog-card__excerpt">Why the most interesting work is happening off the clock.</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Team -->
+        <section class="container py-16" id="team" aria-labelledby="team-heading">
+          <div class="text-center mb-12">
+            <span class="badge badge-secondary mb-4">Our Team</span>
+            <h2 id="team-heading" class="page-title md:text-5xl mb-4">Meet the voices behind Nexus</h2>
+            <p class="lead max-w-2xl mx-auto">A small editorial team of writers, strategists, and creators exploring
+              fashion, technology, business, and modern lifestyle.</p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <article class="card">
+              <div class="card__body pt-6 text-center flex flex-col items-center gap-4">
+                <div class="overflow-hidden rounded-full aspect-square w-full bg-muted">
+                  <img class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                    alt="Portrait of Alex Morgan" width="600" height="600" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2">Alex Morgan</h3>
+                  <p class="blog-meta justify-center mb-4">Editor in Chief</p>
+                  <p class="text-sm text-muted-foreground leading-relaxed">Shapes the editorial calendar and keeps every
+                    story sharp, thoughtful, and useful.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6 text-center flex flex-col items-center gap-4">
+                <div class="overflow-hidden rounded-full aspect-square w-full bg-muted">
+                  <img class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                    alt="Portrait of Sara Lee" width="600" height="600" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2">Sara Lee</h3>
+                  <p class="blog-meta justify-center mb-4">Fashion Writer</p>
+                  <p class="text-sm text-muted-foreground leading-relaxed">Covers style culture, trend cycles, and the
+                    creators changing how fashion moves online.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6 text-center flex flex-col items-center gap-4">
+                <div class="overflow-hidden rounded-full aspect-square w-full bg-muted">
+                  <img class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                    alt="Portrait of Daniel Kim" width="600" height="600" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2">Daniel Kim</h3>
+                  <p class="blog-meta justify-center mb-4">Technology Lead</p>
+                  <p class="text-sm text-muted-foreground leading-relaxed">Explains emerging tools, product shifts, and
+                    the systems behind the digital world.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card__body pt-6 text-center flex flex-col items-center gap-4">
+                <div class="overflow-hidden rounded-full aspect-square w-full bg-muted">
+                  <img class="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+                    alt="Portrait of Maya Patel" width="600" height="600" loading="lazy">
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold mb-2">Maya Patel</h3>
+                  <p class="blog-meta justify-center mb-4">Business Editor</p>
+                  <p class="text-sm text-muted-foreground leading-relaxed">Writes about entrepreneurship, brand
+                    strategy, and the decisions that build durable companies.</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Split media + text -->
+        <section class="container py-16" id="gallery">
+          <div class="dm-split">
+            <div class="flex flex-col gap-4">
+              <span class="dm-eyebrow">Media</span>
+              <h2 class="section-title text-3xl">Change the picture</h2>
+              <p class="text-muted-foreground leading-relaxed">
+                Swap the photo from the media library and it drops into the same frame.
+              </p>
+            </div>
+            <div class="dm-media aspect-photo">
+              <img src="/images/lifestyle-post-B2o5gHGK.jpg" alt="Flat-lay of styling accessories on a neutral background">
+            </div>
+          </div>
+        </section>
+
+        <!-- Intro -->
+        <section class="container py-8" id="intro">
+          <div class="max-w-3xl mx-auto text-center flex flex-col gap-4">
+            <h2 class="section-title text-3xl">Click to edit</h2>
+            <p class="lead">
+              Text, images, lists and forms — every block on this page is editable.
+            </p>
+          </div>
+        </section>
+
+        <!-- Story / prose -->
+        <section class="container py-16" id="story">
+          <div class="dm-split">
+            <div class="dm-media aspect-photo">
+              <img src="/images/hero-image-xUp6gwWA.jpg" alt="Notebook and laptop on a desk">
+            </div>
+            <div>
+              <span class="dm-eyebrow">Rich text</span>
+              <div class="prose mt-4">
+                <h2>Write like it's a document</h2>
+                <p>
+                  Type straight into the page. Bold a word, add a link, start a new line — the formatting sticks.
+                </p>
+                <blockquote class="dm-quote text-foreground">
+                  “Clarity is a courtesy you extend to the reader.”
+                </blockquote>
+                <h3>Links and lists</h3>
+                <p>
+                  Rename a link and it keeps its destination. Lists and quotes edit like any other line.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="container py-16" id="stats">
+          <div class="card bg-muted">
+            <div class="card__body py-12 px-8 flex flex-col gap-8">
+              <div class="max-w-2xl">
+                <span class="dm-eyebrow">Numbers</span>
+                <h2 class="section-title text-3xl mt-2">By the numbers</h2>
+              </div>
+              <div class="dm-stats">
+                <div>
+                  <div class="dm-stat__num">12k</div>
+                  <div class="dm-stat__label">Monthly readers</div>
+                </div>
+                <div>
+                  <div class="dm-stat__num">240</div>
+                  <div class="dm-stat__label">Articles published</div>
+                </div>
+                <div>
+                  <div class="dm-stat__num">8</div>
+                  <div class="dm-stat__label">Writers on the team</div>
+                </div>
+                <div>
+                  <div class="dm-stat__num">2023</div>
+                  <div class="dm-stat__label">Publishing since</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Topics / tags -->
+        <section class="container py-16" id="topics">
+          <div class="flex flex-col gap-4 max-w-2xl">
+            <h2 class="section-title text-3xl">Browse by topic</h2>
+            <p class="text-muted-foreground leading-relaxed">
+              Pick a subject and dive in.
+            </p>
+            <div class="dm-tags mt-2">
+              <span class="tag">Fashion</span>
+              <span class="tag">Technology</span>
+              <span class="tag">Business</span>
+              <span class="tag">Lifestyle</span>
+              <span class="tag">Design</span>
+              <span class="tag">Culture</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimonial / quote -->
+        <section class="container py-16" id="quote">
+          <div class="card">
+            <div class="card__body py-12 px-8 flex flex-col gap-6 max-w-3xl mx-auto text-center">
+              <p class="dm-quote">
+                “The pieces I keep coming back to aren't the loudest ones. They're the ones that respected my time.”
+              </p>
+              <div class="byline justify-center">
+                <span class="avatar">
+                  <img src="/images/fashion-post-4m_ykv-I.jpg" alt="Portrait of Mara Lindqvist" width="40" height="40" style="width:2.5rem;height:2.5rem;border-radius:9999px;object-fit:cover">
+                </span>
+                <div class="text-left">
+                  <div class="font-semibold text-foreground">Mara Lindqvist</div>
+                  <div class="text-sm text-muted-foreground">Editor, Nexus</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Signup form -->
+        <section class="container py-16" id="signup">
+          <div class="container-narrow">
+            <div class="card">
+              <div class="card__body py-12 px-8 flex flex-col gap-6">
+                <div class="text-center flex flex-col gap-2">
+                  <h2 class="section-title text-3xl">Join the newsletter</h2>
+                  <p class="text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                    One email a week. The best of Nexus, nothing else.
+                  </p>
+                </div>
+                <form class="flex flex-col gap-6">
+                  <div class="field">
+                    <label class="label" for="dm-name">Name</label>
+                    <input class="input" id="dm-name" name="name" type="text" placeholder="Your full name">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="dm-email">Email</label>
+                    <input class="input" id="dm-email" name="email" type="email" placeholder="your.email@example.com">
+                  </div>
+                  <button class="btn btn-primary btn-block" type="button">Subscribe</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="container py-16" id="cta">
+          <div class="card bg-muted">
+            <div class="card__body text-center py-12 px-8">
+              <h2 class="section-title mb-4">Now make it yours.</h2>
+              <p class="text-muted-foreground max-w-2xl mx-auto mb-8">Most of this page is editable. A few blocks are
+                locked or frozen on purpose — start wherever you like.</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#hero" class="btn btn-primary">Back to top</a>
+                <a href="/editable-elements.html" class="btn">How editing works</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <button id="back-to-top" class="back-to-top hidden" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m18 15-6-6-6 6"></path>
+        </svg>
+      </button>
+
+      <!-- ===== Footer ===== -->
+      <footer class="site-footer" role="contentinfo">
+        <div class="container py-12">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-lg font-bold text-foreground">nexus</h2>
+              <p class="text-sm text-muted-foreground">
+                A personal blog exploring fashion, technology, business, and lifestyle trends.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Categories</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/posts.html">Fashion</a></li>
+                <li><a class="footer-link" href="/technology.html">Technology</a></li>
+                <li><a class="footer-link" href="/business.html">Business</a></li>
+                <li><a class="footer-link" href="/posts.html">Lifestyle</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Quick Links</h3>
+              <ul class="flex flex-col gap-2 text-sm">
+                <li><a class="footer-link" href="/about.html">About</a></li>
+                <li><a class="footer-link" href="/contact.html">Contact</a></li>
+                <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
+                <li><a class="footer-link" href="/terms.html">Terms</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-medium text-foreground">Connect</h3>
+              <div class="flex gap-4">
+                <a class="footer-link" href="#" aria-label="Follow us on Facebook">Facebook</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Twitter">Twitter</a>
+                <a class="footer-link" href="#" aria-label="Follow us on Instagram">Instagram</a>
+              </div>
+            </div>
+          </div>
+          <div class="border-t mt-8 pt-8 text-center">
+            <p class="text-sm text-muted-foreground">
+              © 2026 Nexus Blog. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
