@@ -15,8 +15,13 @@
 
       /* Note/callout background — a shade that stands out from the card in
          dark mode (where --muted equals --card). Light mode keeps --muted. */
-      :root { --ee-note-bg: var(--muted); }
-      .dark { --ee-note-bg: #2a2a30; }
+      :root {
+        --ee-note-bg: var(--muted);
+      }
+
+      .dark {
+        --ee-note-bg: #2a2a30;
+      }
 
       /* ── Directive showcase (namespaced .sd-*) ─────────────────────── */
       .sd-hero {
@@ -167,7 +172,7 @@
   <body>
     <div class="min-h-screen bg-background">
       <!-- ===== Header ===== -->
-      <header class="site-header" id="header">
+      <header class="site-header hidden" id="header">
         <div class="container">
           <div class="site-header__bar">
             <a class="brand" href="/index.html">Klar</a>
@@ -220,7 +225,9 @@
             <div class="sd-hero__inner">
               <span class="flex justify-start"><span class="badge">Klar Reference</span></span>
               <h1 class="page-title md:text-5xl">Editable Elements</h1>
-              <p class="lead">Editable Elements tell Klar which parts of your page can be edited — and how.<br>It works like CSS: you target elements with selectors, then attach behaviors with :directives. Where CSS says "make .hero blue," Klar says "make .hero editable."<br><br>"It's CSS, but for <em>editability</em>"</p>
+              <p class="lead">Editable Elements tell Klar which parts of your page can be edited — and how.<br>It works
+                like CSS: you target elements with selectors, then attach behaviors with :directives. Where CSS says
+                "make .hero blue," Klar says "make .hero editable."<br><br>"It's CSS, but for <em>editability</em>"</p>
               <div class="sd-toc">
                 <a class="tag field-tab" href="#bare">.selector</a>
                 <a class="tag field-tab" href="#list">:list</a>
@@ -245,6 +252,7 @@
               gap: var(--space-4);
               margin-top: var(--space-12);
             }
+
             .ee-intent {
               display: flex;
               flex-direction: column;
@@ -255,6 +263,7 @@
               border-radius: var(--radius-lg);
               box-shadow: var(--shadow-sm);
             }
+
             .ee-intent__kicker {
               font-size: var(--text-xs);
               font-weight: var(--font-bold);
@@ -262,22 +271,30 @@
               letter-spacing: var(--tracking-wide);
               color: var(--primary);
             }
+
             .ee-intent__desc {
               font-size: var(--text-sm);
               color: var(--muted-foreground);
               line-height: var(--leading-relaxed);
             }
+
             .ee-intent__tags {
               display: flex;
               flex-wrap: wrap;
               gap: var(--space-2);
               margin-top: auto;
             }
+
             @media (max-width: 960px) {
-              .ee-intent-grid { grid-template-columns: 1fr 1fr; }
+              .ee-intent-grid {
+                grid-template-columns: 1fr 1fr;
+              }
             }
+
             @media (max-width: 560px) {
-              .ee-intent-grid { grid-template-columns: 1fr; }
+              .ee-intent-grid {
+                grid-template-columns: 1fr;
+              }
             }
           </style>
           <div class="sd-showcase-header">
@@ -801,7 +818,8 @@
               <p class="sd-demo-card__lead">Lets a user edit the element's CSS <code>background-image</code> through
                 Klar's media picker. Instead of editing text, they swap the background by choosing a new photo — ideal
                 for hero bands and cover panels where the picture is applied as a background rather than an
-                <code>&lt;img&gt;</code>.</p>
+                <code>&lt;img&gt;</code>.
+              </p>
             </article>
 
             <!-- 6 · :exclude -->
@@ -877,9 +895,11 @@
               </div>
               <p class="sd-demo-card__lead">Freezes the element's content at save time — whatever it contains the moment
                 you save is captured as plain HTML and locked in. Freezing makes it read-only too, so the frozen content
-                can't be edited inline either. It's built for JavaScript-rendered content: a script fills the element on load, and
+                can't be edited inline either. It's built for JavaScript-rendered content: a script fills the element on
+                load, and
                 <code>:snapshot</code> bakes whatever it produced into the saved static HTML — so a computed value or
-                timestamp is committed to the page once, instead of being regenerated on every visit.</p>
+                timestamp is committed to the page once, instead of being regenerated on every visit.
+              </p>
             </article>
 
             <!-- 9 · :htmlBlocks -->
@@ -920,11 +940,13 @@
               margin-top: var(--space-8);
               align-items: stretch;
             }
+
             .ee-example__col {
               display: flex;
               flex-direction: column;
               gap: var(--space-3);
             }
+
             .ee-example__label {
               font-size: var(--text-xs);
               font-weight: var(--font-bold);
@@ -933,6 +955,7 @@
               color: var(--muted-foreground);
               padding-left: var(--space-1);
             }
+
             .ee-code {
               flex: 1;
               margin: 0;
@@ -948,10 +971,20 @@
               color: var(--foreground);
               overflow-x: auto;
             }
-            .ee-code .c { color: var(--muted-foreground); }
-            .ee-code .d { color: var(--primary); font-weight: var(--font-semibold); }
+
+            .ee-code .c {
+              color: var(--muted-foreground);
+            }
+
+            .ee-code .d {
+              color: var(--primary);
+              font-weight: var(--font-semibold);
+            }
+
             @media (max-width: 800px) {
-              .ee-example { grid-template-columns: 1fr; }
+              .ee-example {
+                grid-template-columns: 1fr;
+              }
             }
 
             .ee-ref-wrap {
@@ -961,6 +994,7 @@
               overflow: hidden;
               box-shadow: var(--shadow-sm);
             }
+
             .ee-ref {
               width: 100%;
               border-collapse: collapse;
@@ -968,6 +1002,7 @@
               background-color: var(--card);
               table-layout: fixed;
             }
+
             .ee-ref th,
             .ee-ref td {
               text-align: left;
@@ -976,11 +1011,21 @@
               vertical-align: top;
               line-height: var(--leading-relaxed);
             }
+
             .ee-ref th:nth-child(1),
-            .ee-ref td:nth-child(1) { width: 22%; }
+            .ee-ref td:nth-child(1) {
+              width: 22%;
+            }
+
             .ee-ref th:nth-child(3),
-            .ee-ref td:nth-child(3) { width: 30%; }
-            .ee-ref td:nth-child(2) { color: var(--muted-foreground); }
+            .ee-ref td:nth-child(3) {
+              width: 30%;
+            }
+
+            .ee-ref td:nth-child(2) {
+              color: var(--muted-foreground);
+            }
+
             .ee-ref thead th {
               padding-block: var(--space-3);
               font-size: var(--text-xs);
@@ -990,6 +1035,7 @@
               font-weight: var(--font-semibold);
               background-color: var(--muted);
             }
+
             .ee-ref__group td {
               padding-top: var(--space-6);
               padding-bottom: var(--space-2);
@@ -1001,12 +1047,23 @@
               background-color: transparent;
               border-bottom: none;
             }
-            .ee-ref__group:first-child td { padding-top: var(--space-4); }
-            .ee-ref__group + tr td { padding-top: var(--space-2); }
+
+            .ee-ref__group:first-child td {
+              padding-top: var(--space-4);
+            }
+
+            .ee-ref__group+tr td {
+              padding-top: var(--space-2);
+            }
+
             .ee-ref tbody tr:not(.ee-ref__group):hover td {
               background-color: color-mix(in srgb, var(--muted) 45%, transparent);
             }
-            .ee-ref tbody tr:last-child td { border-bottom: none; }
+
+            .ee-ref tbody tr:last-child td {
+              border-bottom: none;
+            }
+
             .ee-ref code {
               font-family: ui-monospace, "SF Mono", Menlo, monospace;
               font-size: 0.85em;
@@ -1015,16 +1072,23 @@
               border-radius: var(--radius-sm);
               overflow-wrap: anywhere;
             }
+
             @media (max-width: 640px) {
-              .ee-ref { table-layout: auto; }
+              .ee-ref {
+                table-layout: auto;
+              }
+
               .ee-ref th:last-child,
-              .ee-ref td:last-child { display: none; }
+              .ee-ref td:last-child {
+                display: none;
+              }
             }
           </style>
 
           <div class="sd-showcase-header">
             <h2 class="section-title text-3xl">A page, made editable</h2>
-            <p class="text-muted-foreground mt-2">Your page's HTML on the left; the Editable Elements that open it up for
+            <p class="text-muted-foreground mt-2">Your page's HTML on the left; the Editable Elements that open it up
+              for
               editing on the right. Selectors are separated by commas.</p>
           </div>
           <div class="ee-example">
@@ -1066,24 +1130,28 @@ footer<span class="d">:readonly</span></pre>
                 </tr>
               </thead>
               <tbody>
-                <tr class="ee-ref__group"><td colspan="3">Target</td></tr>
+                <tr class="ee-ref__group">
+                  <td colspan="3">Target</td>
+                </tr>
                 <tr>
                   <td><code>.selector</code></td>
                   <td>Makes the matched element's text click-to-edit — the starting point for every rule.</td>
                   <td><code>.hero, .lead</code></td>
                 </tr>
 
-                <tr class="ee-ref__group"><td colspan="3">Field types</td></tr>
+                <tr class="ee-ref__group">
+                  <td colspan="3">Field types</td>
+                </tr>
                 <tr>
                   <td><code>:field(…)</code></td>
-                  <td>Turn it into a typed field — text, date, number, tags, image and more. See <a class="footer-link"
-                      href="/fields.html">Field Types</a>.</td>
+                  <td>Turn it into a typed field — text, date, number, tags, image and more. See <a class="footer-link" href="/fields.html">Field Types</a>.</td>
                   <td><code>.date:field(type:date)</code></td>
                 </tr>
                 <tr>
                   <td><code>:attr(name)</code></td>
                   <td>Make an attribute editable (alt, href, data-*). Use <code>:attr(class)</code> or
-                    <code>:attr(style)</code> for the class and style editors.</td>
+                    <code>:attr(style)</code> for the class and style editors.
+                  </td>
                   <td><code>img.logo:attr(alt)</code></td>
                 </tr>
                 <tr>
@@ -1098,7 +1166,9 @@ footer<span class="d">:readonly</span></pre>
                   <td><code>.body:wrap(span.class[Red=text-red-500])</code></td>
                 </tr>
 
-                <tr class="ee-ref__group"><td colspan="3">Repeat &amp; arrange</td></tr>
+                <tr class="ee-ref__group">
+                  <td colspan="3">Repeat &amp; arrange</td>
+                </tr>
                 <tr>
                   <td><code>:list</code></td>
                   <td>Add, reorder and remove list items.</td>
@@ -1115,7 +1185,9 @@ footer<span class="d">:readonly</span></pre>
                   <td><code>.layout:htmlBlocks</code></td>
                 </tr>
 
-                <tr class="ee-ref__group"><td colspan="3">Limit</td></tr>
+                <tr class="ee-ref__group">
+                  <td colspan="3">Limit</td>
+                </tr>
                 <tr>
                   <td><code>:exclude(sel)</code></td>
                   <td>Carve matching descendants out of editing.</td>
@@ -1132,7 +1204,9 @@ footer<span class="d">:readonly</span></pre>
                   <td><code>.cached-price:snapshot</code></td>
                 </tr>
 
-                <tr class="ee-ref__group"><td colspan="3">Advanced</td></tr>
+                <tr class="ee-ref__group">
+                  <td colspan="3">Advanced</td>
+                </tr>
                 <tr>
                   <td><code>:config(…)</code></td>
                   <td>Per-selector settings — e.g. which class marks the active item in a nav.</td>
@@ -1168,7 +1242,7 @@ footer<span class="d">:readonly</span></pre>
       </button>
 
       <!-- ===== Footer ===== -->
-      <footer class="site-footer" role="contentinfo">
+      <footer class="site-footer hidden" role="contentinfo">
         <div class="container py-12">
           <div class="grid md:grid-cols-4 gap-8">
             <div class="flex flex-col gap-4">
@@ -1226,7 +1300,10 @@ footer<span class="d">:readonly</span></pre>
           var brand = e.target.closest('.brand');
           if (brand) {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
             history.pushState(null, '', location.pathname);
             return;
           }
