@@ -1054,26 +1054,24 @@
             }
 
             document.querySelectorAll('.field-row').forEach(function(row) {
-              if (!row.querySelector('.field-copy')) {
-                var elWithId = row.querySelector('[id]');
-                if (!elWithId) return;
-                var config = configs[elWithId.id];
-                if (!config) return;
-
-                var label = row.querySelector('.field-label');
-                if (!label) return;
-
-                var btn = document.createElement('button');
-                btn.className = 'field-copy';
-                btn.type = 'button';
-                btn.setAttribute('aria-label', 'Copy field config to clipboard');
-                btn.innerHTML =
-                  ICON_COPY +
-                  '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
-              } else {
-                var btn = row.querySelector('.field-copy');
-                  console.log('sdf')
+              if (row.querySelector('.field-copy')) {
+                row.querySelector('.field-copy').remove();
               }
+              var elWithId = row.querySelector('[id]');
+              if (!elWithId) return;
+              var config = configs[elWithId.id];
+              if (!config) return;
+
+              var label = row.querySelector('.field-label');
+              if (!label) return;
+
+              var btn = document.createElement('button');
+              btn.className = 'field-copy';
+              btn.type = 'button';
+              btn.setAttribute('aria-label', 'Copy field config to clipboard');
+              btn.innerHTML =
+                ICON_COPY +
+                '<span class="field-copy__tooltip">' + escapeHtml(config) + '</span>';
               btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1090,9 +1088,7 @@
                   }, 2000);
                 }).catch(function() {});
               });
-              if (label) {
-                label.appendChild(btn);
-              }
+              label.appendChild(btn);
 
               // Position tooltip: default is left-aligned (extends rightward
               // from the button). If it overflows the viewport's right edge,
