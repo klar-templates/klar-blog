@@ -1054,6 +1054,7 @@
             }
 
             document.querySelectorAll('.field-row').forEach(function(row) {
+              if (row.querySelector('.field-copy')) return;
               var elWithId = row.querySelector('[id]');
               if (!elWithId) return;
               var config = configs[elWithId.id];
