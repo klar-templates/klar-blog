@@ -1055,7 +1055,7 @@
 
             document.querySelectorAll('.field-row').forEach(function(row) {
               if (row.querySelector('.field-copy')) {
-                // row.querySelector('.field-copy').remove();
+                row.querySelector('.field-copy').remove();
               }
               var elWithId = row.querySelector('[id]');
               if (!elWithId) return;
