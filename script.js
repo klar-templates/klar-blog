@@ -4,8 +4,8 @@
    window.klarSdk used by the per-page render/facet scripts, then wires up
    theme, mobile menu, filters, article TOC and back-to-top.
    ========================================================================== */
-// import { createKlarClient } from "https://editor.klar.website/sdk/content-static.js";
-import { createKlarClient } from "http://localhost:5173/sdk/content-static.js";
+import { createKlarClient } from "https://editor.klar.website/sdk/content-static.js";
+// import { createKlarClient } from "http://localhost:5173/sdk/content-static.js";
 
 function spa(container) {
   history.scrollRestoration = "manual";
