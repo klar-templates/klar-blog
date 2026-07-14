@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
-  <head>
+<!DOCTYPE html><html lang="en" class="light"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klar — Visual CMS for static sites on GitHub</title>
     <meta name="description" content="Klar loads your live page and lets you edit text, images, links, and icons right where they sit. Each save commits clean HTML to your GitHub repo, and ⌘⇧P publishes to GitHub Pages.">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/klar-blog/images/favicon.png">
     <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHQ.woff2">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/klar-blog/style.css">
     <style>
       /* ── Klar landing helpers (namespaced .kl-*) ─────────────────────── */
       html { scroll-padding-top: calc(var(--header-height) + 16px); }
@@ -184,7 +182,7 @@
       })();
     </script>
     <script src="https://editor.klar.website/sdk/content-static.iife.js"></script>
-    <script type="module" src="/script.js"></script>
+    <script type="module" src="/klar-blog/script.js"></script>
   </head>
   <body>
     <div class="min-h-screen bg-background kl-page">
@@ -192,7 +190,7 @@
       <header class="site-header" id="header">
         <div class="container">
           <div class="site-header__bar">
-            <a class="brand" href="/klar.html">Klar</a>
+            <a class="brand" href="/klar-blog/klar.html">Klar</a>
             <nav class="nav-desktop items-center gap-8" aria-label="Main navigation">
               <a class="nav-link" href="#editor">FEATURES</a>
               <a class="nav-link" href="#ai">AI</a>
@@ -267,7 +265,7 @@
         <!-- Product screenshot -->
         <section class="container" style="margin-top: 3rem; padding-bottom: 3rem">
           <div class="kl-shot">
-            <img src="/images/klar-editor.png" alt="The Klar editor: a live page preview in the center, a sections panel on the left, and an element panel on the right" width="1920" height="933" fetchpriority="high">
+            <img src="/klar-blog/images/klar-editor.png" alt="The Klar editor: a live page preview in the center, a sections panel on the left, and an element panel on the right" width="1920" height="933" fetchpriority="high">
           </div>
         </section>
         </div>
@@ -520,10 +518,10 @@ document.querySelector('#list').innerHTML =
             <div class="flex flex-col gap-4">
               <h3 class="font-medium text-foreground">Company</h3>
               <ul class="flex flex-col gap-2 text-sm">
-                <li><a class="footer-link" href="/about.html">About</a></li>
+                <li><a class="footer-link" href="/klar-blog/about.html">About</a></li>
                 <li><a class="footer-link" href="#">Changelog</a></li>
-                <li><a class="footer-link" href="/privacy.html">Privacy</a></li>
-                <li><a class="footer-link" href="/contact.html">Contact</a></li>
+                <li><a class="footer-link" href="/klar-blog/privacy.html">Privacy</a></li>
+                <li><a class="footer-link" href="/klar-blog/contact.html">Contact</a></li>
               </ul>
             </div>
           </div>
@@ -562,5 +560,6 @@ document.querySelector('#list').innerHTML =
         });
       })();
     </script>
-  </body>
-</html>
+  
+
+</body></html>
